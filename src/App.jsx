@@ -11,7 +11,7 @@ import { styles, theme } from './Theme'
 import Layout from './Containers/Layout'
 
 // Build layout components for router
-const DashboardRoute = () => <Layout />
+const DashboardRoute = () => <Layout slot={<h1>Hola</h1>} />
 
 // Create a browser history, and it's middleware
 const history = createHistory()
