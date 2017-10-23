@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "webpack": { "config": "./webpack/webpack.prod.config.js" }
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "quotes": ["error"],
+    "semi": ["error", "never"],
+    "camelcase": ["off"],
+    "no-unused-vars": ["error", { "vars": "local", "args": "after-used", "argsIgnorePattern": "^_" }],
+    "no-confusing-arrow": 0,
+    "global-require": 0,
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }]
+  }
+}
