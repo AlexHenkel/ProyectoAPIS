@@ -1,5 +1,6 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "rules": {
     "quotes": ["error"],
     "semi": ["error", "never"],
