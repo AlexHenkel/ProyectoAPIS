@@ -9,9 +9,10 @@ import { withStyles, MuiThemeProvider } from 'material-ui/styles'
 import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
+import Dashboard from './Containers/Dashboard/Dashboard'
 
 // Build layout components for router
-const DashboardRoute = () => <Layout slot={<h1>Hola</h1>} />
+const DashboardRoute = () => <Layout slot={<Dashboard />} />
 
 // Create a browser history, and it's middleware
 const history = createHistory()
