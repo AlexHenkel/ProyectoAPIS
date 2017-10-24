@@ -3,6 +3,7 @@ import {
   Grid,
 } from 'material-ui'
 import Courses from './Courses'
+import Exams from './Exams'
 
 export default class Dashboard extends Component {
 
@@ -15,6 +16,9 @@ export default class Dashboard extends Component {
       <Grid container spacing={24}>
         <Grid item xs={12} sm={3}>
           <Courses />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Exams />
         </Grid>
       </Grid>
     )

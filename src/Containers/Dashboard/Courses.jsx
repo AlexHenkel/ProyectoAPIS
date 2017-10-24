@@ -9,6 +9,8 @@ import {
   Button,
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
+import AddIcon from 'material-ui-icons/Add'
+import { AlignCenter } from '../../Components/Utils'
 
 const Card = styled(OriginalCard)`
   margin: 15px 0;
@@ -51,6 +53,12 @@ const Courses = ({
         </CardActions>
       </Card>
     ))}
+    <AlignCenter>
+      <Button color="accent">
+        <AddIcon />
+        Agregar grupo
+      </Button>
+    </AlignCenter>
   </div>
 )
 
