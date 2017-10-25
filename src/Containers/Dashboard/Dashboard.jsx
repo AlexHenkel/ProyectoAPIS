@@ -5,9 +5,9 @@ import {
 import Courses from './Courses'
 import Exams from './Exams'
 import Students from './Students'
+import Top10 from './Top10'
 
 export default class Dashboard extends Component {
-
   componentDidMount() {
     console.log('load data')
   }
@@ -23,6 +23,7 @@ export default class Dashboard extends Component {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Students />
+          <Top10 />
         </Grid>
       </Grid>
     )

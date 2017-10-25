@@ -13,8 +13,8 @@ const Students = ({ students }) => (
     <Typography type="display1" gutterBottom>Mis alumnos</Typography>
     <Card>
       <List>
-        {students.map(({ name }) => (
-          <ListItem>
+        {students.map(({ id, name }) => (
+          <ListItem key={id}>
             <ListItemText primary={name} />
           </ListItem>
         ))}
