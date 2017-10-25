@@ -6,6 +6,7 @@ import Groups from './Groups'
 import Exams from './Exams'
 import Students from './Students'
 import Top10 from './Top10'
+import GroupCode from './GroupCode'
 
 export default class Dashboard extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ export default class Dashboard extends Component {
           <Exams />
         </Grid>
         <Grid item xs={12} sm={3}>
+          <GroupCode />
           <Students />
           <Top10 />
         </Grid>

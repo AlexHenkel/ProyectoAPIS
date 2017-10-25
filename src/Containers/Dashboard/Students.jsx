@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import {
   Typography,
   Card,
@@ -8,9 +9,13 @@ import {
   ListItemText,
 } from 'material-ui'
 
+const Title = styled(Typography)`
+  margin-top: 25px !important;
+`
+
 const Students = ({ students }) => (
   <div>
-    <Typography type="display1" gutterBottom>Mis alumnos</Typography>
+    <Title type="display1" gutterBottom>Mis alumnos</Title>
     <Card>
       <List>
         {students.map(({ id, name }) => (
