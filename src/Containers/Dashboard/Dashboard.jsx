@@ -4,6 +4,7 @@ import {
 } from 'material-ui'
 import Courses from './Courses'
 import Exams from './Exams'
+import Students from './Students'
 
 export default class Dashboard extends Component {
 
@@ -19,6 +20,9 @@ export default class Dashboard extends Component {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Exams />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <Students />
         </Grid>
       </Grid>
     )

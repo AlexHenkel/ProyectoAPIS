@@ -42,7 +42,7 @@ const Exams = ({
   theme,
   exams,
   students,
-}) => console.log(theme) || (
+}) => (
   <div>
     <Typography type="display1" gutterBottom>Mis examenes</Typography>
     {exams.map(({
