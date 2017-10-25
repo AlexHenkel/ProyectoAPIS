@@ -14,10 +14,12 @@ import moment from 'moment'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
 import { AlignCenter } from '../../Components/Utils'
+import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 
 const Card = styled(OriginalCard)`
   margin: 15px 0;
   ${({ active, theme }) => !active ? '' : `background-color: ${theme.palette.primary[500]} !important;`}
+  position: relative;
 `
 
 const CardText = styled(Typography)`
@@ -53,6 +55,13 @@ const Exams = ({
     }) => (
       <Card key={id}>
         <CardContent>
+          <ContextContainer>
+            <ContextMenu
+              value={id}
+              handleEdit={id => console.log('edit', id)}
+              handleRemove={id => console.log('remove', id)}
+            />
+          </ContextContainer>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={3}>
               <AlignCenter>
@@ -82,7 +91,6 @@ const Exams = ({
           </Grid>
         </CardContent>
         <CardActions>
-          <Button dense color="accent" onClick={() => console.log('ver mas')}>Editar</Button>
           <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
         </CardActions>
       </Card>

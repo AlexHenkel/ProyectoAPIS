@@ -11,10 +11,12 @@ import {
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
 import { AlignCenter } from '../../Components/Utils'
+import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 
 const Card = styled(OriginalCard)`
   margin: 15px 0;
   ${({ active, theme }) => !active ? '' : `background-color: ${theme.palette.primary[500]} !important;`}
+  position: relative;
 `
 
 const CardText = styled(Typography)`
@@ -25,7 +27,7 @@ const DisabledButton = styled(Button)`
   color: rgba(255,255,255,0.75) !important;
 `
 
-const Courses = ({
+const Groups = ({
   theme,
   groups,
   selectActiveGroup,
@@ -36,6 +38,13 @@ const Courses = ({
     {groups.map(({ id, name, activeQuizes }) => (
       <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
         <CardContent>
+          <ContextContainer>
+            <ContextMenu
+              value={id}
+              handleEdit={id => console.log('edit', id)}
+              handleRemove={id => console.log('remove', id)}
+            />
+          </ContextContainer>
           <CardText type="headline" component="h2" gutterBottom active={activeGroup === id ? 'yes' : ''}>
             {name}
           </CardText>
@@ -62,14 +71,14 @@ const Courses = ({
   </div>
 )
 
-Courses.propTypes = {
+Groups.propTypes = {
   theme: PropTypes.object.isRequired,
   groups: PropTypes.array,
   activeGroup: PropTypes.number,
   selectActiveGroup: PropTypes.func,
 }
 
-Courses.defaultProps = {
+Groups.defaultProps = {
   groups: [
     {
       id: 1,
@@ -86,4 +95,4 @@ Courses.defaultProps = {
   selectActiveGroup: id => console.log('change group', id),
 }
 
-export default withTheme()(Courses)
+export default withTheme()(Groups)
