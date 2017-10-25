@@ -33,6 +33,9 @@ class Input extends Mixin {
           onChange={this.updateValue}
           helperText={errorMessages.length ? errorMessages : help}
           margin="normal"
+          InputLabelProps={type === 'datetime-local' ? {
+            shrink: true,
+          } : {}}
           fullWidth
         />
       </div>
