@@ -9,6 +9,7 @@
     "no-confusing-arrow": 0,
     "global-require": 0,
     "react/forbid-prop-types": ["error", { "forbid": [""] }],
+    "react/no-array-index-key": ["off"],
     "object-curly-newline": ["off"]
   }
 }

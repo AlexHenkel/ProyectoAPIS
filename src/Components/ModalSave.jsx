@@ -12,6 +12,7 @@ import Slide from 'material-ui/transitions/Slide'
 import Input from '../Components/Input'
 import MultipleSelect from '../Components/MultipleSelect'
 import Select from '../Components/Select'
+import FuzzySearch from '../Components/FuzzySearch'
 
 const Form = styled(OriginalForm)`
   overflow: auto;
@@ -43,6 +44,15 @@ class ModalSave extends Component {
       case 'select':
         return (
           <Select
+            key={id}
+            options={options}
+            optionsLabel={optionsLabel}
+            {...inputProps}
+          />
+        )
+      case 'fuzzySearch':
+        return (
+          <FuzzySearch
             key={id}
             options={options}
             optionsLabel={optionsLabel}
