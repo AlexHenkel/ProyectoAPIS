@@ -9,7 +9,10 @@ import {
   Button,
   Grid,
   LinearProgress,
+  Tab,
+  Tabs,
 } from 'material-ui'
+import SwipeableViews from 'react-swipeable-views'
 import moment from 'moment'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
@@ -40,6 +43,9 @@ const LimitText = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey[500]} !important;
 `
 
+const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
+TabContainer.propTypes = { children: PropTypes.node.isRequired }
+
 const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
 
 class Exams extends Component {
@@ -50,6 +56,7 @@ class Exams extends Component {
       modalSaveOpened: false,
       modalRemoveOpened: false,
       toModifyId: -1,
+      tabIndex: 0,
     }
   }
 
@@ -78,72 +85,125 @@ class Exams extends Component {
     this.setState({ modalRemoveOpened: false })
   }
 
+  handleChange = (event, tabIndex) => {
+    this.setState({ tabIndex })
+  }
+
+  handleChangeIndex = (tabIndex) => {
+    this.setState({ tabIndex })
+  }
+
   render() {
     const { theme, currentExams, students, groups, exams } = this.props
-    const {
-      modalSaveOpened,
-      modalType,
-      toModifyId,
-      modalRemoveOpened,
-    } = this.state
+    const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened, tabIndex } = this.state
 
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis examenes</Typography>
-        {currentExams.map(({
-          id,
-          name,
-          expiresAt,
-          completed,
-        }) => (
-          <Card key={id}>
-            <CardContent>
-              <ContextContainer>
-                <ContextMenu
-                  value={id}
-                  handleEdit={this.onEdit}
-                  handleRemove={this.onRemove}
-                />
-              </ContextContainer>
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={3}>
-                  <AlignCenter>
-                    <Date type="display3">{moment(expiresAt).date()}</Date>
-                  </AlignCenter>
-                  <AlignCenter>
-                    <Typography type="subheading">{months[moment(expiresAt).month()]}</Typography>
-                  </AlignCenter>
-                  <AlignCenter>
-                    <LimitText type="body2" theme={theme}>Fecha límite</LimitText>
-                  </AlignCenter>
-                </Grid>
-                <Grid item xs={12} sm={9}>
-                  <CardText type="display1" component="h2" gutterBottom>
-                    {name}
-                  </CardText>
-                  <CardText type="body1" gutterBottom>
-                    Examenes presentados: <b>{completed} / {students.length}</b>
-                  </CardText>
-                  <LinearProgress
-                    color="accent"
-                    mode="determinate"
-                    value={(completed / students.length) * 100}
-                    valueBuffer={(completed / students.length) * 100}
-                  />
-                </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions>
-              <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
-            </CardActions>
-          </Card>
-        ))}
-        <AlignCenter>
-          <Button color="accent" onClick={this.onAdd}>
-            <AddIcon />
-            Agregar examen
-          </Button>
-        </AlignCenter>
+        <Tabs
+          value={tabIndex}
+          onChange={this.handleChange}
+          indicatorColor="accent"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Activos" />
+          <Tab label="Pasados" />
+        </Tabs>
+        <SwipeableViews
+          index={tabIndex}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          <TabContainer>
+            {currentExams.map(({ id, name, expiresAt, completed }) => (
+              <Card key={id}>
+                <CardContent>
+                  <ContextContainer>
+                    <ContextMenu
+                      value={id}
+                      handleEdit={this.onEdit}
+                      handleRemove={this.onRemove}
+                    />
+                  </ContextContainer>
+                  <Grid container spacing={24}>
+                    <Grid item xs={12} sm={3}>
+                      <AlignCenter>
+                        <Date type="display3">{moment(expiresAt).date()}</Date>
+                      </AlignCenter>
+                      <AlignCenter>
+                        <Typography type="subheading">{months[moment(expiresAt).month()]}</Typography>
+                      </AlignCenter>
+                      <AlignCenter>
+                        <LimitText type="body2" theme={theme}>Fecha límite</LimitText>
+                      </AlignCenter>
+                    </Grid>
+                    <Grid item xs={12} sm={9}>
+                      <CardText type="display1" component="h2" gutterBottom>
+                        {name}
+                      </CardText>
+                      <CardText type="body1" gutterBottom>
+                        Examenes presentados: <b>{completed} / {students.length}</b>
+                      </CardText>
+                      <LinearProgress
+                        color="accent"
+                        mode="determinate"
+                        value={(completed / students.length) * 100}
+                        valueBuffer={(completed / students.length) * 100}
+                      />
+                    </Grid>
+                  </Grid>
+                </CardContent>
+                <CardActions>
+                  <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
+                </CardActions>
+              </Card>
+            ))}
+            <AlignCenter>
+              <Button color="accent" onClick={this.onAdd}>
+                <AddIcon />
+                Agregar examen
+              </Button>
+            </AlignCenter>
+          </TabContainer>
+          <TabContainer>
+            {currentExams.map(({ id, name, expiresAt, completed }) => (
+              <Card key={id}>
+                <CardContent>
+                  <Grid container spacing={24}>
+                    <Grid item xs={12} sm={3}>
+                      <AlignCenter>
+                        <Date type="display3">{moment(expiresAt).date()}</Date>
+                      </AlignCenter>
+                      <AlignCenter>
+                        <Typography type="subheading">{months[moment(expiresAt).month()]}</Typography>
+                      </AlignCenter>
+                      <AlignCenter>
+                        <LimitText type="body2" theme={theme}>Fecha límite</LimitText>
+                      </AlignCenter>
+                    </Grid>
+                    <Grid item xs={12} sm={9}>
+                      <CardText type="display1" component="h2" gutterBottom>
+                        {name}
+                      </CardText>
+                      <CardText type="body1" gutterBottom>
+                        Examenes presentados: <b>{completed} / {students.length}</b>
+                      </CardText>
+                      <LinearProgress
+                        color="accent"
+                        mode="determinate"
+                        value={(completed / students.length) * 100}
+                        valueBuffer={(completed / students.length) * 100}
+                      />
+                    </Grid>
+                  </Grid>
+                </CardContent>
+                <CardActions>
+                  <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
+                </CardActions>
+              </Card>
+            ))}
+          </TabContainer>
+        </SwipeableViews>
         <ModalSave
           open={modalSaveOpened}
           title="Examen"
