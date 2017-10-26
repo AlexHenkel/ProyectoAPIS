@@ -241,7 +241,9 @@ class Exams extends Component {
               id: 4,
               name: 'groups',
               label: 'Grupos a asignar examen',
+              // value: currentGroup
               options: groups,
+              optionsValue: 'id',
               optionsLabel: 'name',
               required: true,
             },
@@ -303,6 +305,26 @@ Exams.defaultProps = {
     },
     {
       id: 2,
+      name: 'Física 2 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+    {
+      id: 3,
+      name: 'Física 1 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+    {
+      id: 4,
+      name: 'Física 2 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+    {
+      id: 5,
+      name: 'Física 1 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+    {
+      id: 6,
       name: 'Física 2 - ENE/DIC 17',
       activeQuizes: 1,
     },

@@ -13,6 +13,7 @@ import Input from '../Components/Input'
 import MultipleSelect from '../Components/MultipleSelect'
 import Select from '../Components/Select'
 import FuzzySearch from '../Components/FuzzySearch'
+import TagSelect from '../Components/TagSelect'
 
 const Form = styled(OriginalForm)`
   overflow: auto;
@@ -62,6 +63,15 @@ class ModalSave extends Component {
       case 'multiSelect':
         return (
           <MultipleSelect
+            key={id}
+            options={options}
+            optionsLabel={optionsLabel}
+            {...inputProps}
+          />
+        )
+      case 'tags':
+        return (
+          <TagSelect
             key={id}
             options={options}
             optionsLabel={optionsLabel}

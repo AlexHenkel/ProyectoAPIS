@@ -33,7 +33,6 @@ export const FuzzyInput = ({ label, hasError, errorMessages = [], isRequired,
       inputRef={ref}
       error={hasError}
       label={`${label} ${isRequired ? '*' : ''}`}
-      onChange={this.updateValue}
       helperText={errorMessages.length ? errorMessages : help}
       margin="normal"
     />
@@ -71,7 +70,7 @@ FuzzyContainer.propTypes = {
   children: PropTypes.number.isRequired,
 }
 
-const getSuggestions = (value, options, optionsLabel) => {
+export const getSuggestions = (value, options, optionsLabel) => {
   const inputValue = value.trim().toLowerCase()
   const inputLength = inputValue.length
   let count = 0
@@ -90,7 +89,7 @@ const getSuggestions = (value, options, optionsLabel) => {
     })
 }
 
-const styles = theme => ({
+export const styles = theme => ({
   container: {
     flexGrow: 1,
     position: 'relative',
