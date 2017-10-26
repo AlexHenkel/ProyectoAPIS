@@ -227,11 +227,12 @@ class Exams extends Component {
               required: true,
             },
             {
-              type: 'select',
+              type: 'fuzzySearch',
               id: 3,
               name: 'exam',
               label: 'Examen a asignar',
               options: exams,
+              optionsValue: 'id',
               optionsLabel: 'name',
               required: true,
             },

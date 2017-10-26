@@ -26,7 +26,8 @@ class Select extends Mixin {
   handleChange = event => this.setValue(event.target.value)
 
   render() {
-    const { id, label, help, options, optionsLabel } = this.removeFormsyProps(this.props)
+    const { id, label, help, options,
+      optionsLabel, optionsValue } = this.removeFormsyProps(this.props)
     const errorMessages = this.getErrorMessages()
     const hasError = !!errorMessages.length || this.showRequired()
     return (
@@ -37,9 +38,10 @@ class Select extends Mixin {
           onChange={this.handleChange}
           input={<Input id={`select-${id}`} />}
         >
-          <MenuItem value={undefined} />
           {options.map(item => (
-            <MenuItem key={item.id} value={item.id}>{item[optionsLabel]}</MenuItem>
+            <MenuItem key={item[optionsValue]} value={item[optionsValue]}>
+              {item[optionsLabel]}
+            </MenuItem>
           ))}
         </MUISelect>
         <FormHelperText>{errorMessages.length ? errorMessages : help}</FormHelperText>
@@ -52,12 +54,14 @@ Select.propTypes = {
   label: PropTypes.string,
   help: PropTypes.string,
   options: PropTypes.array.isRequired,
+  optionsValue: PropTypes.string,
   optionsLabel: PropTypes.string,
 }
 
 Select.defaultProps = {
   label: '',
   help: '',
+  optionsValue: 'value',
   optionsLabel: 'label',
 }
 

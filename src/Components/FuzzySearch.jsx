@@ -94,7 +94,6 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: 'relative',
-    height: 200,
   },
   suggestionsContainerOpen: {
     position: 'absolute',
@@ -102,6 +101,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
     left: 0,
     right: 0,
+    zIndex: 1,
   },
   suggestion: {
     display: 'block',
@@ -192,6 +192,7 @@ class FuzzySearch extends Mixin {
           help,
           errorMessages: this.getErrorMessages(),
           hasError: !!this.getErrorMessages().length || this.showRequired(),
+          isRequired: this.isRequired(),
           value: this.state.value,
           onChange: this.handleChange,
         }}
@@ -204,7 +205,7 @@ FuzzySearch.propTypes = {
   label: PropTypes.string,
   help: PropTypes.string,
   options: PropTypes.array.isRequired,
-  optionsValue: PropTypes.string.isRequired,
+  optionsValue: PropTypes.string,
   optionsLabel: PropTypes.string,
   classes: PropTypes.object.isRequired,
 }
@@ -212,6 +213,7 @@ FuzzySearch.propTypes = {
 FuzzySearch.defaultProps = {
   label: '',
   help: '',
+  optionsValue: 'value',
   optionsLabel: 'label',
 }
 
