@@ -79,11 +79,7 @@ class Exams extends Component {
   }
 
   render() {
-    const {
-      theme,
-      exams,
-      students,
-    } = this.props
+    const { theme, currentExams, students, groups } = this.props
     const {
       modalSaveOpened,
       modalType,
@@ -94,7 +90,7 @@ class Exams extends Component {
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis examenes</Typography>
-        {exams.map(({
+        {currentExams.map(({
           id,
           name,
           expiresAt,
@@ -164,10 +160,19 @@ class Exams extends Component {
             },
             {
               type: 'textField',
-              id: 1,
+              id: 2,
               name: 'limitDate',
               inputType: 'datetime-local',
               label: 'Fecha límite',
+              required: true,
+            },
+            {
+              type: 'multiSelect',
+              id: 4,
+              name: 'groups',
+              label: 'Grupos a asignar examen',
+              options: groups,
+              optionsLabel: 'name',
               required: true,
             },
           ]}
@@ -184,12 +189,14 @@ class Exams extends Component {
 
 Exams.propTypes = {
   theme: PropTypes.object.isRequired,
-  exams: PropTypes.array,
+  currentExams: PropTypes.array,
   students: PropTypes.array,
+  exams: PropTypes.array,
+  groups: PropTypes.array,
 }
 
 Exams.defaultProps = {
-  exams: [
+  currentExams: [
     {
       id: 1,
       name: 'Leyes de Newton',
@@ -204,6 +211,32 @@ Exams.defaultProps = {
     },
   ],
   students: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  exams: [
+    {
+      id: 1,
+      name: 'Estática',
+    },
+    {
+      id: 2,
+      name: 'Probabilidad',
+    },
+    {
+      id: 3,
+      name: 'Estadística',
+    },
+  ],
+  groups: [
+    {
+      id: 1,
+      name: 'Física 1 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+    {
+      id: 2,
+      name: 'Física 2 - ENE/DIC 17',
+      activeQuizes: 1,
+    },
+  ],
 }
 
 export default withTheme()(Exams)

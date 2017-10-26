@@ -9,6 +9,7 @@ import {
 } from 'material-ui'
 import Slide from 'material-ui/transitions/Slide'
 import Input from '../Components/Input'
+import MultipleSelect from '../Components/MultipleSelect'
 
 class ModalSave extends Component {
   handleRequestClose = () => {
@@ -23,18 +24,22 @@ class ModalSave extends Component {
     console.log(model)
   }
 
-  renderField = ({
-    id,
-    type,
-    inputType,
-    ...inputProps
-  }) => {
+  renderField = ({ id, type, inputType, options, optionsLabel, ...inputProps }) => {
     switch (type) {
       case 'textField':
         return (
           <Input
             key={id}
             type={inputType}
+            {...inputProps}
+          />
+        )
+      case 'multiSelect':
+        return (
+          <MultipleSelect
+            key={id}
+            options={options}
+            optionsLabel={optionsLabel}
             {...inputProps}
           />
         )

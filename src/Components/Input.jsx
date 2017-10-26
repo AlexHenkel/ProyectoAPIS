@@ -11,10 +11,6 @@ const TextField = styled(OriginalTextField)`
 `
 
 class Input extends Mixin {
-  static defaultProps = {
-    type: 'text',
-  }
-
   updateValue = (event) => {
     this.setValue(event.target.value)
   }
@@ -50,7 +46,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  type: '',
+  type: 'text',
   label: '',
   help: '',
 }

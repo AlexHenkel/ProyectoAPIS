@@ -61,8 +61,8 @@ class Layout extends Component {
             <Hidden xsDown>
               <Button raised color="accent">Cursos</Button>
               <Button raised color="accent">Quizes</Button>
+              <Button color="contrast">Login</Button>
             </Hidden>
-            <Button color="contrast">Login</Button>
           </Toolbar>
           <Drawer open={drawerOpened} onRequestClose={this.handleToggleDrawer(false)}>
             <div

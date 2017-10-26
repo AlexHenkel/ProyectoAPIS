@@ -127,6 +127,22 @@ class Groups extends Component {
               label: 'Nombre del grupo',
               required: true,
             },
+            {
+              type: 'textField',
+              id: 2,
+              name: 'startDate',
+              inputType: 'datetime-local',
+              label: 'Fecha de inicio',
+              required: true,
+            },
+            {
+              type: 'textField',
+              id: 3,
+              name: 'endDate',
+              inputType: 'datetime-local',
+              label: 'Fecha de fin',
+              required: true,
+            },
           ]}
         />
         <ModalRemove
