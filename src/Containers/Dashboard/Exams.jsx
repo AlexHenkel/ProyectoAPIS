@@ -1,52 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import {
   Typography,
-  Card as OriginalCard,
-  CardContent,
-  CardActions as OriginalCardActions,
   Button,
-  Grid,
-  LinearProgress,
   Tab,
   Tabs,
 } from 'material-ui'
 import SwipeableViews from 'react-swipeable-views'
-import moment from 'moment'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
 import { AlignCenter } from '../../Components/Utils'
-import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
-
-const Card = styled(OriginalCard)`
-  margin: 15px 0;
-  ${({ active, theme }) => !active ? '' : `background-color: ${theme.palette.primary[500]} !important;`}
-  position: relative;
-`
-
-const CardText = styled(Typography)`
-  ${({ active }) => !active ? '' : 'color: rgba(255,255,255,0.75) !important;'}
-`
-
-const Date = styled(Typography)`
-  line-height: 1 !important;
-`
-
-const CardActions = styled(OriginalCardActions)`
-  justify-content: flex-end;
-`
-
-const LimitText = styled(Typography)`
-  color: ${({ theme }) => theme.palette.grey[500]} !important;
-`
+import Exam from '../../Components/Exam'
 
 const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
 TabContainer.propTypes = { children: PropTypes.node.isRequired }
 
-const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
 
 class Exams extends Component {
   constructor(props) {
@@ -94,7 +64,7 @@ class Exams extends Component {
   }
 
   render() {
-    const { theme, currentExams, students, groups, exams } = this.props
+    const { theme, currentExams, pastExams, students, groups, exams } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened, tabIndex } = this.state
 
     return (
@@ -115,92 +85,32 @@ class Exams extends Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer>
-            {currentExams.map(({ id, name, expiresAt, completed }) => (
-              <Card key={id}>
-                <CardContent>
-                  <ContextContainer>
-                    <ContextMenu
-                      value={id}
-                      handleEdit={this.onEdit}
-                      handleRemove={this.onRemove}
-                    />
-                  </ContextContainer>
-                  <Grid container spacing={24}>
-                    <Grid item xs={12} sm={3}>
-                      <AlignCenter>
-                        <Date type="display3">{moment(expiresAt).date()}</Date>
-                      </AlignCenter>
-                      <AlignCenter>
-                        <Typography type="subheading">{months[moment(expiresAt).month()]}</Typography>
-                      </AlignCenter>
-                      <AlignCenter>
-                        <LimitText type="body2" theme={theme}>Fecha límite</LimitText>
-                      </AlignCenter>
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
-                      <CardText type="display1" component="h2" gutterBottom>
-                        {name}
-                      </CardText>
-                      <CardText type="body1" gutterBottom>
-                        Examenes presentados: <b>{completed} / {students.length}</b>
-                      </CardText>
-                      <LinearProgress
-                        color="accent"
-                        mode="determinate"
-                        value={(completed / students.length) * 100}
-                        valueBuffer={(completed / students.length) * 100}
-                      />
-                    </Grid>
-                  </Grid>
-                </CardContent>
-                <CardActions>
-                  <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
-                </CardActions>
-              </Card>
-            ))}
             <AlignCenter>
               <Button color="accent" onClick={this.onAdd}>
                 <AddIcon />
                 Agregar examen
               </Button>
             </AlignCenter>
+            {currentExams.map(data => (
+              <Exam
+                onEdit={this.onEdit}
+                onRemove={this.onRemove}
+                studentsLen={students.length}
+                data={data}
+                theme={theme}
+              />
+            ))}
           </TabContainer>
           <TabContainer>
-            {currentExams.map(({ id, name, expiresAt, completed }) => (
-              <Card key={id}>
-                <CardContent>
-                  <Grid container spacing={24}>
-                    <Grid item xs={12} sm={3}>
-                      <AlignCenter>
-                        <Date type="display3">{moment(expiresAt).date()}</Date>
-                      </AlignCenter>
-                      <AlignCenter>
-                        <Typography type="subheading">{months[moment(expiresAt).month()]}</Typography>
-                      </AlignCenter>
-                      <AlignCenter>
-                        <LimitText type="body2" theme={theme}>Fecha límite</LimitText>
-                      </AlignCenter>
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
-                      <CardText type="display1" component="h2" gutterBottom>
-                        {name}
-                      </CardText>
-                      <CardText type="body1" gutterBottom>
-                        Examenes presentados: <b>{completed} / {students.length}</b>
-                      </CardText>
-                      <LinearProgress
-                        color="accent"
-                        mode="determinate"
-                        value={(completed / students.length) * 100}
-                        valueBuffer={(completed / students.length) * 100}
-                      />
-                    </Grid>
-                  </Grid>
-                </CardContent>
-                <CardActions>
-                  <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
-                </CardActions>
-              </Card>
+            {pastExams.map(data => (
+              <Exam
+                onEdit={this.onEdit}
+                onRemove={this.onRemove}
+                studentsLen={students.length}
+                data={data}
+                theme={theme}
+                noEdit
+              />
             ))}
           </TabContainer>
         </SwipeableViews>
@@ -262,6 +172,7 @@ class Exams extends Component {
 Exams.propTypes = {
   theme: PropTypes.object.isRequired,
   currentExams: PropTypes.array,
+  pastExams: PropTypes.array,
   students: PropTypes.array,
   exams: PropTypes.array,
   groups: PropTypes.array,
@@ -278,6 +189,20 @@ Exams.defaultProps = {
     {
       id: 2,
       name: 'Electricidad',
+      expiresAt: 1508811671643,
+      completed: 3,
+    },
+  ],
+  pastExams: [
+    {
+      id: 3,
+      name: 'Estática',
+      expiresAt: 1508811671643,
+      completed: 10,
+    },
+    {
+      id: 4,
+      name: 'Mecánica',
       expiresAt: 1508811671643,
       completed: 3,
     },

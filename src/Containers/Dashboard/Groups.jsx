@@ -1,33 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import {
   Typography,
-  Card as OriginalCard,
   CardContent,
   CardActions,
   Button,
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
-import { AlignCenter } from '../../Components/Utils'
+import { AlignCenter, DisabledButton, Card, CardText } from '../../Components/Utils'
 import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
 
-const Card = styled(OriginalCard)`
-  margin: 15px 0;
-  ${({ active, theme }) => !active ? '' : `background-color: ${theme.palette.primary[500]} !important;`}
-  position: relative;
-`
-
-const CardText = styled(Typography)`
-  ${({ active }) => !active ? '' : 'color: rgba(255,255,255,0.75) !important;'}
-`
-
-const DisabledButton = styled(Button)`
-  color: rgba(255,255,255,0.75) !important;
-`
 class Groups extends Component {
   constructor(props) {
     super(props)
@@ -79,7 +64,13 @@ class Groups extends Component {
     } = this.state
     return (
       <div>
-        <Typography type="display1" gutterBottom>Mis cursos</Typography>
+        <Typography type="display1" gutterBottom>Mis grupos</Typography>
+        <AlignCenter>
+          <Button color="accent" onClick={this.onAdd}>
+            <AddIcon />
+            Agregar grupo
+          </Button>
+        </AlignCenter>
         {groups.map(({ id, name, activeQuizes }) => (
           <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
             <CardContent>
@@ -107,12 +98,6 @@ class Groups extends Component {
             </CardActions>
           </Card>
         ))}
-        <AlignCenter>
-          <Button color="accent" onClick={this.onAdd}>
-            <AddIcon />
-            Agregar grupo
-          </Button>
-        </AlignCenter>
         <ModalSave
           open={modalSaveOpened}
           title="Grupo"
