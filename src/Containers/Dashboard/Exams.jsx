@@ -79,7 +79,7 @@ class Exams extends Component {
   }
 
   render() {
-    const { theme, currentExams, students, groups } = this.props
+    const { theme, currentExams, students, groups, exams } = this.props
     const {
       modalSaveOpened,
       modalType,
@@ -164,6 +164,15 @@ class Exams extends Component {
               name: 'limitDate',
               inputType: 'datetime-local',
               label: 'Fecha límite',
+              required: true,
+            },
+            {
+              type: 'select',
+              id: 3,
+              name: 'exam',
+              label: 'Examen a asignar',
+              options: exams,
+              optionsLabel: 'name',
               required: true,
             },
             {

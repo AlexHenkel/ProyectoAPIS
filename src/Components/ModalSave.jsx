@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'formsy-react-2'
+import styled from 'styled-components'
+import { Form as OriginalForm } from 'formsy-react-2'
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
 import {
   DialogContent,
@@ -10,6 +11,11 @@ import {
 import Slide from 'material-ui/transitions/Slide'
 import Input from '../Components/Input'
 import MultipleSelect from '../Components/MultipleSelect'
+import Select from '../Components/Select'
+
+const Form = styled(OriginalForm)`
+  overflow: auto;
+`
 
 class ModalSave extends Component {
   handleRequestClose = () => {
@@ -31,6 +37,15 @@ class ModalSave extends Component {
           <Input
             key={id}
             type={inputType}
+            {...inputProps}
+          />
+        )
+      case 'select':
+        return (
+          <Select
+            key={id}
+            options={options}
+            optionsLabel={optionsLabel}
             {...inputProps}
           />
         )
