@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
 import {
   AppBar,
   Toolbar,
@@ -55,12 +57,12 @@ class Layout extends Component {
                 <MenuIcon />
               </IconButton>
             </Hidden>
-            <Typography type="title" color="inherit">
+            <Typography type="title" color="inherit" onClick={() => this.props.navigateTo('/')}>
               TecLearn
             </Typography>
             <Hidden xsDown>
-              <Button raised color="accent">Cursos</Button>
-              <Button raised color="accent">Quizes</Button>
+              <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Cursos</Button>
+              <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Quizes</Button>
               <Button color="contrast">Login</Button>
             </Hidden>
           </Toolbar>
@@ -101,6 +103,13 @@ class Layout extends Component {
 
 Layout.propTypes = {
   slot: PropTypes.node.isRequired,
+  navigateTo: PropTypes.func.isRequired,
 }
 
-export default Layout
+const mapStateToProps = () => ({})
+
+const mapDispatchToProps = dispatch => ({
+  navigateTo: route => dispatch(push(route)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)
