@@ -10,9 +10,11 @@ import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
 import Dashboard from './Containers/Dashboard/Dashboard'
+import Resources from './Containers/Resources/Resources'
 
 // Build layout components for router
 const DashboardRoute = () => <Layout slot={<Dashboard />} />
+const ResourcesRoute = () => <Layout slot={<Resources />} />
 
 // Create a browser history, and it's middleware
 const history = createHistory()
@@ -23,14 +25,15 @@ const store = createStore(() => null, applyMiddleware(historyMiddleware))
 
 const App = () => (
   <Provider store={store}>
-    <div>
+    <MuiThemeProvider theme={theme}>
       { /* ConnectedRouter will use the store from Provider automatically */ }
       <ConnectedRouter history={history}>
-        <MuiThemeProvider theme={theme}>
+        <div>
           <Route exact path="/" component={DashboardRoute} />
-        </MuiThemeProvider>
+          <Route exact path="/recursos" component={ResourcesRoute} />
+        </div>
       </ConnectedRouter>
-    </div>
+    </MuiThemeProvider>
   </Provider>
 )
 

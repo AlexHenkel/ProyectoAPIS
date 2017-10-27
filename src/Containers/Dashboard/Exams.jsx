@@ -93,6 +93,7 @@ class Exams extends Component {
             </AlignCenter>
             {currentExams.map(data => (
               <Exam
+                key={data.id}
                 onEdit={this.onEdit}
                 onRemove={this.onRemove}
                 studentsLen={students.length}
@@ -104,6 +105,7 @@ class Exams extends Component {
           <TabContainer>
             {pastExams.map(data => (
               <Exam
+                key={data.id}                
                 onEdit={this.onEdit}
                 onRemove={this.onRemove}
                 studentsLen={students.length}

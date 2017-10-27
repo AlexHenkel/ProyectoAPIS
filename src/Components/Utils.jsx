@@ -19,6 +19,7 @@ export const Card = styled(OriginalCard)`
   margin: 15px 0;
   ${({ active, theme }) => !active ? '' : `background-color: ${theme.palette.primary[500]} !important;`}
   position: relative;
+  padding-right: 30px;
 `
 
 export const CardText = styled(Typography)`
