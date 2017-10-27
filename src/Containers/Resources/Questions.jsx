@@ -89,6 +89,13 @@ class Questions extends Component {
               label: 'Título de la pregunta',
               required: true,
             },
+            {
+              type: 'textField',
+              id: 2,
+              name: 'correctAnswer',
+              label: 'Respuesta correcta',
+              required: true,
+            },
           ]}
         />
         <ModalRemove
@@ -109,36 +116,21 @@ Questions.defaultProps = {
   questions: [
     {
       id: 1,
-      correctAnswer: 'c',
+      correctAnswer: '4.56',
       question: '¿Cuál es la magnitud de la gravedad?',
-      answers: {
-        a: '4.56',
-        b: '4.56',
-        c: '9.14',
-        d: '4.56',
-      },
+      incorrectAnswers: ['4.56', '9.14', '4.56'],
     },
     {
       id: 2,
-      correctAnswer: 'a',
+      correctAnswer: '9.14',
       question: '¿Cuál es la magnitud de la velocidad?',
-      answers: {
-        a: '4.56',
-        b: '4.56',
-        c: '9.14',
-        d: '4.56',
-      },
+      incorrectAnswers: ['4.56', '4.56', '4.56'],
     },
     {
       id: 3,
-      correctAnswer: 'd',
+      correctAnswer: '25.3',
       question: '¿Cuál es la magnitud de la aceleración?',
-      answers: {
-        a: '4.56',
-        b: '4.56',
-        c: '9.14',
-        d: '4.56',
-      },
+      incorrectAnswers: ['4.56', '4.56', '4.56'],
     },
   ],
 }

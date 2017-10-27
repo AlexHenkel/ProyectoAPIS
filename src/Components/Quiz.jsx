@@ -76,13 +76,16 @@ class Quiz extends Component {
               <Typography type="body1" gutterBottom>
                 Número de veces asignado: <b>{assigned}</b>
               </Typography>
-              {questions.map(({ id: answerId, question, answers, correctAnswer }, index) => (
+              {questions.map(({ id: answerId, question, correctAnswer, incorrectAnswers }, i) => (
                 <div key={answerId}>
-                  <Question type="display1">{index + 1}. {question}</Question>
+                  <Question type="display1">{i + 1}. {question}</Question>
                   <AnswerTitle type="body2">Respuestas</AnswerTitle>
-                  {Object.keys(answers).map(option => (
-                    <Answer key={option} gutterBottom type="headline" color={correctAnswer === option ? 'accent' : 'inherit'}>
-                      {correctAnswer === option && <CheckIcon />} {answers[option]}
+                  <Answer gutterBottom type="headline" color="accent">
+                    <CheckIcon /> {correctAnswer}
+                  </Answer>
+                  {incorrectAnswers.map((option, incorrectIndex) => (
+                    <Answer key={incorrectIndex} gutterBottom type="headline">
+                      {option}
                     </Answer>
                   ))}
                 </div>
