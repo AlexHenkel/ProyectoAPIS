@@ -96,6 +96,12 @@ class Questions extends Component {
               label: 'Respuesta correcta',
               required: true,
             },
+            {
+              type: 'multipleInputs',
+              id: 3,
+              name: 'incorrectAnswers',
+              label: 'Respuestas incorrectas',
+            },
           ]}
         />
         <ModalRemove

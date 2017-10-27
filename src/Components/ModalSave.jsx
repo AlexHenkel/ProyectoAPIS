@@ -14,6 +14,7 @@ import MultipleSelect from '../Components/MultipleSelect'
 import Select from '../Components/Select'
 import FuzzySearch from '../Components/FuzzySearch'
 import TagSelect from '../Components/TagSelect'
+import MultipleInputs from '../Components/MultipleInputs'
 
 const Form = styled(OriginalForm)`
   overflow: auto;
@@ -75,6 +76,13 @@ class ModalSave extends Component {
             key={id}
             options={options}
             optionsLabel={optionsLabel}
+            {...inputProps}
+          />
+        )
+      case 'multipleInputs':
+        return (
+          <MultipleInputs
+            key={id}
             {...inputProps}
           />
         )
