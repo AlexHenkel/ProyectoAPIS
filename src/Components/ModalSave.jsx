@@ -9,12 +9,7 @@ import {
   Button,
 } from 'material-ui'
 import Slide from 'material-ui/transitions/Slide'
-import Input from '../Components/Input'
-import MultipleSelect from '../Components/MultipleSelect'
-import Select from '../Components/Select'
-import FuzzySearch from '../Components/FuzzySearch'
-import TagSelect from '../Components/TagSelect'
-import MultipleInputs from '../Components/MultipleInputs'
+import InputManager from '../Components/InputManager'
 
 const Form = styled(OriginalForm)`
   overflow: auto;
@@ -31,64 +26,6 @@ class ModalSave extends Component {
 
   submit = (model) => {
     console.log(model)
-  }
-
-  renderField = ({ id, type, inputType, options, optionsLabel, ...inputProps }) => {
-    switch (type) {
-      case 'textField':
-        return (
-          <Input
-            key={id}
-            type={inputType}
-            {...inputProps}
-          />
-        )
-      case 'select':
-        return (
-          <Select
-            key={id}
-            options={options}
-            optionsLabel={optionsLabel}
-            {...inputProps}
-          />
-        )
-      case 'fuzzySearch':
-        return (
-          <FuzzySearch
-            key={id}
-            options={options}
-            optionsLabel={optionsLabel}
-            {...inputProps}
-          />
-        )
-      case 'multiSelect':
-        return (
-          <MultipleSelect
-            key={id}
-            options={options}
-            optionsLabel={optionsLabel}
-            {...inputProps}
-          />
-        )
-      case 'tags':
-        return (
-          <TagSelect
-            key={id}
-            options={options}
-            optionsLabel={optionsLabel}
-            {...inputProps}
-          />
-        )
-      case 'multipleInputs':
-        return (
-          <MultipleInputs
-            key={id}
-            {...inputProps}
-          />
-        )
-      default:
-        return null
-    }
   }
 
   render() {
@@ -109,7 +46,7 @@ class ModalSave extends Component {
         >
           <DialogTitle>{modalType === 'create' ? 'Agregar' : 'Editar'} {title}</DialogTitle>
           <DialogContent>
-            {fields.map(item => this.renderField(item))}
+            {fields.map((item, index) => <InputManager id={index} {...item} />)}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleRequestClose} color="primary">
