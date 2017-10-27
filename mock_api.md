@@ -74,7 +74,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Request (application/json)
 
         {
-            teacher_id: 1,
             group_id: 1
         }
 

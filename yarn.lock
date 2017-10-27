@@ -326,6 +326,13 @@ aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
+axios@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.0.tgz#7da747916db803f761651d6091d708789b953c6a"
+  dependencies:
+    follow-redirects "^1.2.3"
+    is-buffer "^1.1.5"
+
 axobject-query@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-0.1.0.tgz#62f59dbc59c9f9242759ca349960e7a2fe3c36c0"
@@ -1913,7 +1920,7 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8:
+debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -2874,6 +2881,12 @@ flat-cache@^1.2.1:
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
+
+follow-redirects@^1.2.3:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.5.tgz#ffd3e14cbdd5eaa72f61b6368c1f68516c2a26cc"
+  dependencies:
+    debug "^2.6.9"
 
 for-in@^1.0.1:
   version "1.0.2"
@@ -5559,9 +5572,19 @@ rafl@~1.2.1:
   dependencies:
     global "~4.3.0"
 
+ramda@^0.24.1:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
+
 ramda@^0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+
+ramdasauce@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ramdasauce/-/ramdasauce-2.1.0.tgz#65ea157a9cfc17841a7dd6499d3f9f421dc2eb36"
+  dependencies:
+    ramda "^0.24.1"
 
 randomatic@^1.1.3:
   version "1.1.7"
@@ -5938,7 +5961,20 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux@^3.7.2:
+"redux-observable-crud@https://github.com/alexhenkel/redux-observable-crud.git":
+  version "1.0.0"
+  resolved "https://github.com/alexhenkel/redux-observable-crud.git#bb10a63fd1ae274d8f5be7e91a7f36a584c5c5e7"
+  dependencies:
+    ramda "^0.24.1"
+    redux "^3.7.2"
+    redux-observable "^0.16.0"
+    rxjs "^5.4.3"
+
+redux-observable@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/redux-observable/-/redux-observable-0.16.0.tgz#dc431d0f47a9c3af232639d6bdd70d80c1b620d9"
+
+redux@^3.7.1, redux@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
@@ -5946,6 +5982,15 @@ redux@^3.7.2:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
+
+"reduxsauce-crud@https://github.com/AlexHenkel/reduxsauce-crud.git":
+  version "1.0.0"
+  resolved "https://github.com/AlexHenkel/reduxsauce-crud.git#5926736d0ddf8e6850b3108370478adb61675740"
+  dependencies:
+    ramda "^0.24.1"
+    ramdasauce "^2.0.0"
+    redux "^3.7.1"
+    seamless-immutable "^7.1.2"
 
 regenerate@^1.2.1:
   version "1.3.3"
@@ -6196,6 +6241,12 @@ rx-lite@*, rx-lite@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
 
+rxjs@^5.4.3:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.2.tgz#28d403f0071121967f18ad665563255d54236ac3"
+  dependencies:
+    symbol-observable "^1.0.1"
+
 safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
@@ -6227,6 +6278,10 @@ scroll@^2.0.1:
   resolved "https://registry.yarnpkg.com/scroll/-/scroll-2.0.1.tgz#b4c7d27e8bcf3ae8a58a042f27268ae3f55f9ccd"
   dependencies:
     rafl "~1.2.1"
+
+seamless-immutable@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/seamless-immutable/-/seamless-immutable-7.1.2.tgz#c87a1eba6767a32455311d76600ac5eddeafbb69"
 
 section-iterator@^2.0.0:
   version "2.0.0"
@@ -6677,7 +6732,7 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
-symbol-observable@^1.0.3, symbol-observable@^1.0.4:
+symbol-observable@^1.0.1, symbol-observable@^1.0.3, symbol-observable@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 

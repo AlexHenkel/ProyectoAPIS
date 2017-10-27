@@ -3,9 +3,8 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
-import { createStore, applyMiddleware } from 'redux'
 import { withStyles, MuiThemeProvider } from 'material-ui/styles'
-
+import createStore from './Data/Redux'
 import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
@@ -20,8 +19,8 @@ const ResourcesRoute = () => <Layout slot={<Resources />} />
 const history = createHistory()
 const historyMiddleware = routerMiddleware(history)
 
-// TODO: Change this to use custom store
-const store = createStore(() => null, applyMiddleware(historyMiddleware))
+// create our store, with middlewares
+const store = createStore([historyMiddleware])
 
 const App = () => (
   <Provider store={store}>
