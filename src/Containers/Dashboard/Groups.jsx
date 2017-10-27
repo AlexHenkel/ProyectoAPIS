@@ -71,7 +71,7 @@ class Groups extends Component {
             Agregar grupo
           </Button>
         </AlignCenter>
-        {groups.map(({ id, name, activeQuizes }) => (
+        {groups.map(({ id, name, activeExams }) => (
           <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
             <CardContent>
               <ContextContainer>
@@ -85,7 +85,7 @@ class Groups extends Component {
                 {name}
               </CardText>
               <CardText type="body1" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-                Quizes activos: <b>{activeQuizes}</b>
+                Quizes activos: <b>{activeExams}</b>
               </CardText>
             </CardContent>
             <CardActions>
@@ -152,12 +152,12 @@ Groups.defaultProps = {
     {
       id: 1,
       name: 'Física 1 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 2,
       name: 'Física 2 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
   ],
   activeGroup: 1,

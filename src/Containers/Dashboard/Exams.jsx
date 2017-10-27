@@ -133,7 +133,7 @@ class Exams extends Component {
             {
               type: 'textField',
               id: 2,
-              name: 'limitDate',
+              name: 'expiresAt',
               inputType: 'datetime-local',
               label: 'Fecha límite',
               required: true,
@@ -141,23 +141,25 @@ class Exams extends Component {
             {
               type: 'fuzzySearch',
               id: 3,
-              name: 'exam',
+              name: 'exam_id',
               label: 'Examen a asignar',
               options: exams,
               optionsValue: 'id',
               optionsLabel: 'name',
               required: true,
+              specificFor: 'create',
             },
             {
               type: 'multiSelect',
               id: 4,
-              name: 'groups',
+              name: 'groups_id',
               label: 'Grupos a asignar examen',
               // value: currentGroup
               options: groups,
               optionsValue: 'id',
               optionsLabel: 'name',
               required: true,
+              specificFor: 'create',
             },
           ]}
         />
@@ -228,32 +230,32 @@ Exams.defaultProps = {
     {
       id: 1,
       name: 'Física 1 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 2,
       name: 'Física 2 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 3,
       name: 'Física 1 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 4,
       name: 'Física 2 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 5,
       name: 'Física 1 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
     {
       id: 6,
       name: 'Física 2 - ENE/DIC 17',
-      activeQuizes: 1,
+      activeExams: 1,
     },
   ],
 }

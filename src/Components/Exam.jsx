@@ -27,17 +27,19 @@ const LimitText = styled(Typography)`
 
 const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
 
-const Exam = ({ data: { id, name, expiresAt, completed, questions },
-  onEdit, onRemove, theme, studentsLen }) => (
+const Exam = ({ data: { id, name, expiresAt, completed },
+  onEdit, onRemove, theme, studentsLen, noEdit }) => (
     <Card key={id}>
       <CardContent>
-        <ContextContainer>
-          <ContextMenu
-            value={id}
-            handleEdit={onEdit}
-            handleRemove={onRemove}
-          />
-        </ContextContainer>
+        {!noEdit && (
+          <ContextContainer>
+            <ContextMenu
+              value={id}
+              handleEdit={onEdit}
+              handleRemove={onRemove}
+            />
+          </ContextContainer>
+        )}
         <Grid container spacing={24}>
           <Grid item xs={12} sm={3}>
             <AlignCenter>
@@ -78,11 +80,13 @@ Exam.propTypes = {
   onRemove: PropTypes.func,
   theme: PropTypes.object.isRequired,
   studentsLen: PropTypes.number.isRequired,
+  noEdit: PropTypes.bool,
 }
 
 Exam.defaultProps = {
   onEdit: null,
   onRemove: null,
+  noEdit: false,
 }
 
 export default Exam
