@@ -12,10 +12,6 @@ import {
 } from 'material-ui'
 
 class MultipleSelect extends Mixin {
-  updateValue = (event) => {
-    this.setValue(event.target.value)
-  }
-
   handleChange = id => (event, checked) => {
     const currVal = this.getValue() || []
     if (checked) {
@@ -28,20 +24,20 @@ class MultipleSelect extends Mixin {
   }
 
   render() {
-    const { label, help, options, optionsLabel } = this.removeFormsyProps(this.props)
+    const { label, help, options, optionsLabel, optionsValue } = this.removeFormsyProps(this.props)
     const errorMessages = this.getErrorMessages()
     const hasError = !!errorMessages.length || this.showRequired()
     return (
       <FormControl component="fieldset" error={hasError} margin="normal">
         <FormLabel component="legend">{`${label} ${this.isRequired() ? '*' : ''}`}</FormLabel>
         {options.map(item => (
-          <FormGroup key={item.id}>
+          <FormGroup key={item[optionsValue]}>
             <FormControlLabel
               control={
                 <Checkbox
                   // TODO: Check if this will be an array of id's or objects
-                  checked={contains(item.id, this.getValue() || [])}
-                  onChange={this.handleChange(item.id)}
+                  checked={contains(item[optionsValue], this.getValue() || [])}
+                  onChange={this.handleChange(item[optionsValue])}
                 />
               }
               label={item[optionsLabel]}
@@ -58,12 +54,14 @@ MultipleSelect.propTypes = {
   label: PropTypes.string,
   help: PropTypes.string,
   options: PropTypes.array.isRequired,
+  optionsValue: PropTypes.string,
   optionsLabel: PropTypes.string,
 }
 
 MultipleSelect.defaultProps = {
   label: '',
   help: '',
+  optionsValue: 'value',
   optionsLabel: 'label',
 }
 

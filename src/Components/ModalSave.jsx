@@ -46,7 +46,7 @@ class ModalSave extends Component {
         >
           <DialogTitle>{modalType === 'create' ? 'Agregar' : 'Editar'} {title}</DialogTitle>
           <DialogContent>
-            {fields.map((item, index) => <InputManager id={index} {...item} />)}
+            {fields.map((item, index) => <InputManager key={index} {...item} />)}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleRequestClose} color="primary">

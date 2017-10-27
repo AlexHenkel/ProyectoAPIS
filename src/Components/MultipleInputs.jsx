@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Mixin } from 'formsy-react-2'
 import {
@@ -49,7 +50,7 @@ class MultipleInputs extends Mixin {
 
   render() {
     const { value } = this.state
-
+    const { label } = this.props
     return (
       <div>
         {value.map((currVal, index) => (
@@ -57,7 +58,7 @@ class MultipleInputs extends Mixin {
             key={index}
             value={currVal}
             onChange={this.updateValue(index)}
-            label={`Respuesta incorrecta ${index + 1} *`}
+            label={`${label} ${index + 1} *`}
             margin="normal"
             fullWidth
             error={currVal === ''}
@@ -76,6 +77,14 @@ class MultipleInputs extends Mixin {
       </div>
     )
   }
+}
+
+MultipleInputs.propTypes = {
+  label: PropTypes.string,
+}
+
+MultipleInputs.defaultProps = {
+  label: '',
 }
 
 export default MultipleInputs

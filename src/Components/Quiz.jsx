@@ -26,7 +26,7 @@ const AnswerTitle = styled(Typography)`
   }
 `
 
-const Answer = styled(Typography)`
+export const Answer = styled(Typography)`
   position: relative;
   margin-left: 30px !important;
   @media (min-width: 600px) {
