@@ -6,10 +6,33 @@ import {
   Button,
 } from 'material-ui'
 import AddIcon from 'material-ui-icons/Add'
+import styled from 'styled-components'
+import OriginalCheckIcon from 'material-ui-icons/Check'
+import { withTheme } from 'material-ui/styles'
 import { AlignCenter, Card, CardText } from '../../Components/Utils'
 import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
+import { Answer } from '../../Components/Quiz'
+
+const CheckIcon = styled(OriginalCheckIcon)`
+  position: absolute;
+  left: -30px;
+`
+
+const TagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const Tag = styled.div`
+  background: ${({ theme }) => theme.palette.primary[500]};
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+`
 
 class Questions extends Component {
   constructor(props) {
@@ -48,7 +71,7 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions } = this.props
+    const { questions, tags, theme } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -59,7 +82,7 @@ class Questions extends Component {
             Agregar pregunta
           </Button>
         </AlignCenter>
-        {questions.map(({ id, question }) => (
+        {questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
           <Card key={id}>
             <CardContent>
               <ContextContainer>
@@ -69,9 +92,22 @@ class Questions extends Component {
                   handleRemove={this.onRemove}
                 />
               </ContextContainer>
-              <CardText type="headline" component="h2" gutterBottom>
+              <CardText type="title" gutterBottom>
                 {question}
               </CardText>
+              <CardText>
+                <Answer gutterBottom type="title" color="accent">
+                  <CheckIcon /> {correctAnswer}
+                </Answer>
+                {incorrectAnswers.map((incorrectAnswer, index) => (
+                  <Answer key={index} gutterBottom type="title">
+                    {incorrectAnswer}
+                  </Answer>
+                ))}
+              </CardText>
+              <TagContainer>
+                {currTags.map(({ id: tagId, name }) => <Tag key={tagId} theme={theme}>{name}</Tag>)}
+              </TagContainer>
             </CardContent>
           </Card>
         ))}
@@ -100,7 +136,16 @@ class Questions extends Component {
               type: 'multipleInputs',
               id: 3,
               name: 'incorrectAnswers',
-              label: 'Respuestas incorrectas',
+              label: 'Respuesta incorrecta',
+            },
+            {
+              type: 'tags',
+              id: 4,
+              name: 'tags',
+              label: 'Tags asociadas',
+              options: tags,
+              optionsValue: 'id',
+              optionsLabel: 'name',
             },
           ]}
         />
@@ -116,6 +161,8 @@ class Questions extends Component {
 
 Questions.propTypes = {
   questions: PropTypes.array,
+  tags: PropTypes.array,
+  theme: PropTypes.object.isRequired,
 }
 
 Questions.defaultProps = {
@@ -125,20 +172,72 @@ Questions.defaultProps = {
       correctAnswer: '4.56',
       question: '¿Cuál es la magnitud de la gravedad?',
       incorrectAnswers: ['4.56', '9.14', '4.56'],
+      tags: [
+        {
+          id: 1,
+          name: 'Física',
+        },
+        {
+          id: 2,
+          name: 'Química',
+        },
+      ],
     },
     {
       id: 2,
       correctAnswer: '9.14',
       question: '¿Cuál es la magnitud de la velocidad?',
       incorrectAnswers: ['4.56', '4.56', '4.56'],
+      tags: [
+        {
+          id: 1,
+          name: 'Física',
+        },
+        {
+          id: 2,
+          name: 'Química',
+        },
+        {
+          id: 3,
+          name: 'Matemáticas',
+        },
+        {
+          id: 4,
+          name: 'Física cuantica nuclear destructiva',
+        },
+      ],
     },
     {
       id: 3,
       correctAnswer: '25.3',
       question: '¿Cuál es la magnitud de la aceleración?',
       incorrectAnswers: ['4.56', '4.56', '4.56'],
+      tags: [
+        {
+          id: 1,
+          name: 'Física',
+        },
+        {
+          id: 2,
+          name: 'Química',
+        },
+      ],
+    },
+  ],
+  tags: [
+    {
+      id: 1,
+      name: 'Física',
+    },
+    {
+      id: 2,
+      name: 'Mécanica',
+    },
+    {
+      id: 3,
+      name: 'Eléctrica',
     },
   ],
 }
 
-export default Questions
+export default withTheme()(Questions)
