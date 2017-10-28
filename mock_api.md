@@ -21,9 +21,17 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + id: 1 (number, required)
             
-            + name: Física 1 - ENE/DIC 17 (string, required)
+            + name: Física 1 ENE/DIC 17 (string, required)
 
-            + activeExams: 1 (number, required)
+            + activeExams: 2 (number, required)
+
+        + (object)
+
+            + id: 2 (number, required)
+            
+            + name: Física 2 ENE/DIC 17 (string, required)
+
+            + activeExams: 2 (number, required)
  
 ### Create teacher's group  [POST]
 
@@ -43,7 +51,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (object)
 
-        + id: 2 (number, required)
+        + id: 3 (number, required)
 
         + name: cool name (string, required)
 
@@ -55,7 +63,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes
 
-        + group_id: 2 (string, required)
+        + group_id: 3 (string, required)
 
         + name: not cool name (string, required)
 
@@ -67,7 +75,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (object)
 
-        + id: 2 (number, required)
+        + id: 3 (number, required)
 
         + name: not cool name (string, required)
 
@@ -77,13 +85,13 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (object)
 
-        + group_id: 1 (number, required)
+        + group_id: 3 (number, required)
 
 + Response 201 (application/json)
     
     + Attributes (object)
 
-        + id: 1 (number, required)
+        + id: 3 (number, required)
 
 ## Teacher Overview [/teacher_overview/{id}]
 
@@ -140,7 +148,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                 + id: 1 (number, required)
 
                 + name: Chelsea Otakan (string, required)
-            
+
             + (object)
 
                 + id: 2 (number, required)
@@ -160,7 +168,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                 + id: 1 (number, required)
 
                 + name: Chelsea Otakan (string, required)
-            
+
             + (object)
 
                 + id: 2 (number, required)
@@ -273,7 +281,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 4.56 (string, required)
 
-                    + incorrectAnswers 4.56, 9.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
                 
                 + (object)
 
@@ -283,7 +291,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 9.14 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
 
                 + (object)
 
@@ -293,7 +301,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 15.32 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
         
         + (object)
 
@@ -315,7 +323,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 4.56 (string, required)
 
-                    + incorrectAnswers 4.56, 9.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
                 
                 + (object)
 
@@ -325,7 +333,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 9.14 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
 
                 + (object)
 
@@ -335,7 +343,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 15.32 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
         
         + (object)
 
@@ -357,7 +365,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 4.56 (string, required)
 
-                    + incorrectAnswers 4.56, 9.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
                 
                 + (object)
 
@@ -367,7 +375,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 9.14 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
 
                 + (object)
 
@@ -377,7 +385,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                     + correctAnswer: 15.32 (string, required)
 
-                    + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+                    + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
  
 ## Teacher Questions Collection [/teacher_questions/]
 
@@ -401,7 +409,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + correctAnswer: 4.56 (string, required)
 
-            + incorrectAnswers 4.56, 9.14, 4.56 (array[string], required)
+            + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
 
             + tags (array, required)
                 
@@ -425,7 +433,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + correctAnswer: 9.14 (string, required)
 
-            + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+            + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
 
             + tags (array, required)
                 
@@ -449,7 +457,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + correctAnswer: 15.32 (string, required)
 
-            + incorrectAnswers 4.56, 98.14, 4.56 (array[string], required)
+            + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
 
             + tags (array, required)
                 
@@ -491,7 +499,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + correctAnswer: 20 (string, required)
 
-        + incorrectAnswers 1, 5, 100 (array[string], required)
+        + incorrectAnswers: 1, 5, 100 (array[string], required)
 
         + tags (array, required)
             
@@ -511,7 +519,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + correctAnswer: 20 (string, required)
 
-        + incorrectAnswers 1, 5, 100 (array[string], required)
+        + incorrectAnswers: 1, 5, 100 (array[string], required)
 
         + tags (array, required)
                 
@@ -519,19 +527,19 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                 + id: 1 (number, required)
 
-                + name: Física (number, required)
+                + name: Física (string, required)
             
             + (object)
 
                 + id: 3 (number, required)
 
-                + name: Estática (number, required)
+                + name: Estática (string, required)
 
             + (object)
 
                 + id: 7 (number, required)
 
-                + name: this is a new tag (number, required)
+                + name: this is a new tag (string, required)
 
 ### Update teacher's question  [PATCH]
 
@@ -547,7 +555,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + correctAnswer: 24 (string, required)
 
-        + incorrectAnswers 1, 5, 100 (array[string], required)
+        + incorrectAnswers: 1, 5, 100 (array[string], required)
 
         + tags (array, required)
             
@@ -567,7 +575,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + correctAnswer: 24 (string, required)
 
-        + incorrectAnswers 1, 5, 100 (array[string], required)
+        + incorrectAnswers: 1, 5, 100 (array[string], required)
 
         + tags (array, required)
                 
@@ -575,19 +583,19 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                 + id: 1 (number, required)
 
-                + name: Física (number, required)
+                + name: Física (string, required)
             
             + (object)
 
                 + id: 3 (number, required)
 
-                + name: Estática (number, required)
+                + name: Estática (string, required)
 
             + (object)
 
                 + id: 8 (number, required)
 
-                + name: this is another new tag (number, required)
+                + name: this is another new tag (string, required)
 
 ### Remove teacher's question  [DELETE]
 
@@ -602,3 +610,39 @@ TecLearn is a tool for teacher and students to create and grade exams associated
     + Attributes (object)
 
         + id: 1 (number, required)
+
+## Teacher Tags Collection [/teacher_tags/]
+
+### List all teacher's tags [GET /teacher_tags/{id}]
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 200 (application/json)
+
+    + Attributes (array)
+
+        + (object)
+
+            + id: 1 (number, required)
+
+            + name: Física (string, required)
+        
+        + (object)
+
+            + id: 2 (number, required)
+
+            + name: Química (string, required)
+
+        + (object)
+
+            + id: 3 (number, required)
+
+            + name: Matemáticas (string, required)
+        
+        + (object)
+
+            + id: 4 (number, required)
+
+            + name: Física cuantica nuclear destructiva (string, required)

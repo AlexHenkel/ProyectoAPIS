@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Grid,
 } from 'material-ui'
@@ -8,9 +10,11 @@ import Students from './Students'
 import Top10 from './Top10'
 import GroupCode from './GroupCode'
 
-export default class Dashboard extends Component {
+import GroupsActions from '../../Data/Redux/GroupsRedux'
+
+class Dashboard extends Component {
   componentDidMount() {
-    console.log('load data')
+    this.props.getGroups()
   }
 
   render() {
@@ -31,3 +35,18 @@ export default class Dashboard extends Component {
     )
   }
 }
+
+Dashboard.propTypes = {
+  getGroups: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = () => ({})
+
+const mapDispatchToProps = dispatch => ({
+  getGroups: () => dispatch(GroupsActions.getRequest({
+    isTeacher: true,
+    id: 1,
+  })),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

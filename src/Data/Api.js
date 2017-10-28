@@ -1,6 +1,6 @@
 import { create } from 'axios'
 
-const baseURL = 'https://private-f1f1a-teclearn.apiary-mock.com/'
+const baseURL = 'http://private-anon-fdb02c9693-teclearn.apiary-mock.com/'
 
 /**
  * Create a new API instance
@@ -15,25 +15,25 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
-const getGroups = (isTeacher, id) => {
+const getGroups = ({ isTeacher, id }) => {
   if (isTeacher) {
     return api.get(`teacher_groups/${id}`)
   }
   return null
 }
-const createGroup = (isTeacher, data) => {
+const createGroup = ({ isTeacher, ...data }) => {
   if (isTeacher) {
     return api.post('teacher_groups/', data)
   }
   return null
 }
-const updateGroup = (isTeacher, id, data) => {
+const updateGroup = (id, { isTeacher, ...data }) => {
   if (isTeacher) {
     return api.patch('teacher_groups/', data)
   }
   return null
 }
-const removeGroup = (isTeacher, id) => {
+const removeGroup = ({ isTeacher, id }) => {
   if (isTeacher) {
     return api.delete('teacher_groups/', {
       group_id: id,

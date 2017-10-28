@@ -5,6 +5,7 @@ import { GroupsRedux } from '../Redux/GroupsRedux'
 const groupsCrudObservable = createCRUDObservable({
   mainRedux: GroupsRedux,
   reduxPath: 'groups',
+  generalDataHandler: res => res.data,
 })
 
 // For testing

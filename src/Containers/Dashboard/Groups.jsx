@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Typography,
   CardContent,
@@ -50,18 +51,8 @@ class Groups extends Component {
   }
 
   render() {
-    const {
-      theme,
-      groups,
-      selectActiveGroup,
-      activeGroup,
-    } = this.props
-    const {
-      modalSaveOpened,
-      modalType,
-      toModifyId,
-      modalRemoveOpened,
-    } = this.state
+    const { theme, groups, selectActiveGroup, activeGroup } = this.props
+    const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis grupos</Typography>
@@ -142,26 +133,18 @@ class Groups extends Component {
 
 Groups.propTypes = {
   theme: PropTypes.object.isRequired,
-  groups: PropTypes.array,
+  groups: PropTypes.array.isRequired,
   activeGroup: PropTypes.number,
   selectActiveGroup: PropTypes.func,
 }
 
 Groups.defaultProps = {
-  groups: [
-    {
-      id: 1,
-      name: 'Física 1 - ENE/DIC 17',
-      activeExams: 1,
-    },
-    {
-      id: 2,
-      name: 'Física 2 - ENE/DIC 17',
-      activeExams: 1,
-    },
-  ],
   activeGroup: 1,
   selectActiveGroup: id => console.log('change group', id),
 }
 
-export default withTheme()(Groups)
+const mapStateToProps = state => ({
+  groups: state.groups.get.results,
+})
+
+export default connect(mapStateToProps)(withTheme()(Groups))
