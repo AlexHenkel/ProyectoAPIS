@@ -117,7 +117,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
                 + expiresAt: 1508811671643 (number, required)
 
-                + completed: 10 (number, required)
+                + completed: 1 (number, required)
 
             + (object)
 

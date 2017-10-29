@@ -11,10 +11,12 @@ import Top10 from './Top10'
 import GroupCode from './GroupCode'
 
 import GroupsActions from '../../Data/Redux/GroupsRedux'
+import OverviewActions from '../../Data/Redux/OverviewRedux'
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getGroups()
+    this.props.getOverview()
   }
 
   render() {
@@ -38,6 +40,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getGroups: PropTypes.func.isRequired,
+  getOverview: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = () => ({})
@@ -46,6 +49,9 @@ const mapDispatchToProps = dispatch => ({
   getGroups: () => dispatch(GroupsActions.getRequest({
     isTeacher: true,
     id: 1,
+  })),
+  getOverview: () => dispatch(OverviewActions.getOneRequest(1, {
+    isTeacher: true,
   })),
 })
 

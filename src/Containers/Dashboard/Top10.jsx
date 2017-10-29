@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {
   Typography,
@@ -9,6 +10,7 @@ import {
   ListItemText as OriginalListItemText,
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
+import Loading from '../../Components/Loading'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
@@ -24,45 +26,33 @@ const ListItemText = styled(OriginalListItemText)`
   }
 `
 
-const Top10 = ({ theme, students }) => (
+const Top10 = ({ theme, loading, students }) => (
   <div>
     <Title type="display1" gutterBottom>Top 10</Title>
-    <Card theme={theme}>
-      <List>
-        {students.map(({ id, name }, index) => (
-          <ListItem key={id}>
-            <ListItemText primary={name} theme={theme} active={index === 1 ? 'yes' : ''} />
-          </ListItem>
-        ))}
-      </List>
-    </Card>
+    {loading && <Loading />}
+    {!loading && (
+      <Card theme={theme}>
+        <List>
+          {students.map(({ id, name }, index) => (
+            <ListItem key={id}>
+              <ListItemText primary={name} theme={theme} active={index === 1 ? 'yes' : ''} />
+            </ListItem>
+          ))}
+        </List>
+      </Card>
+    )}
   </div>
 )
 
 Top10.propTypes = {
   theme: PropTypes.object.isRequired,
-  students: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  students: PropTypes.array.isRequired,
 }
 
-Top10.defaultProps = {
-  students: [
-    {
-      id: 1,
-      name: 'Chelsea Otakan',
-    },
-    {
-      id: 2,
-      name: 'Eric Hoffman',
-    },
-    {
-      id: 3,
-      name: 'Chelsea Otakan',
-    },
-    {
-      id: 4,
-      name: 'Eric Hoffman',
-    },
-  ],
-}
+const mapStateToProps = state => ({
+  loading: state.overview.getOne.fetching,
+  students: state.overview.getOne.result.top10,
+})
 
-export default withTheme()(Top10)
+export default connect(mapStateToProps)(withTheme()(Top10))

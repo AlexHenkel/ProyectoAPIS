@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {
   Typography,
@@ -8,49 +9,38 @@ import {
   ListItem,
   ListItemText,
 } from 'material-ui'
+import Loading from '../../Components/Loading'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
 `
 
-const Students = ({ students }) => (
+const Students = ({ loading, students }) => (
   <div>
     <Title type="display1" gutterBottom>Mis alumnos</Title>
-    <Card>
-      <List>
-        {students.map(({ id, name }) => (
-          <ListItem key={id}>
-            <ListItemText primary={name} />
-          </ListItem>
-        ))}
-      </List>
-    </Card>
+    {loading && <Loading />}
+    {!loading && (
+      <Card>
+        <List>
+          {students.map(({ id, name }) => (
+            <ListItem key={id}>
+              <ListItemText primary={name} />
+            </ListItem>
+          ))}
+        </List>
+      </Card>
+    )}
   </div>
 )
 
 Students.propTypes = {
-  students: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  students: PropTypes.array.isRequired,
 }
 
-Students.defaultProps = {
-  students: [
-    {
-      id: 1,
-      name: 'Chelsea Otakan',
-    },
-    {
-      id: 2,
-      name: 'Eric Hoffman',
-    },
-    {
-      id: 3,
-      name: 'Chelsea Otakan',
-    },
-    {
-      id: 4,
-      name: 'Eric Hoffman',
-    },
-  ],
-}
+const mapStateToProps = state => ({
+  loading: state.overview.getOne.fetching,
+  students: state.overview.getOne.result.students,
+})
 
-export default Students
+export default connect(mapStateToProps)(Students)

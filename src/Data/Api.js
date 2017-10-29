@@ -15,32 +15,12 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
-const getGroups = ({ isTeacher, id }) => {
-  if (isTeacher) {
-    return api.get(`teacher_groups/${id}`)
-  }
-  return null
-}
-const createGroup = ({ isTeacher, ...data }) => {
-  if (isTeacher) {
-    return api.post('teacher_groups/', data)
-  }
-  return null
-}
-const updateGroup = (id, { isTeacher, ...data }) => {
-  if (isTeacher) {
-    return api.patch('teacher_groups/', data)
-  }
-  return null
-}
-const removeGroup = ({ isTeacher, id }) => {
-  if (isTeacher) {
-    return api.delete('teacher_groups/', {
-      group_id: id,
-    })
-  }
-  return null
-}
+const getGroups = ({ isTeacher, id }) => isTeacher ? api.get(`teacher_groups/${id}`) : null
+const createGroup = ({ isTeacher, ...data }) => isTeacher ? api.post('teacher_groups/', data) : null
+const updateGroup = (id, { isTeacher, ...data }) => isTeacher ? api.patch('teacher_groups/', data) : null
+const removeGroup = ({ isTeacher, id }) => isTeacher ? api.delete('teacher_groups/', { group_id: id }) : null
+
+const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : null
 
 /**
  * Create a collection of the previous functions to be exposed
@@ -51,5 +31,8 @@ export default {
     create: createGroup,
     update: updateGroup,
     remove: removeGroup,
+  },
+  overview: {
+    getOne: getOneOverview,
   },
 }

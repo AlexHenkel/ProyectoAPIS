@@ -13,6 +13,7 @@ import { AlignCenter, DisabledButton, Card, CardText } from '../../Components/Ut
 import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
+import Loading from '../../Components/Loading'
 
 class Groups extends Component {
   constructor(props) {
@@ -51,44 +52,49 @@ class Groups extends Component {
   }
 
   render() {
-    const { theme, groups, selectActiveGroup, activeGroup } = this.props
+    const { theme, loading, groups, selectActiveGroup, activeGroup } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis grupos</Typography>
-        <AlignCenter>
-          <Button color="accent" onClick={this.onAdd}>
-            <AddIcon />
-            Agregar grupo
-          </Button>
-        </AlignCenter>
-        {groups.map(({ id, name, activeExams }) => (
-          <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
-            <CardContent>
-              <ContextContainer>
-                <ContextMenu
-                  value={id}
-                  handleEdit={this.onEdit}
-                  handleRemove={this.onRemove}
-                />
-              </ContextContainer>
-              <CardText type="headline" component="h2" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-                {name}
-              </CardText>
-              <CardText type="body1" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-                Quizes activos: <b>{activeExams}</b>
-              </CardText>
-            </CardContent>
-            <CardActions>
-              {activeGroup === id && (
-                <DisabledButton disabled>Seleccionado</DisabledButton>
-              )}
-              {activeGroup !== id && (
-                <Button dense color="accent" onClick={selectActiveGroup(id)}>Ver Más</Button>
-              )}
-            </CardActions>
-          </Card>
-        ))}
+        {loading && <Loading />}
+        {!loading && (
+          <div>
+            <AlignCenter>
+              <Button color="accent" onClick={this.onAdd}>
+                <AddIcon />
+                Agregar grupo
+              </Button>
+            </AlignCenter>
+            {groups.map(({ id, name, activeExams }) => (
+              <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
+                <CardContent>
+                  <ContextContainer>
+                    <ContextMenu
+                      value={id}
+                      handleEdit={this.onEdit}
+                      handleRemove={this.onRemove}
+                    />
+                  </ContextContainer>
+                  <CardText type="headline" component="h2" gutterBottom active={activeGroup === id ? 'yes' : ''}>
+                    {name}
+                  </CardText>
+                  <CardText type="body1" gutterBottom active={activeGroup === id ? 'yes' : ''}>
+                    Quizes activos: <b>{activeExams}</b>
+                  </CardText>
+                </CardContent>
+                <CardActions>
+                  {activeGroup === id && (
+                    <DisabledButton disabled>Seleccionado</DisabledButton>
+                  )}
+                  {activeGroup !== id && (
+                    <Button dense color="accent" onClick={selectActiveGroup(id)}>Ver Más</Button>
+                  )}
+                </CardActions>
+              </Card>
+            ))}
+          </div>
+        )}
         <ModalSave
           open={modalSaveOpened}
           title="Grupo"
@@ -133,6 +139,7 @@ class Groups extends Component {
 
 Groups.propTypes = {
   theme: PropTypes.object.isRequired,
+  loading: PropTypes.object.isRequired,
   groups: PropTypes.array.isRequired,
   activeGroup: PropTypes.number,
   selectActiveGroup: PropTypes.func,
@@ -144,6 +151,7 @@ Groups.defaultProps = {
 }
 
 const mapStateToProps = state => ({
+  loading: state.groups.get.fetching,
   groups: state.groups.get.results,
 })
 
