@@ -10,7 +10,7 @@ import {
 import OriginalCheckIcon from 'material-ui-icons/Check'
 import moment from 'moment'
 import ContextMenu, { ContextContainer } from './ContextMenu'
-import { Card } from './Utils'
+import { Card, AlignCenter } from './Utils'
 
 const Question = styled(Typography)`
   margin-top: 20px !important;
@@ -70,6 +70,9 @@ class Quiz extends Component {
           <Typography type="display2" gutterBottom align="center" color="primary">{name}</Typography>
           {open && (
             <div>
+              <AlignCenter>
+                <Button dense color="accent" onClick={this.toggleOpen}>Ocultar Preguntas</Button>
+              </AlignCenter>
               <Typography type="body1" gutterBottom>
                 Creado: <b>{moment(createdAt).format('ll')}</b>
               </Typography>
@@ -94,7 +97,6 @@ class Quiz extends Component {
           )}
         </CardContent>
         <CardActions>
-          {/* <DisabledButton disabled>Seleccionado</DisabledButton> */}
           <Button dense color="accent" onClick={this.toggleOpen}>{open ? 'Ocultar' : 'Ver'} Preguntas</Button>
         </CardActions>
       </Card>
