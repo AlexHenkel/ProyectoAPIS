@@ -7,6 +7,7 @@ import FuzzySearch from '../Components/FuzzySearch'
 import TagSelect from '../Components/TagSelect'
 import MultipleInputs from '../Components/MultipleInputs'
 import Radio from '../Components/Radio'
+import MultipleSelectSearch from '../Components/MultipleSelectSearch'
 
 const InputManager = ({ noValue, result, value, path, type, inputType, ...inputProps }) => {
   /**
@@ -34,6 +35,8 @@ const InputManager = ({ noValue, result, value, path, type, inputType, ...inputP
       return <TagSelect value={fixedVal} {...inputProps} />
     case 'multipleInputs':
       return <MultipleInputs value={fixedVal} {...inputProps} />
+    case 'multiSelectSearch':
+      return <MultipleSelectSearch value={fixedVal} {...inputProps} />
     default:
       return null
   }

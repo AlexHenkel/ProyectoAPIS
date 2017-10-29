@@ -11,7 +11,9 @@ import {
 } from 'material-ui'
 
 class RadioInput extends Mixin {
-  handleChange = (event, value) => this.setValue(Number(value))
+  handleChange = (event, value) => this.setValue(value)
+
+  isChecked = label => this.getValue() == label // eslint-disable-line
 
   render() {
     const { label, help, options, optionsLabel, optionsValue } = this.removeFormsyProps(this.props)
@@ -28,7 +30,7 @@ class RadioInput extends Mixin {
             <FormControlLabel
               key={item[optionsValue]}
               value={item[optionsValue]}
-              control={<Radio checked={this.getValue() === item[optionsValue]} />}
+              control={<Radio checked={this.isChecked(item[optionsValue])} />}
               label={item[optionsLabel]}
             />
           ))}

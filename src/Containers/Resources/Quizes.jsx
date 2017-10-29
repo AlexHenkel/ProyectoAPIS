@@ -49,7 +49,7 @@ class Quizes extends Component {
   }
 
   render() {
-    const { loading, quizes } = this.props
+    const { loading, quizes, questions } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -89,6 +89,49 @@ class Quizes extends Component {
                   required: true,
                 },
                 {
+                  type: 'radio',
+                  id: 2,
+                  name: 'resourceType',
+                  path: 'resourceType',
+                  label: 'Tipo de recurso',
+                  required: true,
+                  options: [
+                    {
+                      value: 'video',
+                      label: 'Video',
+                    },
+                    {
+                      value: 'pdf',
+                      label: 'PDF',
+                    },
+                  ],
+                  optionsLabel: 'label',
+                  optionsValue: 'value',
+                },
+                {
+                  type: 'textField',
+                  id: 3,
+                  name: 'resource',
+                  label: 'Link del recurso',
+                  required: true,
+                  validations: 'isUrl',
+                  validationErrors: {
+                    isUrl: 'Introduce un link válido',
+                  },
+                },
+                {
+                  type: 'multiSelectSearch',
+                  id: 4,
+                  name: 'questions_id',
+                  path: 'questions_id',
+                  label: 'Preguntas del quiz',
+                  options: questions,
+                  optionsValue: 'id',
+                  optionsLabel: 'question',
+                  tagsPath: 'tags',
+                  required: true,
+                },
+                {
                   type: 'textField',
                   id: 5,
                   name: 'teacher_id',
@@ -113,11 +156,13 @@ class Quizes extends Component {
 Quizes.propTypes = {
   loading: PropTypes.bool.isRequired,
   quizes: PropTypes.array.isRequired,
+  questions: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.exams.get.fetching,
   quizes: state.exams.get.results,
+  questions: state.questions.get.results,
 })
 
 
