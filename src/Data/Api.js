@@ -28,8 +28,15 @@ const updateExam = (id, data) => api.patch('teacher_exams/', { teacher_exam_id: 
 const removeExam = id => api.delete('teacher_exams/', { exam_id: id })
 
 const createTeacherGroupExam = data => api.post('teacher_groups_exams/', data)
-const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', data)
+const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', { teacher_group_exam_id: id, ...data })
 const removeTeacherGroupExam = id => api.delete('teacher_exams/', { teacher_group_exam_id: id })
+
+const getQuestions = id => api.get(`teacher_questions/${id}`)
+const createQuestion = data => api.post('teacher_questions/', data)
+const updateQuestion = (id, data) => api.patch('teacher_questions/', { question_id: id, ...data })
+const removeQuestion = id => api.delete('teacher_questions/', { question_id: id })
+
+const getTags = id => api.get(`teacher_tags/${id}`)
 
 /**
  * Create a collection of the previous functions to be exposed
@@ -54,5 +61,14 @@ export default {
     create: createTeacherGroupExam,
     update: updateTeacherGroupExam,
     remove: removeTeacherGroupExam,
+  },
+  questions: {
+    get: getQuestions,
+    create: createQuestion,
+    update: updateQuestion,
+    remove: removeQuestion,
+  },
+  tags: {
+    get: getTags,
   },
 }

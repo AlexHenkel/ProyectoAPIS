@@ -9,6 +9,8 @@ export default (middlewares) => {
     overview: require('./OverviewRedux').reducer,
     exams: require('./ExamsRedux').reducer,
     teacherGroupExams: require('./TeacherGroupExamsRedux').reducer,
+    questions: require('./QuestionsRedux').reducer,    
+    tags: require('./TagsRedux').reducer,
   })
 
   return configureStore(rootReducer, [epicMiddleware, ...middlewares])
