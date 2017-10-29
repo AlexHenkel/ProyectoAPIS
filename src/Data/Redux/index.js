@@ -7,6 +7,8 @@ export default (middlewares) => {
   const rootReducer = combineReducers({
     groups: require('./GroupsRedux').reducer,
     overview: require('./OverviewRedux').reducer,
+    exams: require('./ExamsRedux').reducer,
+    teacherGroupExams: require('./TeacherGroupExamsRedux').reducer,
   })
 
   return configureStore(rootReducer, [epicMiddleware, ...middlewares])

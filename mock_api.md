@@ -25,6 +25,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + activeExams: 2 (number, required)
 
+            + startDate: 1485932460000 (number, required)
+
+            + endDate: 1483254000000 (number, required)
+
         + (object)
 
             + id: 2 (number, required)
@@ -32,6 +36,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
             + name: Física 2 ENE/DIC 17 (string, required)
 
             + activeExams: 2 (number, required)
+
+            + startDate: 1485932460000 (number, required)
+
+            + endDate: 1483254000000 (number, required)
  
 ### Create teacher's group  [POST]
 
@@ -56,6 +64,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
         + name: cool name (string, required)
 
         + activeExams: 0 (number, required)
+
+        + startDate: 1485932460000 (number, required)
+
+        + endDate: 1483254000000 (number, required)
 
 ### Update teacher's group  [PATCH]
 

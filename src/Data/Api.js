@@ -22,6 +22,15 @@ const removeGroup = ({ isTeacher, id }) => isTeacher ? api.delete('teacher_group
 
 const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : null
 
+const getExams = id => api.get(`teacher_exams/${id}`)
+const createExam = data => api.post('teacher_exams/', data)
+const updateExam = (id, data) => api.patch('teacher_exams/', { teacher_exam_id: id, ...data })
+const removeExam = id => api.delete('teacher_exams/', { exam_id: id })
+
+const createTeacherGroupExam = data => api.post('teacher_groups_exams/', data)
+const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', data)
+const removeTeacherGroupExam = id => api.delete('teacher_exams/', { teacher_group_exam_id: id })
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -34,5 +43,16 @@ export default {
   },
   overview: {
     getOne: getOneOverview,
+  },
+  exams: {
+    get: getExams,
+    create: createExam,
+    update: updateExam,
+    remove: removeExam,
+  },
+  teacherGroupExams: {
+    create: createTeacherGroupExam,
+    update: updateTeacherGroupExam,
+    remove: removeTeacherGroupExam,
   },
 }

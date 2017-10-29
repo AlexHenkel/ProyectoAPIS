@@ -129,11 +129,15 @@ class Exams extends Component {
           onRequestClose={this.onCloseModalSave}
           modalType={modalType}
           toUpdateId={toModifyId}
+          statePath="teacherGroupExams"
+          typePrefix="TEACHER_GROUP_EXAMS"
+          getOnePath="overview.getOne.result.currentExams"
           fields={[
             {
               type: 'textField',
               id: 1,
               name: 'name',
+              path: 'name',
               label: 'Nombre del examen',
               required: true,
             },
@@ -141,6 +145,7 @@ class Exams extends Component {
               type: 'textField',
               id: 2,
               name: 'expiresAt',
+              path: 'expiresAt',
               inputType: 'datetime-local',
               label: 'Fecha límite',
               required: true,
@@ -149,6 +154,7 @@ class Exams extends Component {
               type: 'fuzzySearch',
               id: 3,
               name: 'exam_id',
+              path: 'exam_id',
               label: 'Examen a asignar',
               options: exams,
               optionsValue: 'id',
@@ -160,6 +166,7 @@ class Exams extends Component {
               type: 'multiSelect',
               id: 4,
               name: 'groups_id',
+              path: 'groups_id',
               label: 'Grupos a asignar examen',
               // value: currentGroup
               options: groups,
@@ -186,25 +193,8 @@ Exams.propTypes = {
   currentExams: PropTypes.array.isRequired,
   pastExams: PropTypes.array.isRequired,
   students: PropTypes.array.isRequired,
-  exams: PropTypes.array,
+  exams: PropTypes.array.isRequired,
   groups: PropTypes.array.isRequired,
-}
-
-Exams.defaultProps = {
-  exams: [
-    {
-      id: 1,
-      name: 'Estática',
-    },
-    {
-      id: 2,
-      name: 'Probabilidad',
-    },
-    {
-      id: 3,
-      name: 'Estadística',
-    },
-  ],
 }
 
 const mapStateToProps = state => ({
@@ -213,6 +203,7 @@ const mapStateToProps = state => ({
   pastExams: state.overview.getOne.result.pastExams,
   students: state.overview.getOne.result.students,
   groups: state.groups.get.results,
+  exams: state.exams.get.results,
 })
 
 export default connect(mapStateToProps)(withTheme()(Exams))
