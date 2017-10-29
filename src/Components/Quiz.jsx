@@ -55,7 +55,8 @@ class Quiz extends Component {
   toggleOpen = () => this.setState({ open: !this.state.open })
 
   render() {
-    const { data: { id, name, assigned, createdAt, questions }, onEdit, onRemove } = this.props
+    const { data: { id, name, resourceType, resource, assigned, createdAt, questions },
+      onEdit, onRemove } = this.props
     const { open } = this.state
     return (
       <Card key={id}>
@@ -73,6 +74,12 @@ class Quiz extends Component {
               <AlignCenter>
                 <Button dense color="accent" onClick={this.toggleOpen}>Ocultar Preguntas</Button>
               </AlignCenter>
+              <Typography type="body1" gutterBottom>
+                Tipo de recurso: <b>{resourceType === 'video' ? 'Video' : 'PDF'}</b>
+              </Typography>
+              <Typography type="body1" gutterBottom>
+                Link: <a href={resource} target="_blank">{resource}</a>
+              </Typography>
               <Typography type="body1" gutterBottom>
                 Creado: <b>{moment(createdAt).format('ll')}</b>
               </Typography>

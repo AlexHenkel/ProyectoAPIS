@@ -24,7 +24,7 @@ const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overv
 
 const getExams = id => api.get(`teacher_exams/${id}`)
 const createExam = data => api.post('teacher_exams/', data)
-const updateExam = (id, data) => api.patch('teacher_exams/', { teacher_exam_id: id, ...data })
+const updateExam = (id, data) => api.patch('teacher_exams/', { exam_id: id, ...data })
 const removeExam = id => api.delete('teacher_exams/', { exam_id: id })
 
 const createTeacherGroupExam = data => api.post('teacher_groups_exams/', data)

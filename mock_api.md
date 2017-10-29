@@ -263,6 +263,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
 ## Teacher Exams Collection [/teacher_exams/]
 
+**NOTE: All `id` in responses refers to the exams entity**
+
 ### List all teacher's exams [GET /teacher_exams/{id}]
 
 + Parameters
@@ -282,6 +284,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
             + createdAt: 1508811671643 (number, required)
 
             + assigned: 10 (number, required)
+
+            + resourceType: video (string, required)
+
+            + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
 
             + questions (array)
 
@@ -325,6 +331,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + assigned: 3 (number, required)
 
+            + resourceType: pdf (string, required)
+
+            + resource: https://leoberrios.files.wordpress.com/2011/10/leyes-de-newton.pdf (string, required)
+
             + questions (array)
 
                 + (object)
@@ -367,6 +377,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + assigned: 10 (number, required)
 
+            + resourceType: video (string, required)
+
+            + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
             + questions (array)
 
                 + (object)
@@ -398,7 +412,149 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                     + correctAnswer: 15.32 (string, required)
 
                     + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
- 
+
+### Create teacher's exams  [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + teacher_id: 1 (number, required)
+
+        + name: New exam (string, required)
+
+        + resourceType: video (string, required)
+
+        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
+        + questions: 1, 2, 3 (array[number], required)
+
++ Response 200 (application/json)
+
+    + Attributes (object)
+        
+        + id: 4 (number, required)
+
+        + name: New exam (string, required)
+
+        + createdAt: 1508811671643 (number, required)
+
+        + assigned: 0 (number, required)
+
+        + resourceType: video (string, required)
+
+        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
+        + questions (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + question: ¿Cuál es la magnitud de la gravedad? (string, required)
+
+                + correctAnswer: 4.56 (string, required)
+
+                + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
+            
+            + (object)
+
+                + id: 2 (number, required)
+
+                + question: ¿Cuál es la magnitud de la velocidad? (string, required)
+
+                + correctAnswer: 9.14 (string, required)
+
+                + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+
+                + correctAnswer: 15.32 (string, required)
+
+                + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
+
+### Update teacher's exams  [PATCH]
+
++ Request (application/json)
+
+    + Attributes
+
+        + exam_id: 4 (number, required)
+
+        + name: New title for exam (string, required)
+
+        + resourceType: video (string, required)
+
+        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
+        + questions: 1, 2, 3 (array[number], required)
+
++ Response 200 (application/json)
+
+    + Attributes (object)
+        
+        + id: 1 (number, required)
+
+        + name: New title for exam (string, required)
+
+        + createdAt: 1508811671643 (number, required)
+
+        + assigned: 0 (number, required)
+
+        + resourceType: video (string, required)
+
+        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
+        + questions (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + question: ¿Cuál es la magnitud de la gravedad? (string, required)
+
+                + correctAnswer: 4.56 (string, required)
+
+                + incorrectAnswers: 4.56, 9.14, 4.56 (array[string], required)
+            
+            + (object)
+
+                + id: 2 (number, required)
+
+                + question: ¿Cuál es la magnitud de la velocidad? (string, required)
+
+                + correctAnswer: 9.14 (string, required)
+
+                + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+
+                + correctAnswer: 15.32 (string, required)
+
+                + incorrectAnswers: 4.56, 98.14, 4.56 (array[string], required)
+
+### Remove teacher exam  [DELETE]
+
++ Request (application/json)
+
+    + Attributes (object)
+
+        + exam_id: 4 (number, required)
+
++ Response 201 (application/json)
+    
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
 ## Teacher Questions Collection [/teacher_questions/]
 
 **NOTE: All `id` in responses refers to the questions entity**

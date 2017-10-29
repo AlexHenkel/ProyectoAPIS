@@ -18,7 +18,17 @@ const InputManager = ({ noValue, result, value, path, type, inputType, ...inputP
    */
   const currVal = !value ? path.split('.').reduce((acum, currPath) => acum ? acum[currPath] : undefined, result) : value
   // Safe assign value. Handles null and undefined
-  const fixedVal  = !value && (noValue || currVal == null) ? type === 'tags' ? [] : '' : currVal // eslint-disable-line
+  let fixedVal = currVal
+
+  if (type === 'tags' || type === 'multiSelect' || type === 'multipleInputs' || type === 'multiSelectSearch') {
+    if (!value && (noValue || currVal == null)) {
+      fixedVal = []
+    } else {
+      fixedVal = currVal.map(item => item[inputProps.optionsValue])
+    }
+  } else if (!value && (noValue || currVal == null)) {
+    fixedVal = ''
+  }
 
   switch (type) {
     case 'textField':

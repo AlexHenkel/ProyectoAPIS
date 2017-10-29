@@ -100,8 +100,31 @@ class TagSelect extends Mixin {
     )
   }
 
+  renderTag = (item) => {
+    const { options, optionsLabel, optionsValue, theme } = this.props
+    if (typeof item === 'number') {
+      const selectedOption = options.filter(option => option[optionsValue] === item)
+      if (selectedOption.length) {
+        return (
+          <Tag key={item} theme={theme}>
+            {selectedOption[0][optionsLabel]}
+            <CloseButton onClick={this.handleRemoveTag(item)}>x</CloseButton>
+          </Tag>
+        )
+      }
+      return null
+    }
+
+    return (
+      <Tag key={item} theme={theme}>
+        {item}
+        <CloseButton onClick={this.handleRemoveTag(item)}>x</CloseButton>
+      </Tag>
+    )
+  }
+
   render() {
-    const { label, help, options, optionsLabel, optionsValue, classes, theme } = this.props
+    const { label, help, classes, optionsLabel } = this.props
     const value = this.getValue()
     return (
       <div>
@@ -134,13 +157,7 @@ class TagSelect extends Mixin {
         />
         {value && (
           <TagContainer>
-            {value.map(item => (
-              <Tag key={item} theme={theme}>
-                {typeof item === 'number' && options.filter(option => option[optionsValue] === item)[0][optionsLabel]}
-                {typeof item === 'string' && item}
-                <CloseButton onClick={this.handleRemoveTag(item)}>x</CloseButton>
-              </Tag>
-            ))}
+            {value.map(item => this.renderTag(item))}
           </TagContainer>
         )}
       </div>

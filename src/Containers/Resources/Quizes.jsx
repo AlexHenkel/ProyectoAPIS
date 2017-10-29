@@ -84,7 +84,8 @@ class Quizes extends Component {
                 {
                   type: 'textField',
                   id: 1,
-                  name: 'question',
+                  name: 'name',
+                  path: 'name',
                   label: 'Nombre del quiz',
                   required: true,
                 },
@@ -112,6 +113,7 @@ class Quizes extends Component {
                   type: 'textField',
                   id: 3,
                   name: 'resource',
+                  path: 'resource',
                   label: 'Link del recurso',
                   required: true,
                   validations: 'isUrl',
@@ -122,8 +124,8 @@ class Quizes extends Component {
                 {
                   type: 'multiSelectSearch',
                   id: 4,
-                  name: 'questions_id',
-                  path: 'questions_id',
+                  name: 'questions',
+                  path: 'questions',
                   label: 'Preguntas del quiz',
                   options: questions,
                   optionsValue: 'id',
