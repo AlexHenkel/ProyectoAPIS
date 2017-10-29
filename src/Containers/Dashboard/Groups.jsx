@@ -101,11 +101,15 @@ class Groups extends Component {
           onRequestClose={this.onCloseModalSave}
           modalType={modalType}
           toUpdateId={toModifyId}
+          statePath="groups"
+          typePrefix="GROUPS"
+          getOnePath="groups.get.results"
           fields={[
             {
               type: 'textField',
               id: 1,
               name: 'name',
+              path: 'name',
               label: 'Nombre del grupo',
               required: true,
             },
@@ -113,6 +117,7 @@ class Groups extends Component {
               type: 'textField',
               id: 2,
               name: 'startDate',
+              path: 'startDate',
               inputType: 'datetime-local',
               label: 'Fecha de inicio',
               required: true,
@@ -121,6 +126,7 @@ class Groups extends Component {
               type: 'textField',
               id: 3,
               name: 'endDate',
+              path: 'endDate',
               inputType: 'datetime-local',
               label: 'Fecha de fin',
               required: true,
@@ -139,7 +145,7 @@ class Groups extends Component {
 
 Groups.propTypes = {
   theme: PropTypes.object.isRequired,
-  loading: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
   activeGroup: PropTypes.number,
   selectActiveGroup: PropTypes.func,

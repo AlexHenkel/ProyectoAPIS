@@ -8,33 +8,51 @@ import TagSelect from '../Components/TagSelect'
 import MultipleInputs from '../Components/MultipleInputs'
 import Radio from '../Components/Radio'
 
-const InputManager = ({ type, inputType, ...inputProps }) => {
+const InputManager = ({ noValue, result, value, path, type, inputType, ...inputProps }) => {
+  /**
+   * If a value is set, keep the value. Else..
+   * Recursively get path from result. If result or path are invalid, will be undefined.
+   * On create will return an empty array.
+   * Then convert invalid tag value into an array to avoid errors
+   */
+  const currVal = !value ? path.split('.').reduce((acum, currPath) => acum ? acum[currPath] : undefined, result) : value
+  // Safe assign value. Handles null and undefined
+  const fixedVal  = noValue || currVal == null ? type === 'tags' ? [] : '' : currVal // eslint-disable-line
+
   switch (type) {
     case 'textField':
-      return <Input type={inputType} {...inputProps} />
+      return <Input value={fixedVal} type={inputType} {...inputProps} />
     case 'select':
-      return <Select {...inputProps} />
+      return <Select value={fixedVal} {...inputProps} />
     case 'fuzzySearch':
-      return <FuzzySearch {...inputProps} />
+      return <FuzzySearch value={fixedVal} {...inputProps} />
     case 'multiSelect':
-      return <MultipleSelect {...inputProps} />
+      return <MultipleSelect value={fixedVal} {...inputProps} />
     case 'radio':
-      return <Radio {...inputProps} />
+      return <Radio value={fixedVal} {...inputProps} />
     case 'tags':
-      return <TagSelect {...inputProps} />
+      return <TagSelect value={fixedVal} {...inputProps} />
     case 'multipleInputs':
-      return <MultipleInputs {...inputProps} />
+      return <MultipleInputs value={fixedVal} {...inputProps} />
     default:
       return null
   }
 }
 
 InputManager.propTypes = {
+  noValue: PropTypes.bool,
+  result: PropTypes.object,
+  path: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   type: PropTypes.string.isRequired,
   inputType: PropTypes.string,
 }
 
 InputManager.defaultProps = {
+  noValue: false,
+  result: {},
+  path: '',
+  value: undefined,
   inputType: '',
 }
 
