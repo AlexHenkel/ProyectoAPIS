@@ -6,6 +6,7 @@ import { TextField as OriginalTextField } from 'material-ui'
 import moment from 'moment'
 
 const TextField = styled(OriginalTextField)`
+  ${({ hidden }) => !hidden ? '' : 'display: none !important;'}
   @media (min-width: 600px) {
     min-width: 400px !important;
   }
@@ -40,6 +41,7 @@ class Input extends Mixin {
           error={hasError}
           label={`${label} ${this.isRequired() ? '*' : ''}`}
           type={type}
+          hidden={type === 'hidden'}
           value={this.parseInput()}
           onChange={this.updateValue}
           helperText={errorMessages.length ? errorMessages : help}

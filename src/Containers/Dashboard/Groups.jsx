@@ -14,6 +14,7 @@ import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
 import Loading from '../../Components/Loading'
+import GroupsActions from '../../Data/Redux/GroupsRedux'
 
 class Groups extends Component {
   constructor(props) {
@@ -23,6 +24,15 @@ class Groups extends Component {
       modalSaveOpened: false,
       modalRemoveOpened: false,
       toModifyId: -1,
+    }
+  }
+
+  componentWillReceiveProps({ loading, groups }) {
+    const { loading: currLoading, selectActiveGroup } = this.props
+    if (!loading && currLoading) {
+      if (groups.length) {
+        selectActiveGroup(groups[0].id)
+      }
     }
   }
 
@@ -88,7 +98,7 @@ class Groups extends Component {
                     <DisabledButton disabled>Seleccionado</DisabledButton>
                   )}
                   {activeGroup !== id && (
-                    <Button dense color="accent" onClick={selectActiveGroup(id)}>Ver Más</Button>
+                    <Button dense color="accent" onClick={() => selectActiveGroup(id)}>Ver Más</Button>
                   )}
                 </CardActions>
               </Card>
@@ -131,6 +141,14 @@ class Groups extends Component {
               label: 'Fecha de fin',
               required: true,
             },
+            {
+              type: 'textField',
+              id: 4,
+              name: 'teacher_id',
+              inputType: 'hidden',
+              value: 1, // TODO: Change this for user id
+              specificFor: 'create',
+            },
           ]}
         />
         <ModalRemove
@@ -147,18 +165,18 @@ Groups.propTypes = {
   theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
-  activeGroup: PropTypes.number,
-  selectActiveGroup: PropTypes.func,
-}
-
-Groups.defaultProps = {
-  activeGroup: 1,
-  selectActiveGroup: id => console.log('change group', id),
+  activeGroup: PropTypes.number.isRequired,
+  selectActiveGroup: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.groups.get.fetching,
   groups: state.groups.get.results,
+  activeGroup: state.groups.activeGroup,
 })
 
-export default connect(mapStateToProps)(withTheme()(Groups))
+const mapDispatchToProps = dispatch => ({
+  selectActiveGroup: id => dispatch(GroupsActions.selectActiveGroup(id)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme()(Groups))

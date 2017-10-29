@@ -175,6 +175,14 @@ class Exams extends Component {
               required: true,
               specificFor: 'create',
             },
+            {
+              type: 'textField',
+              id: 5,
+              name: 'teacher_id',
+              inputType: 'hidden',
+              value: 1, // TODO: Change this for user id
+              specificFor: 'create',
+            },
           ]}
         />
         <ModalRemove

@@ -17,7 +17,7 @@ const InputManager = ({ noValue, result, value, path, type, inputType, ...inputP
    */
   const currVal = !value ? path.split('.').reduce((acum, currPath) => acum ? acum[currPath] : undefined, result) : value
   // Safe assign value. Handles null and undefined
-  const fixedVal  = noValue || currVal == null ? type === 'tags' ? [] : '' : currVal // eslint-disable-line
+  const fixedVal  = !value && (noValue || currVal == null) ? type === 'tags' ? [] : '' : currVal // eslint-disable-line
 
   switch (type) {
     case 'textField':
@@ -43,7 +43,7 @@ InputManager.propTypes = {
   noValue: PropTypes.bool,
   result: PropTypes.object,
   path: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number]),
   type: PropTypes.string.isRequired,
   inputType: PropTypes.string,
 }
