@@ -8,11 +8,11 @@ import createStore from './Data/Redux'
 import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
-import Dashboard from './Containers/Dashboard/Dashboard'
+import TeacherDashboard from './Containers/TeacherDashboard/Dashboard'
 import Resources from './Containers/Resources/Resources'
 
 // Build layout components for router
-const DashboardRoute = () => <Layout slot={<Dashboard />} />
+const TeacherDashboardRoute = () => <Layout slot={<TeacherDashboard />} />
 const ResourcesRoute = () => <Layout slot={<Resources />} />
 
 // Create a browser history, and it's middleware
@@ -28,7 +28,7 @@ const App = () => (
       { /* ConnectedRouter will use the store from Provider automatically */ }
       <ConnectedRouter history={history}>
         <div>
-          <Route exact path="/" component={DashboardRoute} />
+          <Route exact path="/" component={TeacherDashboardRoute} />
           <Route exact path="/recursos" component={ResourcesRoute} />
         </div>
       </ConnectedRouter>
