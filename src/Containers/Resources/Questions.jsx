@@ -174,6 +174,8 @@ class Questions extends Component {
               open={modalRemoveOpened}
               onRequestClose={this.onCloseModalRemove}
               toRemoveId={toModifyId}
+              statePath="questions"
+              typePrefix="QUESTIONS"
             />
           </div>
         )}

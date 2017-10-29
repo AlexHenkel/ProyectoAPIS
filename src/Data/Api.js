@@ -16,9 +16,9 @@ const api = create({
  */
 
 const getGroups = ({ isTeacher, id }) => isTeacher ? api.get(`teacher_groups/${id}`) : null
-const createGroup = ({ isTeacher, ...data }) => isTeacher ? api.post('teacher_groups/', data) : null
-const updateGroup = (id, { isTeacher, ...data }) => isTeacher ? api.patch('teacher_groups/', data) : null
-const removeGroup = ({ isTeacher, id }) => isTeacher ? api.delete('teacher_groups/', { group_id: id }) : null
+const createGroup = data => api.post('teacher_groups/', data)
+const updateGroup = (id, data) => api.patch('teacher_groups/', data)
+const removeGroup = id => api.delete('teacher_groups/', { group_id: id })
 
 const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : null
 

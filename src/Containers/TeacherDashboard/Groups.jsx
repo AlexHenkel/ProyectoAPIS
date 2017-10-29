@@ -155,6 +155,8 @@ class Groups extends Component {
           open={modalRemoveOpened}
           onRequestClose={this.onCloseModalRemove}
           toRemoveId={toModifyId}
+          statePath="groups"
+          typePrefix="GROUPS"
         />
       </div>
     )

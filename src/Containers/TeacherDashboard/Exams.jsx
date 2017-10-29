@@ -190,6 +190,8 @@ class Exams extends Component {
           open={modalRemoveOpened}
           onRequestClose={this.onCloseModalRemove}
           toRemoveId={toModifyId}
+          statePath="teacherGroupExams"
+          typePrefix="TEACHER_GROUP_EXAMS"
         />
       </div>
     )

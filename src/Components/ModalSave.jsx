@@ -47,10 +47,7 @@ class ModalSave extends Component {
     this.props.onRequestClose()
   }
 
-  submit = (model) => {
-    const { isTeacher, saveAction } = this.props
-    saveAction({ isTeacher, ...model })
-  }
+  submit = model => this.props.saveAction(model)
 
   render() {
     const { open, title, modalType, fields, result } = this.props
@@ -90,15 +87,12 @@ ModalSave.propTypes = {
   onRequestClose: PropTypes.func.isRequired,
   modalType: PropTypes.string,
   fields: PropTypes.array.isRequired,
-  isTeacher: PropTypes.bool,
 
   /* Redux requirements */
   /** State path of current object. lowercase */
   statePath: PropTypes.string.isRequired,
   /** Redux actions type prefix of current object. UPPERCASE  */
   typePrefix: PropTypes.string.isRequired,
-  /** Verify if modal has error on any select options */
-  hasErrorOptions: PropTypes.bool,
   toUpdateId: PropTypes.number,
   /**
    * Redux actions type prefix of current object for GET ONE.
@@ -139,10 +133,8 @@ ModalSave.propTypes = {
 
 ModalSave.defaultProps = {
   modalType: 'create',
-  isTeacher: true,
   toUpdateId: -1,
   getOneTypePrefix: null,
-  hasErrorOptions: false,
   hasErrorResult: false,
   extraParamsGet: {},
   extraParamsSave: {},
@@ -194,11 +186,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
     }
     // Set action to dispatch an update request, with the correct id
-    actions.saveAction = data => dispatch(merge({
+    actions.saveAction = data => dispatch({
       type: `${typePrefix}_UPDATE_REQUEST`,
-      data,
+      data: merge(data, extraParamsSave),
       id: toUpdateId,
-    }, extraParamsSave))
+    })
 
     // Set action to reset redux state for update
     actions.resetSave = () => dispatch({
@@ -206,10 +198,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     })
   } else {
     // Set action to dispatch a create request
-    actions.saveAction = data => dispatch(merge({
+    actions.saveAction = data => dispatch({
       type: `${typePrefix}_CREATE_REQUEST`,
-      data,
-    }, extraParamsSave))
+      data: merge(data, extraParamsSave),
+    })
 
     // Set action to reset redux state for create
     actions.resetSave = () => dispatch({

@@ -147,6 +147,8 @@ class Quizes extends Component {
               open={modalRemoveOpened}
               onRequestClose={this.onCloseModalRemove}
               toRemoveId={toModifyId}
+              statePath="exams"
+              typePrefix="EXAMS"
             />
           </div>
         )}
