@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Typography,
   CardContent,
@@ -14,6 +15,7 @@ import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
 import { Answer } from '../../Components/Quiz'
+import Loading from '../../Components/Loading'
 
 const CheckIcon = styled(OriginalCheckIcon)`
   position: absolute;
@@ -71,173 +73,122 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, tags, theme } = this.props
+    const { loading, questions, tags, theme } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis preguntas</Typography>
-        <AlignCenter>
-          <Button color="accent" onClick={this.onAdd}>
-            <AddIcon />
-            Agregar pregunta
-          </Button>
-        </AlignCenter>
-        {questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
-          <Card key={id}>
-            <CardContent>
-              <ContextContainer>
-                <ContextMenu
-                  value={id}
-                  handleEdit={this.onEdit}
-                  handleRemove={this.onRemove}
-                />
-              </ContextContainer>
-              <CardText type="title" gutterBottom>
-                {question}
-              </CardText>
-              <CardText>
-                <Answer gutterBottom type="title" color="accent">
-                  <CheckIcon /> {correctAnswer}
-                </Answer>
-                {incorrectAnswers.map((incorrectAnswer, index) => (
-                  <Answer key={index} gutterBottom type="title">
-                    {incorrectAnswer}
-                  </Answer>
-                ))}
-              </CardText>
-              <TagContainer>
-                {currTags.map(({ id: tagId, name }) => <Tag key={tagId} theme={theme}>{name}</Tag>)}
-              </TagContainer>
-            </CardContent>
-          </Card>
-        ))}
-        <ModalSave
-          open={modalSaveOpened}
-          title="Pregunta"
-          onRequestClose={this.onCloseModalSave}
-          modalType={modalType}
-          toUpdateId={toModifyId}
-          fields={[
-            {
-              type: 'textField',
-              id: 1,
-              name: 'question',
-              label: 'Título de la pregunta',
-              required: true,
-            },
-            {
-              type: 'textField',
-              id: 2,
-              name: 'correctAnswer',
-              label: 'Respuesta correcta',
-              required: true,
-            },
-            {
-              type: 'multipleInputs',
-              id: 3,
-              name: 'incorrectAnswers',
-              label: 'Respuesta incorrecta',
-            },
-            {
-              type: 'tags',
-              id: 4,
-              name: 'tags',
-              label: 'Tags asociadas',
-              options: tags,
-              optionsValue: 'id',
-              optionsLabel: 'name',
-            },
-          ]}
-        />
-        <ModalRemove
-          open={modalRemoveOpened}
-          onRequestClose={this.onCloseModalRemove}
-          toRemoveId={toModifyId}
-        />
+        {loading && <Loading />}
+        {!loading && (
+          <div>
+            <AlignCenter>
+              <Button color="accent" onClick={this.onAdd}>
+                <AddIcon />
+                Agregar pregunta
+              </Button>
+            </AlignCenter>
+            {questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
+              <Card key={id}>
+                <CardContent>
+                  <ContextContainer>
+                    <ContextMenu
+                      value={id}
+                      handleEdit={this.onEdit}
+                      handleRemove={this.onRemove}
+                    />
+                  </ContextContainer>
+                  <CardText type="title" gutterBottom>
+                    {question}
+                  </CardText>
+                  <CardText component="div">
+                    <Answer gutterBottom type="title" color="accent">
+                      <CheckIcon /> {correctAnswer}
+                    </Answer>
+                    {incorrectAnswers.map((incorrectAnswer, index) => (
+                      <Answer key={index} gutterBottom type="title">
+                        {incorrectAnswer}
+                      </Answer>
+                    ))}
+                  </CardText>
+                  <TagContainer>
+                    {currTags.map(({ id: tagId, name }) =>
+                      <Tag key={tagId} theme={theme}>{name}</Tag>)}
+                  </TagContainer>
+                </CardContent>
+              </Card>
+            ))}
+            <ModalSave
+              open={modalSaveOpened}
+              title="Pregunta"
+              onRequestClose={this.onCloseModalSave}
+              modalType={modalType}
+              toUpdateId={toModifyId}
+              statePath="questions"
+              typePrefix="QUESTIONS"
+              getOnePath="questions.get.results"
+              fields={[
+                {
+                  type: 'textField',
+                  id: 1,
+                  name: 'question',
+                  label: 'Título de la pregunta',
+                  required: true,
+                },
+                {
+                  type: 'textField',
+                  id: 2,
+                  name: 'correctAnswer',
+                  label: 'Respuesta correcta',
+                  required: true,
+                },
+                {
+                  type: 'multipleInputs',
+                  id: 3,
+                  name: 'incorrectAnswers',
+                  label: 'Respuesta incorrecta',
+                },
+                {
+                  type: 'tags',
+                  id: 4,
+                  name: 'tags',
+                  label: 'Tags asociadas',
+                  options: tags,
+                  optionsValue: 'id',
+                  optionsLabel: 'name',
+                },
+                {
+                  type: 'textField',
+                  id: 5,
+                  name: 'teacher_id',
+                  inputType: 'hidden',
+                  value: 1, // TODO: Change this for user id
+                  specificFor: 'create',
+                },
+              ]}
+            />
+            <ModalRemove
+              open={modalRemoveOpened}
+              onRequestClose={this.onCloseModalRemove}
+              toRemoveId={toModifyId}
+            />
+          </div>
+        )}
       </div>
     )
   }
 }
 
 Questions.propTypes = {
-  questions: PropTypes.array,
-  tags: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  questions: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
 }
 
-Questions.defaultProps = {
-  questions: [
-    {
-      id: 1,
-      correctAnswer: '4.56',
-      question: '¿Cuál es la magnitud de la gravedad?',
-      incorrectAnswers: ['4.56', '9.14', '4.56'],
-      tags: [
-        {
-          id: 1,
-          name: 'Física',
-        },
-        {
-          id: 2,
-          name: 'Química',
-        },
-      ],
-    },
-    {
-      id: 2,
-      correctAnswer: '9.14',
-      question: '¿Cuál es la magnitud de la velocidad?',
-      incorrectAnswers: ['4.56', '4.56', '4.56'],
-      tags: [
-        {
-          id: 1,
-          name: 'Física',
-        },
-        {
-          id: 2,
-          name: 'Química',
-        },
-        {
-          id: 3,
-          name: 'Matemáticas',
-        },
-        {
-          id: 4,
-          name: 'Física cuantica nuclear destructiva',
-        },
-      ],
-    },
-    {
-      id: 3,
-      correctAnswer: '25.3',
-      question: '¿Cuál es la magnitud de la aceleración?',
-      incorrectAnswers: ['4.56', '4.56', '4.56'],
-      tags: [
-        {
-          id: 1,
-          name: 'Física',
-        },
-        {
-          id: 2,
-          name: 'Química',
-        },
-      ],
-    },
-  ],
-  tags: [
-    {
-      id: 1,
-      name: 'Física',
-    },
-    {
-      id: 2,
-      name: 'Mécanica',
-    },
-    {
-      id: 3,
-      name: 'Eléctrica',
-    },
-  ],
-}
+const mapStateToProps = state => ({
+  loading: state.questions.get.fetching,
+  questions: state.questions.get.results,
+  tags: state.tags.get.results,
+})
 
-export default withTheme()(Questions)
+export default connect(mapStateToProps)(withTheme()(Questions))

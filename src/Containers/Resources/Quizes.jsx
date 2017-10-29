@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Typography,
   Button,
@@ -9,6 +10,7 @@ import { AlignCenter } from '../../Components/Utils'
 import ModalSave from '../../Components/ModalSave'
 import ModalRemove from '../../Components/ModalRemove'
 import Quiz from '../../Components/Quiz'
+import Loading from '../../Components/Loading'
 
 class Quizes extends Component {
   constructor(props) {
@@ -19,10 +21,6 @@ class Quizes extends Component {
       modalRemoveOpened: false,
       toModifyId: -1,
     }
-  }
-
-  componentDidMount() {
-    console.log('load quizes')
   }
 
   // /** Fired on add item. Set type of modal and then open modal */
@@ -51,110 +49,76 @@ class Quizes extends Component {
   }
 
   render() {
-    const { quizes } = this.props
+    const { loading, quizes } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
         <Typography type="display1" gutterBottom>Mis quizes</Typography>
-        <AlignCenter>
-          <Button color="accent" onClick={this.onAdd}>
-            <AddIcon />
-            Agregar quiz
-          </Button>
-        </AlignCenter>
-        {quizes.map(data => (
-          <Quiz
-            key={data.id}
-            data={data}
-            onEdit={this.onEdit}
-            onRemove={this.onRemove}
-          />
-        ))}
-        <ModalSave
-          open={modalSaveOpened}
-          title="Quiz"
-          onRequestClose={this.onCloseModalSave}
-          modalType={modalType}
-          toUpdateId={toModifyId}
-          fields={[
-            {
-              type: 'textField',
-              id: 1,
-              name: 'question',
-              label: 'Nombre del quiz',
-              required: true,
-            },
-          ]}
-        />
-        <ModalRemove
-          open={modalRemoveOpened}
-          onRequestClose={this.onCloseModalRemove}
-          toRemoveId={toModifyId}
-        />
+        {loading && <Loading />}
+        {!loading && (
+          <div>
+            <AlignCenter>
+              <Button color="accent" onClick={this.onAdd}>
+                <AddIcon />
+                Agregar quiz
+              </Button>
+            </AlignCenter>
+            {quizes.map(data => (
+              <Quiz
+                key={data.id}
+                data={data}
+                onEdit={this.onEdit}
+                onRemove={this.onRemove}
+              />
+            ))}
+            <ModalSave
+              open={modalSaveOpened}
+              title="Examen"
+              onRequestClose={this.onCloseModalSave}
+              modalType={modalType}
+              toUpdateId={toModifyId}
+              statePath="exams"
+              typePrefix="EXAMS"
+              getOnePath="exams.get.results"
+              fields={[
+                {
+                  type: 'textField',
+                  id: 1,
+                  name: 'question',
+                  label: 'Nombre del quiz',
+                  required: true,
+                },
+                {
+                  type: 'textField',
+                  id: 5,
+                  name: 'teacher_id',
+                  inputType: 'hidden',
+                  value: 1, // TODO: Change this for user id
+                  specificFor: 'create',
+                },
+              ]}
+            />
+            <ModalRemove
+              open={modalRemoveOpened}
+              onRequestClose={this.onCloseModalRemove}
+              toRemoveId={toModifyId}
+            />
+          </div>
+        )}
       </div>
     )
   }
 }
 
 Quizes.propTypes = {
-  quizes: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  quizes: PropTypes.array.isRequired,
 }
 
-Quizes.defaultProps = {
-  quizes: [
-    {
-      id: 1,
-      name: 'Leyes de Newton',
-      createdAt: 1508811671643,
-      assigned: 10,
-      questions: [
-        {
-          id: 1,
-          correctAnswer: '4.56',
-          question: '¿Cuál es la magnitud de la gravedad?',
-          incorrectAnswers: ['4.56', '9.14', '4.56'],
-        },
-        {
-          id: 2,
-          correctAnswer: '9.14',
-          question: '¿Cuál es la magnitud de la velocidad?',
-          incorrectAnswers: ['4.56', '4.56', '4.56'],
-        },
-        {
-          id: 3,
-          correctAnswer: '25.3',
-          question: '¿Cuál es la magnitud de la aceleración?',
-          incorrectAnswers: ['4.56', '4.56', '4.56'],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Electricidad',
-      createdAt: 1508811671643,
-      assigned: 10,
-      questions: [
-        {
-          id: 1,
-          correctAnswer: '4.56',
-          question: '¿Cuál es la magnitud de la gravedad?',
-          incorrectAnswers: ['4.56', '9.14', '4.56'],
-        },
-        {
-          id: 2,
-          correctAnswer: '9.14',
-          question: '¿Cuál es la magnitud de la velocidad?',
-          incorrectAnswers: ['4.56', '4.56', '4.56'],
-        },
-        {
-          id: 3,
-          correctAnswer: '25.3',
-          question: '¿Cuál es la magnitud de la aceleración?',
-          incorrectAnswers: ['4.56', '4.56', '4.56'],
-        },
-      ],
-    },
-  ],
-}
+const mapStateToProps = state => ({
+  loading: state.exams.get.fetching,
+  quizes: state.exams.get.results,
+})
 
-export default Quizes
+
+export default connect(mapStateToProps)(Quizes)

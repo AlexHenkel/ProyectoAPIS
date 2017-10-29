@@ -66,7 +66,8 @@ class Exams extends Component {
   }
 
   render() {
-    const { theme, loading, currentExams, pastExams, students, groups, exams } = this.props
+    const { theme, activeGroup, loading, currentExams,
+      pastExams, students, groups, exams } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened, tabIndex } = this.state
 
     return (
@@ -110,7 +111,7 @@ class Exams extends Component {
               <TabContainer>
                 {pastExams.map(data => (
                   <Exam
-                    key={data.id}                
+                    key={data.id}
                     onEdit={this.onEdit}
                     onRemove={this.onRemove}
                     studentsLen={students.length}
@@ -168,7 +169,7 @@ class Exams extends Component {
               name: 'groups_id',
               path: 'groups_id',
               label: 'Grupos a asignar examen',
-              // value: currentGroup
+              value: [activeGroup],
               options: groups,
               optionsValue: 'id',
               optionsLabel: 'name',
@@ -197,6 +198,7 @@ class Exams extends Component {
 
 Exams.propTypes = {
   theme: PropTypes.object.isRequired,
+  activeGroup: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   currentExams: PropTypes.array.isRequired,
   pastExams: PropTypes.array.isRequired,
@@ -206,6 +208,7 @@ Exams.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  activeGroup: state.groups.activeGroup,
   loading: state.overview.getOne.fetching,
   currentExams: state.overview.getOne.result.currentExams,
   pastExams: state.overview.getOne.result.pastExams,
