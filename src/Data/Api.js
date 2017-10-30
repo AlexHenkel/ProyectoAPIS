@@ -38,6 +38,8 @@ const removeQuestion = id => api.delete('teacher_questions/', { question_id: id 
 
 const getTags = id => api.get(`teacher_tags/${id}`)
 
+const getOneGroupExamResult = ({ groupId, examId }) => api.get(`group_exam_results/${groupId}/${examId}`)
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -70,5 +72,8 @@ export default {
   },
   tags: {
     get: getTags,
+  },
+  groupExamResults: {
+    getOne: getOneGroupExamResult,
   },
 }

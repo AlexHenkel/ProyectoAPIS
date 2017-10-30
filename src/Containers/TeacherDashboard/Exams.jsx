@@ -16,7 +16,7 @@ import ModalRemove from '../../Components/ModalRemove'
 import Exam from '../../Components/Exam'
 import Loading from '../../Components/Loading'
 
-const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
+export const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
 TabContainer.propTypes = { children: PropTypes.node.isRequired }
 
 
@@ -105,6 +105,7 @@ class Exams extends Component {
                     studentsLen={students.length}
                     data={data}
                     theme={theme}
+                    groupId={activeGroup}
                   />
                 ))}
               </TabContainer>
@@ -118,6 +119,7 @@ class Exams extends Component {
                     data={data}
                     theme={theme}
                     noEdit
+                    groupId={activeGroup}
                   />
                 ))}
               </TabContainer>

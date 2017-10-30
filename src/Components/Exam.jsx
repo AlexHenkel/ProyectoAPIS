@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import {
   Typography,
   CardContent,
-  Button,
   Grid,
   LinearProgress,
   CardActions as OriginalCardActions,
@@ -12,6 +11,7 @@ import {
 import moment from 'moment'
 import { AlignCenter, Card, CardText } from './Utils'
 import ContextMenu, { ContextContainer } from './ContextMenu'
+import ExamResult from './ExamResult'
 
 const Date = styled(Typography)`
   line-height: 1 !important;
@@ -28,7 +28,7 @@ const LimitText = styled(Typography)`
 const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
 
 const Exam = ({ data: { id, name, expiresAt, completed },
-  onEdit, onRemove, theme, studentsLen, noEdit }) => (
+  onEdit, onRemove, theme, studentsLen, noEdit, groupId }) => (
     <Card key={id}>
       <CardContent>
         {!noEdit && (
@@ -69,7 +69,7 @@ const Exam = ({ data: { id, name, expiresAt, completed },
         </Grid>
       </CardContent>
       <CardActions>
-        <Button raised color="primary" onClick={() => console.log('ver mas')}>Ver Resultados</Button>
+        <ExamResult title={name} groupId={groupId} examId={id} />
       </CardActions>
     </Card>
 )
@@ -81,6 +81,7 @@ Exam.propTypes = {
   theme: PropTypes.object.isRequired,
   studentsLen: PropTypes.number.isRequired,
   noEdit: PropTypes.bool,
+  groupId: PropTypes.number.isRequired,
 }
 
 Exam.defaultProps = {

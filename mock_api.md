@@ -814,3 +814,213 @@ TecLearn is a tool for teacher and students to create and grade exams associated
             + id: 4 (number, required)
 
             + name: Física cuantica nuclear destructiva (string, required)
+
+## Group Exam Results Collection [/group_exam_results/]
+
+**NOTE: Questions should be sorted in the same way as students questions**
+
+### List all teacher's questions [GET /group_exam_results/{group_id}/{exam_id}]
+
++ Parameters
+
+    + group_id: 1 (number, required)
+
+    + exam_id: 1 (number, required)
+
++ Response 200 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+        + questions (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + question: ¿Cuál es la magnitud de la gravedad? (string, required)
+            
+            + (object)
+
+                + id: 2 (number, required)
+
+                + question: ¿Cuál es la magnitud de la velocidad? (string, required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+        
+        + highestGrades (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + student: Chelsea Otakan (string, required)
+
+                + grade: 66.6 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 10 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 11 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 12 (string, required)
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + student: Gary Lekketh (string, required)
+
+                + grade: 33.3 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 1 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 11 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 12 (string, required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + student: Robin Freeman (string, required)
+
+                + grade: 100 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 10 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 11 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 9 (string, required)
+
+        + recentGrades (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + student: Chelsea Otakan (string, required)
+
+                + grade: 0 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 10 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 8 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 14 (string, required)
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + student: Gary Lekketh (string, required)
+
+                + grade: 33.3 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 1 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 11 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 12 (string, required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + student: Robin Freeman (string, required)
+
+                + grade: 66.6 (number, required)
+
+                + answers (array)
+
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 10 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: false (boolean, required)
+
+                        + answer: 23 (string, required)
+                    
+                    + (object)
+
+                        + isCorrect: true (boolean, required)
+
+                        + answer: 9 (string, required)
