@@ -31,7 +31,7 @@ class Groups extends Component {
     const { loading: currLoading, selectActiveGroup } = this.props
     if (!loading && currLoading) {
       if (groups.length) {
-        selectActiveGroup(groups[0].id)
+        selectActiveGroup(groups[0].id, groups[0].name)
       }
     }
   }
@@ -178,7 +178,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  selectActiveGroup: id => dispatch(GroupsActions.selectActiveGroup(id)),
+  selectActiveGroup: (id, name) => dispatch(GroupsActions.selectActiveGroup(id, name)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTheme()(Groups))

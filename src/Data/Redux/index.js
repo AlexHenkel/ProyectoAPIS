@@ -12,6 +12,7 @@ export default (middlewares) => {
     questions: require('./QuestionsRedux').reducer,
     tags: require('./TagsRedux').reducer,
     groupExamResults: require('./GroupExamResultsRedux').reducer,
+    groupResults: require('./GroupResultsRedux').reducer,
   })
 
   return configureStore(rootReducer, [epicMiddleware, ...middlewares])

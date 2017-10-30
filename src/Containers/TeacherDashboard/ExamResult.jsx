@@ -6,12 +6,12 @@ import { Grid, Tab, Tabs } from 'material-ui'
 import SwipeableViews from 'react-swipeable-views'
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table'
 import OriginalPaper from 'material-ui/Paper'
-import DialogResults from './DialogResults'
-import Loading from './Loading'
-import { TabContainer } from '../Containers/TeacherDashboard/Exams'
-import GroupExamResultsActions from '../Data/Redux/GroupExamResultsRedux'
+import DialogResults from '../../Components/DialogResults'
+import Loading from '../../Components/Loading'
+import { TabContainer } from './Exams'
+import GroupExamResultsActions from '../../Data/Redux/GroupExamResultsRedux'
 
-const Paper = styled(OriginalPaper)`
+export const Paper = styled(OriginalPaper)`
   width: 100%;
   overflow-x: auto;
 `

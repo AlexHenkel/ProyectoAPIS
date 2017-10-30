@@ -3,7 +3,7 @@ import { createActions, createState, createReducer } from 'reduxsauce-crud'
 /* ------------- Types and Action Creators ------------- */
 
 export const GroupsRedux = createActions({
-  selectActiveGroup: ['id'],
+  selectActiveGroup: ['id', 'name'],
 }, {
   prefix: 'GROUPS_',
   defaultActions: {
@@ -23,6 +23,7 @@ export default Creators
 
 export const INITIAL_STATE = createState({
   activeGroup: -1,
+  activeGroupName: '',
 }, {
   get: true,
   getOne: true,
@@ -33,7 +34,8 @@ export const INITIAL_STATE = createState({
 
 /* ------------- Reducers ------------- */
 
-const selectActiveGroup = (state, { id }) => state.merge({ activeGroup: id })
+const selectActiveGroup = (state, { id, name }) =>
+  state.merge({ activeGroup: id, activeGroupName: name })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

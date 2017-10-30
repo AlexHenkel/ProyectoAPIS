@@ -40,11 +40,11 @@ class DialogResults extends React.Component {
   }
 
   render() {
-    const { title, buttonText, children } = this.props
+    const { title, buttonText, children, accent, className } = this.props
     const { open } = this.state
     return (
-      <div>
-        <Button raised color="primary" onClick={this.handleClickOpen}>{buttonText}</Button>
+      <div className={className}>
+        <Button raised color={accent ? 'accent' : 'primary'} onClick={this.handleClickOpen}>{buttonText}</Button>
         <Dialog
           fullScreen
           open={open}
@@ -75,6 +75,13 @@ DialogResults.propTypes = {
   buttonText: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   onOpen: PropTypes.func.isRequired,
+  accent: PropTypes.bool,
+  className: PropTypes.string,
+}
+
+DialogResults.defaultProps = {
+  accent: false,
+  className: '',
 }
 
 export default DialogResults

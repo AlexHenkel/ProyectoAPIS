@@ -40,6 +40,8 @@ const getTags = id => api.get(`teacher_tags/${id}`)
 
 const getOneGroupExamResult = ({ groupId, examId }) => api.get(`group_exam_results/${groupId}/${examId}`)
 
+const getOneGroupResult = id => api.get(`group_results/${id}`)
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -75,5 +77,8 @@ export default {
   },
   groupExamResults: {
     getOne: getOneGroupExamResult,
+  },
+  groupResults: {
+    getOne: getOneGroupResult,
   },
 }

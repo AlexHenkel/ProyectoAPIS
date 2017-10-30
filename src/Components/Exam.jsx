@@ -11,7 +11,7 @@ import {
 import moment from 'moment'
 import { AlignCenter, Card, CardText } from './Utils'
 import ContextMenu, { ContextContainer } from './ContextMenu'
-import ExamResult from './ExamResult'
+import ExamResult from '../Containers/TeacherDashboard/ExamResult'
 
 const Date = styled(Typography)`
   line-height: 1 !important;

@@ -819,7 +819,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
 **NOTE: Questions should be sorted in the same way as students questions**
 
-### List all teacher's questions [GET /group_exam_results/{group_id}/{exam_id}]
+### List teacher's group exam results [GET /group_exam_results/{group_id}/{exam_id}]
 
 + Parameters
 
@@ -1024,3 +1024,105 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                         + isCorrect: true (boolean, required)
 
                         + answer: 9 (string, required)
+
+
+## Group Results Collection [/group_results/]
+
+**NOTE: Exams should be sorted in the same way as students questions**
+
+### List teacher's group results [GET /group_results/{group_id}]
+
++ Parameters
+
+    + group_id: 1 (number, required)
+
++ Response 200 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+        + exams (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + name: Leyes de Newton (string, required)
+            
+            + (object)
+
+                + id: 2 (number, required)
+
+                + name: Estática (string, required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + name: Óptica (string, required)
+        
+        + highestGrades (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + student: Chelsea Otakan (string, required)
+
+                + average: 88.8 (number, required)
+
+                + grades: 66, 100, 100 (array[number], required)
+
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + student: Gary Lekketh (string, required)
+
+                + average: 66.6 (number, required)
+
+                + grades: 33, 66.6, 100 (array[number], required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + student: Robin Freeman (string, required)
+
+                + average: 50 (number, required)
+
+                + grades: 50, 50, 50 (array[number], required)
+
+        + recentGrades (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + student: Chelsea Otakan (string, required)
+
+                + average: 50 (number, required)
+
+                + grades: 50, 50, 50 (array[number], required)
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + student: Gary Lekketh (string, required)
+
+                + average: 88.8 (number, required)
+
+                + grades: 66, 100, 100 (array[number], required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + student: Robin Freeman (string, required)
+
+                + average: 66.6 (number, required)
+
+                + grades: 33, 66.6, 100 (array[number], required)

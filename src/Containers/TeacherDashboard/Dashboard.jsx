@@ -9,6 +9,7 @@ import Exams from './Exams'
 import Students from './Students'
 import Top10 from './Top10'
 import GroupCode from './GroupCode'
+import GroupResult from './GroupResult'
 
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 import OverviewActions from '../../Data/Redux/OverviewRedux'
@@ -39,6 +40,7 @@ class Dashboard extends Component {
         </Grid>
         <Grid item xs={12} sm={3}>
           <GroupCode />
+          <GroupResult />
           <Students />
           <Top10 />
         </Grid>
