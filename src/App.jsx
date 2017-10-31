@@ -9,10 +9,12 @@ import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
 import TeacherDashboard from './Containers/TeacherDashboard/Dashboard'
+import StudentDashboard from './Containers/StudentDashboard/Dashboard'
 import Resources from './Containers/Resources/Resources'
 
 // Build layout components for router
 const TeacherDashboardRoute = () => <Layout slot={<TeacherDashboard />} />
+const StudentDashboardRoute = () => <Layout slot={<StudentDashboard />} />
 const ResourcesRoute = () => <Layout slot={<Resources />} />
 
 // Create a browser history, and it's middleware
@@ -29,6 +31,7 @@ const App = () => (
       <ConnectedRouter history={history}>
         <div>
           <Route exact path="/" component={TeacherDashboardRoute} />
+          <Route exact path="/estudiante" component={StudentDashboardRoute} />
           <Route exact path="/recursos" component={ResourcesRoute} />
         </div>
       </ConnectedRouter>

@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  Typography,
-  CardContent,
-  CardActions,
-  Button,
-} from 'material-ui'
-import { withTheme } from 'material-ui/styles'
+import { Typography, Button } from 'material-ui'
 import AddIcon from 'material-ui-icons/Add'
-import { AlignCenter, DisabledButton, Card, CardText } from '../../Components/Common/Utils'
-import ContextMenu, { ContextContainer } from '../../Components/Common/ContextMenu'
+import { AlignCenter } from '../../Components/Common/Utils'
 import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
 import Loading from '../../Components/Common/Loading'
+import Group from '../../Components/Group'
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 
 class Groups extends Component {
@@ -62,7 +56,7 @@ class Groups extends Component {
   }
 
   render() {
-    const { theme, loading, groups, selectActiveGroup, activeGroup } = this.props
+    const { loading, groups } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -76,32 +70,13 @@ class Groups extends Component {
                 Agregar grupo
               </Button>
             </AlignCenter>
-            {groups.map(({ id, name, activeExams }) => (
-              <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
-                <CardContent>
-                  <ContextContainer>
-                    <ContextMenu
-                      value={id}
-                      handleEdit={this.onEdit}
-                      handleRemove={this.onRemove}
-                    />
-                  </ContextContainer>
-                  <CardText type="headline" component="h2" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-                    {name}
-                  </CardText>
-                  <CardText type="body1" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-                    Quizes activos: <b>{activeExams}</b>
-                  </CardText>
-                </CardContent>
-                <CardActions>
-                  {activeGroup === id && (
-                    <DisabledButton disabled>Seleccionado</DisabledButton>
-                  )}
-                  {activeGroup !== id && (
-                    <Button dense color="accent" onClick={() => selectActiveGroup(id)}>Ver Más</Button>
-                  )}
-                </CardActions>
-              </Card>
+            {groups.map(group => (
+              <Group
+                onEdit={this.onEdit}
+                onRemove={this.onRemove}
+                allowEdit
+                {...group}
+              />
             ))}
           </div>
         )}
@@ -167,18 +142,16 @@ Groups.propTypes = {
   theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
-  activeGroup: PropTypes.number.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.groups.get.fetching,
   groups: state.groups.get.results,
-  activeGroup: state.groups.activeGroup,
 })
 
 const mapDispatchToProps = dispatch => ({
   selectActiveGroup: (id, name) => dispatch(GroupsActions.selectActiveGroup(id, name)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTheme()(Groups))
+export default connect(mapStateToProps, mapDispatchToProps)(Groups)
