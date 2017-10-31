@@ -20,10 +20,6 @@ import {
 import MenuIcon from 'material-ui-icons/Menu'
 import PowerIcon from 'material-ui-icons/PowerSettingsNew'
 
-const Container = styled.div`
-  padding: 15px;
-`
-
 const Typography = styled(OriginalTypography)`
   flex: 1;
 `
@@ -46,67 +42,62 @@ class Layout extends Component {
   handleToggleDrawer = state => () => this.toggleDrawer(state)
 
   render() {
-    const { slot } = this.props
     const { drawerOpened } = this.state
     return (
-      <div>
-        <AppBar position="static">
-          <Toolbar>
-            <Hidden smUp>
-              <IconButton onClick={this.handleToggleDrawer(true)} color="contrast" aria-label="Menu">
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
-            <Typography type="title" color="inherit" onClick={() => this.props.navigateTo('/')}>
-              TecLearn
-            </Typography>
-            <Hidden xsDown>
-              <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Cursos</Button>
-              <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Quizes</Button>
-              <Button color="contrast">Login</Button>
-            </Hidden>
-          </Toolbar>
-          <Drawer open={drawerOpened} onRequestClose={this.handleToggleDrawer(false)}>
-            <div
-              tabIndex={0}
-              role="button"
-              onClick={this.handleToggleDrawer(false)}
-              onKeyDown={this.handleToggleDrawer(false)}
-            >
-              <List>
-                <ListItem button>
-                  <ListItemText primary="Cursos" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary="Quizes" />
-                </ListItem>
-              </List>
-              <Divider />
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <PowerIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Login" />
-                </ListItem>
-              </List>
-            </div>
-          </Drawer>
-        </AppBar>
-        <Container>
-          {slot}
-        </Container>
-      </div>
+      <AppBar position="static">
+        <Toolbar>
+          <Hidden smUp>
+            <IconButton onClick={this.handleToggleDrawer(true)} color="contrast" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+          <Typography type="title" color="inherit" onClick={() => this.props.navigateTo('/')}>
+            TecLearn
+          </Typography>
+          <Hidden xsDown>
+            <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Cursos</Button>
+            <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Quizes</Button>
+            <Button color="contrast">Login</Button>
+          </Hidden>
+        </Toolbar>
+        <Drawer open={drawerOpened} onRequestClose={this.handleToggleDrawer(false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.handleToggleDrawer(false)}
+            onKeyDown={this.handleToggleDrawer(false)}
+          >
+            <List>
+              <ListItem button>
+                <ListItemText primary="Cursos" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Quizes" />
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem button>
+                <ListItemIcon>
+                  <PowerIcon />
+                </ListItemIcon>
+                <ListItemText primary="Login" />
+              </ListItem>
+            </List>
+          </div>
+        </Drawer>
+      </AppBar>
     )
   }
 }
 
 Layout.propTypes = {
-  slot: PropTypes.node.isRequired,
   navigateTo: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = () => ({
+  // TODO: Get isTeacher from state to show/hide nav buttons
+})
 
 const mapDispatchToProps = dispatch => ({
   navigateTo: route => dispatch(push(route)),

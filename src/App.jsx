@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import { withStyles, MuiThemeProvider } from 'material-ui/styles'
+import styled from 'styled-components'
 import createStore from './Data/Redux'
 import { styles, theme } from './Theme'
 
@@ -12,10 +13,9 @@ import TeacherDashboard from './Containers/TeacherDashboard/Dashboard'
 import StudentDashboard from './Containers/StudentDashboard/Dashboard'
 import Resources from './Containers/Resources/Resources'
 
-// Build layout components for router
-const TeacherDashboardRoute = () => <Layout slot={<TeacherDashboard />} />
-const StudentDashboardRoute = () => <Layout slot={<StudentDashboard />} />
-const ResourcesRoute = () => <Layout slot={<Resources />} />
+const Container = styled.div`
+  padding: 15px;
+`
 
 // Create a browser history, and it's middleware
 const history = createHistory()
@@ -27,13 +27,14 @@ const store = createStore([historyMiddleware])
 const App = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
+      <Layout />
       { /* ConnectedRouter will use the store from Provider automatically */ }
       <ConnectedRouter history={history}>
-        <div>
-          <Route exact path="/" component={TeacherDashboardRoute} />
-          <Route exact path="/estudiante" component={StudentDashboardRoute} />
-          <Route exact path="/recursos" component={ResourcesRoute} />
-        </div>
+        <Container>
+          <Route exact path="/" component={TeacherDashboard} />
+          <Route exact path="/estudiante" component={StudentDashboard} />
+          <Route exact path="/recursos" component={Resources} />
+        </Container>
       </ConnectedRouter>
     </MuiThemeProvider>
   </Provider>
