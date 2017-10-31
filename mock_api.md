@@ -1126,3 +1126,97 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                 + average: 66.6 (number, required)
 
                 + grades: 33, 66.6, 100 (array[number], required)
+
+## Student Groups Collection [/student_groups/]
+
+### List all student's groups [GET /student_groups/{id}]
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Attributes (array)
+
+        + (object)
+
+            + id: 1 (number, required)
+            
+            + name: Física 1 ENE/DIC 17 (string, required)
+
+            + activeExams: 2 (number, required)
+
+        + (object)
+
+            + id: 2 (number, required)
+            
+            + name: Física 2 ENE/DIC 17 (string, required)
+
+            + activeExams: 2 (number, required)
+ 
+## Student Overview [/student_overview/{id}]
+
+### List a student's group overview [GET]
+
+**Note: If a student hasn't taken the exam, don't send any value or send it as null in `highestGrade` and `recentGrade`**
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 200 (application/json)
+
+    + Attributes (object)
+
+        + currentExams (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + name: Leyes de Newton (string, required)
+
+                + expiresAt: 1508811671643 (number, required)
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + name: Estática (string, required)
+
+                + expiresAt: 1508811671643 (number, required)
+
+                + highestGrade: 100 (number)
+
+                + recentGrade: 80 (number)
+
+        + pastExams (array)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + name: Óptica (string, required)
+
+                + expiresAt: 1508811671643 (number, required)
+
+        + top10 (array)
+
+            + (object)
+
+                + id: 1 (number, required)
+
+                + name: Chelsea Otakan (string, required)
+
+            + (object)
+
+                + id: 2 (number, required)
+
+                + name: Gary Lekketh (string, required)
+
+            + (object)
+
+                + id: 3 (number, required)
+
+                + name: Robin Freeman (string, required)

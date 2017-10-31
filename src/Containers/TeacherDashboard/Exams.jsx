@@ -13,7 +13,7 @@ import AddIcon from 'material-ui-icons/Add'
 import { AlignCenter } from '../../Components/Common/Utils'
 import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
-import Exam from '../../Components/Exam'
+import Exam from '../../Components/Teacher/Exam'
 import Loading from '../../Components/Common/Loading'
 
 export const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>

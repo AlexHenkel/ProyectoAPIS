@@ -5,13 +5,11 @@ import {
   Typography,
   CardContent,
   Grid,
-  LinearProgress,
   CardActions as OriginalCardActions,
 } from 'material-ui'
 import moment from 'moment'
 import { AlignCenter, Card, CardText } from './Common/Utils'
 import ContextMenu, { ContextContainer } from './Common/ContextMenu'
-import ExamResult from '../Containers/TeacherDashboard/ExamResult'
 
 const Date = styled(Typography)`
   line-height: 1 !important;
@@ -27,8 +25,8 @@ const LimitText = styled(Typography)`
 
 const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
 
-const Exam = ({ data: { id, name, expiresAt, completed },
-  onEdit, onRemove, theme, studentsLen, noEdit, groupId }) => (
+const Exam = ({ data: { id, name, expiresAt },
+  onEdit, onRemove, theme, noEdit, children, actions }) => (
     <Card key={id}>
       <CardContent>
         {!noEdit && (
@@ -56,20 +54,12 @@ const Exam = ({ data: { id, name, expiresAt, completed },
             <CardText type="display1" component="h2" gutterBottom>
               {name}
             </CardText>
-            <CardText type="body1" gutterBottom>
-              Examenes presentados: <b>{completed} / {studentsLen}</b>
-            </CardText>
-            <LinearProgress
-              color="accent"
-              mode="determinate"
-              value={(completed / studentsLen) * 100}
-              valueBuffer={(completed / studentsLen) * 100}
-            />
+            {children}
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
-        <ExamResult title={name} groupId={groupId} examId={id} />
+        {actions}
       </CardActions>
     </Card>
 )
@@ -79,9 +69,9 @@ Exam.propTypes = {
   onEdit: PropTypes.func,
   onRemove: PropTypes.func,
   theme: PropTypes.object.isRequired,
-  studentsLen: PropTypes.number.isRequired,
   noEdit: PropTypes.bool,
-  groupId: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
+  actions: PropTypes.node.isRequired,
 }
 
 Exam.defaultProps = {

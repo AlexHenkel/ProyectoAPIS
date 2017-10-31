@@ -15,12 +15,12 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
-const getGroups = ({ isTeacher, id }) => isTeacher ? api.get(`teacher_groups/${id}`) : null
+const getGroups = ({ isTeacher, id }) => isTeacher ? api.get(`teacher_groups/${id}`) : api.get(`student_groups/${id}`)
 const createGroup = data => api.post('teacher_groups/', data)
 const updateGroup = (id, data) => api.patch('teacher_groups/', data)
 const removeGroup = id => api.delete('teacher_groups/', { group_id: id })
 
-const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : null
+const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : api.get(`student_overview/${id}`)
 
 const getExams = id => api.get(`teacher_exams/${id}`)
 const createExam = data => api.post('teacher_exams/', data)

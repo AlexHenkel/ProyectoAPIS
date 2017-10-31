@@ -5,7 +5,7 @@ import {
   Grid,
 } from 'material-ui'
 import Groups from './Groups'
-// import Exams from './Exams'
+import Exams from './Exams'
 // import Students from './Students'
 // import Top10 from './Top10'
 // import GroupCode from './GroupCode'
@@ -34,7 +34,7 @@ class Dashboard extends Component {
           <Groups />
         </Grid>
         <Grid item xs={12} sm={6}>
-          {/* <Exams /> */}
+          <Exams />
         </Grid>
         <Grid item xs={12} sm={3}>
           {/*  */}
@@ -56,10 +56,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getGroups: () => dispatch(GroupsActions.getRequest({
-    isTeacher: true,
+    isTeacher: false,
     id: 1,
   })),
-  getOverview: id => dispatch(OverviewActions.getOneRequest(id, { isTeacher: true })),
+  getOverview: id => dispatch(OverviewActions.getOneRequest(id, { isTeacher: false })),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
