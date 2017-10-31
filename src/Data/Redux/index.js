@@ -7,6 +7,7 @@ export default (middlewares) => {
   const rootReducer = combineReducers({
     groups: require('./GroupsRedux').reducer,
     overview: require('./OverviewRedux').reducer,
+    studentState: require('./StudentStateRedux').reducer,
     exams: require('./ExamsRedux').reducer,
     teacherGroupExams: require('./TeacherGroupExamsRedux').reducer,
     questions: require('./QuestionsRedux').reducer,

@@ -13,10 +13,12 @@ import Exams from './Exams'
 
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 import OverviewActions from '../../Data/Redux/OverviewRedux'
+import StudentStateActions from '../../Data/Redux/StudentStateRedux'
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getGroups()
+    this.props.getState()
   }
 
   componentWillReceiveProps({ activeGroup }) {
@@ -45,9 +47,10 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  activeGroup: PropTypes.number.isRequired,  
+  activeGroup: PropTypes.number.isRequired,
   getGroups: PropTypes.func.isRequired,
   getOverview: PropTypes.func.isRequired,
+  getState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -60,6 +63,7 @@ const mapDispatchToProps = dispatch => ({
     id: 1,
   })),
   getOverview: id => dispatch(OverviewActions.getOneRequest(id, { isTeacher: false })),
+  getState: () => dispatch(StudentStateActions.getOneRequest(1)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

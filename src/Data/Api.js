@@ -42,6 +42,9 @@ const getOneGroupExamResult = ({ groupId, examId }) => api.get(`group_exam_resul
 
 const getOneGroupResult = id => api.get(`group_results/${id}`)
 
+const getOneStudentState = id => api.get(`student_state/${id}`)
+const updateStudentState = (id, data) => api.post('student_state/', { id, ...data })
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -80,5 +83,9 @@ export default {
   },
   groupResults: {
     getOne: getOneGroupResult,
+  },
+  studentState: {
+    getOne: getOneStudentState,
+    update: updateStudentState,
   },
 }

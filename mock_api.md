@@ -1220,3 +1220,50 @@ TecLearn is a tool for teacher and students to create and grade exams associated
                 + id: 3 (number, required)
 
                 + name: Robin Freeman (string, required)
+
+## Student State [/student_state/]
+
+**To prevent student from opening resource and exam in different tabs, we should have a singleton instance for each student to controll it's status on the app. The possible states are:**
+- `free`: Default state. It will be set after test is completed
+- `onResource`: Will be set when student access to one of the resources of the test
+- `onTest`: Will be set when student access to the questions of one test
+
+### Get student state [GET /student_state/{id}]
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+        + state: free (string, required)
+        
+        + examId: 1 (number)
+
+### Update student state  [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + id: 1 (number, required)
+
+        + state: onResource (string, required)
+        
+        + examId: 1 (number)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 3 (number, required)
+
+        + state: onResource (string, required)
+        
+        + examId: 1 (number)
+
+        

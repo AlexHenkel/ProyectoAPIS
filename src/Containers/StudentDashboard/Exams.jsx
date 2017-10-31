@@ -28,7 +28,8 @@ class Exams extends Component {
   }
 
   render() {
-    const { theme, activeGroup, loading, currentExams, pastExams, goToExam } = this.props
+    const { theme, activeGroup, loading, currentExams,
+      pastExams, goToExam, studentState } = this.props
     const { tabIndex } = this.state
 
     return (
@@ -59,6 +60,7 @@ class Exams extends Component {
                     theme={theme}
                     noEdit
                     onClickButton={() => goToExam(activeGroup)}
+                    noActions={studentState !== 'free'}
                   />
                 ))}
               </TabContainer>
@@ -88,9 +90,11 @@ Exams.propTypes = {
   currentExams: PropTypes.array.isRequired,
   pastExams: PropTypes.array.isRequired,
   goToExam: PropTypes.func.isRequired,
+  studentState: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
+  studentState: state.studentState.getOne.result.state,
   activeGroup: state.groups.activeGroup,
   loading: state.overview.getOne.fetching,
   currentExams: state.overview.getOne.result.currentExams,
