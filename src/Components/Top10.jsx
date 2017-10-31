@@ -10,7 +10,7 @@ import {
   ListItemText as OriginalListItemText,
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
-import Loading from '../../Components/Common/Loading'
+import Loading from './Common/Loading'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
@@ -26,16 +26,16 @@ const ListItemText = styled(OriginalListItemText)`
   }
 `
 
-const Top10 = ({ theme, loading, students }) => (
+const Top10 = ({ theme, loading, students, userId }) => (
   <div>
     <Title type="display1" gutterBottom>Top 10</Title>
     {loading && <Loading />}
     {!loading && (
       <Card theme={theme}>
         <List>
-          {students.map(({ id, name }, index) => (
+          {students.map(({ id, name }) => (
             <ListItem key={id}>
-              <ListItemText primary={name} theme={theme} active={index === 1 ? 'yes' : ''} />
+              <ListItemText primary={name} theme={theme} active={userId === id ? 'yes' : ''} />
             </ListItem>
           ))}
         </List>
@@ -48,6 +48,11 @@ Top10.propTypes = {
   theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   students: PropTypes.array.isRequired,
+  userId: PropTypes.number,
+}
+
+Top10.defaultProps = {
+  userId: -1,
 }
 
 const mapStateToProps = state => ({

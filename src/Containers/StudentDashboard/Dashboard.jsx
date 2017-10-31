@@ -6,10 +6,8 @@ import {
 } from 'material-ui'
 import Groups from './Groups'
 import Exams from './Exams'
-// import Students from './Students'
-// import Top10 from './Top10'
-// import GroupCode from './GroupCode'
-// import GroupResult from './GroupResult'
+import Grades from './Grades'
+import Top10 from '../../Components/Top10'
 
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 import OverviewActions from '../../Data/Redux/OverviewRedux'
@@ -39,7 +37,8 @@ class Dashboard extends Component {
           <Exams />
         </Grid>
         <Grid item xs={12} sm={3}>
-          {/*  */}
+          <Grades />
+          <Top10 userId={1} />
         </Grid>
       </Grid>
     )

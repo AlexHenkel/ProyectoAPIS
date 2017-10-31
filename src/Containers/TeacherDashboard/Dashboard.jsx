@@ -7,9 +7,9 @@ import {
 import Groups from './Groups'
 import Exams from './Exams'
 import Students from './Students'
-import Top10 from './Top10'
 import GroupCode from './GroupCode'
 import GroupResult from './GroupResult'
+import Top10 from '../../Components/Top10'
 
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 import OverviewActions from '../../Data/Redux/OverviewRedux'

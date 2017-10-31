@@ -17,6 +17,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
+        + id: 1 (number, required)
+
         + (object)
 
             + id: 1 (number, required)
@@ -116,6 +118,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (object)
+
+        + id: 1 (number, required)
 
         + groupCode: 13DFSD (string, required)
 
@@ -274,6 +278,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (array)
+
+        + id: 1 (number, required)
 
         + (object)
 
@@ -569,6 +575,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
+        + id: 1 (number, required)
+
         + (object)
 
             + id: 1 (number, required)
@@ -790,6 +798,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (array)
+
+        + id: 1 (number, required)
 
         + (object)
 
@@ -1139,6 +1149,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
+        + id: 1 (number, required)
+
         + (object)
 
             + id: 1 (number, required)
@@ -1168,6 +1180,10 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (object)
+
+        + id: 1 (number, required)
+
+        + average: 80 (number)
 
         + currentExams (array)
 
@@ -1260,7 +1276,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (object)
 
-        + id: 3 (number, required)
+        + id: 1 (number, required)
 
         + state: onResource (string, required)
         

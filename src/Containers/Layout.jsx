@@ -57,6 +57,7 @@ class Layout extends Component {
           <Hidden xsDown>
             <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Cursos</Button>
             <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Quizes</Button>
+            <Button raised color="accent" onClick={() => this.props.navigateTo('/estudiante')}>Estudiante</Button>
             <Button color="contrast">Login</Button>
           </Hidden>
         </Toolbar>
