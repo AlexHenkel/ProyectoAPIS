@@ -62,7 +62,7 @@ class TeacherExam extends Component {
           <DialogTitle>¿Estás seguro?</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Recuerda que si no completas el examen, tendrás una calificación de 0 en este intento
+              Recuerda que no podrás presentar otro examen hasta finalizar este intento
             </DialogContentText>
           </DialogContent>
           <DialogActions>
