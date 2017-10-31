@@ -6,8 +6,8 @@ import {
   Card,
   CardContent,
 } from 'material-ui'
-import { AlignCenter } from '../../Components/Utils'
-import Loading from '../../Components/Loading'
+import { AlignCenter } from '../../Components/Common/Utils'
+import Loading from '../../Components/Common/Loading'
 
 const GroupCode = ({ loading, groupCode }) => (
   <div>

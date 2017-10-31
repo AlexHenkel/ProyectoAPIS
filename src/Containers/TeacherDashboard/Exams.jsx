@@ -10,11 +10,11 @@ import {
 import SwipeableViews from 'react-swipeable-views'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
-import { AlignCenter } from '../../Components/Utils'
-import ModalSave from '../../Components/ModalSave'
-import ModalRemove from '../../Components/ModalRemove'
+import { AlignCenter } from '../../Components/Common/Utils'
+import ModalSave from '../../Components/Common/ModalSave'
+import ModalRemove from '../../Components/Common/ModalRemove'
 import Exam from '../../Components/Exam'
-import Loading from '../../Components/Loading'
+import Loading from '../../Components/Common/Loading'
 
 export const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
 TabContainer.propTypes = { children: PropTypes.node.isRequired }

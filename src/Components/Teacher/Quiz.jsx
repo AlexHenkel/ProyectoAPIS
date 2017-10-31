@@ -9,8 +9,8 @@ import {
 } from 'material-ui'
 import OriginalCheckIcon from 'material-ui-icons/Check'
 import moment from 'moment'
-import ContextMenu, { ContextContainer } from './ContextMenu'
-import { Card, AlignCenter } from './Utils'
+import ContextMenu, { ContextContainer } from '../Common/ContextMenu'
+import { Card, AlignCenter } from '../Common/Utils'
 
 const Question = styled(Typography)`
   margin-top: 20px !important;

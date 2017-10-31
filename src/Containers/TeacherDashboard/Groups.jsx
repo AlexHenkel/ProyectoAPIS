@@ -9,11 +9,11 @@ import {
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
 import AddIcon from 'material-ui-icons/Add'
-import { AlignCenter, DisabledButton, Card, CardText } from '../../Components/Utils'
-import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
-import ModalSave from '../../Components/ModalSave'
-import ModalRemove from '../../Components/ModalRemove'
-import Loading from '../../Components/Loading'
+import { AlignCenter, DisabledButton, Card, CardText } from '../../Components/Common/Utils'
+import ContextMenu, { ContextContainer } from '../../Components/Common/ContextMenu'
+import ModalSave from '../../Components/Common/ModalSave'
+import ModalRemove from '../../Components/Common/ModalRemove'
+import Loading from '../../Components/Common/Loading'
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 
 class Groups extends Component {

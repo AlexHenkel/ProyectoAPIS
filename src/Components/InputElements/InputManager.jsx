@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Input from '../Components/Input'
-import MultipleSelect from '../Components/MultipleSelect'
-import Select from '../Components/Select'
-import FuzzySearch from '../Components/FuzzySearch'
-import TagSelect from '../Components/TagSelect'
-import MultipleInputs from '../Components/MultipleInputs'
-import Radio from '../Components/Radio'
-import MultipleSelectSearch from '../Components/MultipleSelectSearch'
+import Input from './Input'
+import MultipleSelect from './MultipleSelect'
+import Select from './Select'
+import FuzzySearch from './FuzzySearch'
+import TagSelect from './TagSelect'
+import MultipleInputs from './MultipleInputs'
+import Radio from './Radio'
+import MultipleSelectSearch from './MultipleSelectSearch'
 
 const InputManager = ({ noValue, result, value, path, type, inputType, ...inputProps }) => {
   /**

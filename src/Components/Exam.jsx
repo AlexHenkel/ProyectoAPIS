@@ -9,8 +9,8 @@ import {
   CardActions as OriginalCardActions,
 } from 'material-ui'
 import moment from 'moment'
-import { AlignCenter, Card, CardText } from './Utils'
-import ContextMenu, { ContextContainer } from './ContextMenu'
+import { AlignCenter, Card, CardText } from './Common/Utils'
+import ContextMenu, { ContextContainer } from './Common/ContextMenu'
 import ExamResult from '../Containers/TeacherDashboard/ExamResult'
 
 const Date = styled(Typography)`

@@ -11,7 +11,7 @@ import {
   Button,
 } from 'material-ui'
 import Slide from 'material-ui/transitions/Slide'
-import InputManager from '../Components/InputManager'
+import InputManager from '../InputElements/InputManager'
 
 const Form = styled(OriginalForm)`
   overflow: auto;

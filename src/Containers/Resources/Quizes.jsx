@@ -6,11 +6,11 @@ import {
   Button,
 } from 'material-ui'
 import AddIcon from 'material-ui-icons/Add'
-import { AlignCenter } from '../../Components/Utils'
-import ModalSave from '../../Components/ModalSave'
-import ModalRemove from '../../Components/ModalRemove'
-import Quiz from '../../Components/Quiz'
-import Loading from '../../Components/Loading'
+import { AlignCenter } from '../../Components/Common/Utils'
+import ModalSave from '../../Components/Common/ModalSave'
+import ModalRemove from '../../Components/Common/ModalRemove'
+import Quiz from '../../Components/Teacher/Quiz'
+import Loading from '../../Components/Common/Loading'
 
 class Quizes extends Component {
   constructor(props) {

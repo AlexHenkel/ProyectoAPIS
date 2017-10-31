@@ -10,12 +10,12 @@ import AddIcon from 'material-ui-icons/Add'
 import styled from 'styled-components'
 import OriginalCheckIcon from 'material-ui-icons/Check'
 import { withTheme } from 'material-ui/styles'
-import { AlignCenter, Card, CardText } from '../../Components/Utils'
-import ContextMenu, { ContextContainer } from '../../Components/ContextMenu'
-import ModalSave from '../../Components/ModalSave'
-import ModalRemove from '../../Components/ModalRemove'
-import { Answer } from '../../Components/Quiz'
-import Loading from '../../Components/Loading'
+import { AlignCenter, Card, CardText } from '../../Components/Common/Utils'
+import ContextMenu, { ContextContainer } from '../../Components/Common/ContextMenu'
+import ModalSave from '../../Components/Common/ModalSave'
+import ModalRemove from '../../Components/Common/ModalRemove'
+import { Answer } from '../../Components/Teacher/Quiz'
+import Loading from '../../Components/Common/Loading'
 
 const CheckIcon = styled(OriginalCheckIcon)`
   position: absolute;

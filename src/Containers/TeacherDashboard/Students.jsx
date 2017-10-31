@@ -9,7 +9,7 @@ import {
   ListItem,
   ListItemText,
 } from 'material-ui'
-import Loading from '../../Components/Loading'
+import Loading from '../../Components/Common/Loading'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
