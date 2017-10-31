@@ -82,12 +82,13 @@ class TeacherExam extends Component {
 TeacherExam.propTypes = {
   data: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  onClickButton: PropTypes.func.isRequired,
+  onClickButton: PropTypes.func,
   noActions: PropTypes.bool,
 }
 
 TeacherExam.defaultProps = {
   noActions: false,
+  onClickButton: () => null,
 }
 
 export default TeacherExam

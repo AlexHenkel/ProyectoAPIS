@@ -22,8 +22,9 @@ class Groups extends Component {
       <div>
         <Typography type="display1" gutterBottom>Mis grupos</Typography>
         {loading && <Loading />}
-        {!loading && groups.map(group => (
+        {!loading && groups.map((group, index) => (
           <Group
+            key={index}
             allowEdit={false}
             {...group}
           />
@@ -34,7 +35,6 @@ class Groups extends Component {
 }
 
 Groups.propTypes = {
-  theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,

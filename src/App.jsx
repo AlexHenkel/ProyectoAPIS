@@ -27,15 +27,17 @@ const store = createStore([historyMiddleware])
 const App = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <Layout />
-      { /* ConnectedRouter will use the store from Provider automatically */ }
-      <ConnectedRouter history={history}>
-        <Container>
-          <Route exact path="/" component={TeacherDashboard} />
-          <Route exact path="/estudiante" component={StudentDashboard} />
-          <Route exact path="/recursos" component={Resources} />
-        </Container>
-      </ConnectedRouter>
+      <div>
+        <Layout />
+        { /* ConnectedRouter will use the store from Provider automatically */ }
+        <ConnectedRouter history={history}>
+          <Container>
+            <Route exact path="/" component={TeacherDashboard} />
+            <Route exact path="/estudiante" component={StudentDashboard} />
+            <Route exact path="/recursos" component={Resources} />
+          </Container>
+        </ConnectedRouter>
+      </div>
     </MuiThemeProvider>
   </Provider>
 )

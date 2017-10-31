@@ -70,8 +70,9 @@ class Groups extends Component {
                 Agregar grupo
               </Button>
             </AlignCenter>
-            {groups.map(group => (
+            {groups.map((group, index) => (
               <Group
+                key={index}
                 onEdit={this.onEdit}
                 onRemove={this.onRemove}
                 allowEdit
@@ -139,7 +140,6 @@ class Groups extends Component {
 }
 
 Groups.propTypes = {
-  theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,
