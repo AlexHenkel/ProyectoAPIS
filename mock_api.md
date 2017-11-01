@@ -1268,7 +1268,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + id: 1 (number, required)
 
-        + state: onExam (string, required)
+        + state: onResource (string, required)
         
         + examId: 1 (number)
 

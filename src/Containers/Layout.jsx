@@ -70,10 +70,13 @@ class Layout extends Component {
           >
             <List>
               <ListItem button>
-                <ListItemText primary="Cursos" />
+                <ListItemText primary="Cursos" onClick={() => this.props.navigateTo('/')} />
               </ListItem>
               <ListItem button>
-                <ListItemText primary="Quizes" />
+                <ListItemText primary="Quizes" onClick={() => this.props.navigateTo('/recursos')} />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Estudiante" onClick={() => this.props.navigateTo('/estudiante')} />
               </ListItem>
             </List>
             <Divider />
