@@ -8,6 +8,7 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import OriginalPaper from 'material-ui/Paper'
 import DialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 import { TabContainer } from './Exams'
 import GroupExamResultsActions from '../../Data/Redux/GroupExamResultsRedux'
 
@@ -22,28 +23,30 @@ export const AnswerCell = styled(TableCell)`
 
 export const ExamResultTable = ({ questions, grades }) => (
   <Paper>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Alumno</TableCell>
-          {questions.map(({ id: questionId, question }) => (
-            <TableCell key={questionId} numeric>{question}</TableCell>
-          ))}
-          <TableCell><b>Cal.</b></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {grades.map(grade => (
-          <TableRow key={grade.id}>
-            <TableCell>{grade.student}</TableCell>
-            {grade.answers.map(({ answer, isCorrect }, index) => (
-              <AnswerCell key={index} correct={isCorrect ? 'yes' : ''} numeric>{answer}</AnswerCell>
+    {grades.length ?
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Alumno</TableCell>
+            {questions.map(({ id: questionId, question }) => (
+              <TableCell key={questionId} numeric>{question}</TableCell>
             ))}
-            <TableCell><b>{grade.grade}</b></TableCell>
+            <TableCell><b>Cal.</b></TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {grades.map(grade => (
+            <TableRow key={grade.id}>
+              <TableCell>{grade.student}</TableCell>
+              {grade.answers.map(({ answer, isCorrect }, index) => (
+                <AnswerCell key={index} correct={isCorrect ? 'yes' : ''} numeric>{answer}</AnswerCell>
+              ))}
+              <TableCell><b>{grade.grade}</b></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    : <NoResults />}
   </Paper>
 )
 ExamResultTable.propTypes = {

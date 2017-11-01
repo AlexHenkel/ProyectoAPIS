@@ -11,6 +11,7 @@ import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
 import Quiz from '../../Components/Teacher/Quiz'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 
 class Quizes extends Component {
   constructor(props) {
@@ -63,14 +64,14 @@ class Quizes extends Component {
                 Agregar quiz
               </Button>
             </AlignCenter>
-            {quizes.map(data => (
+            {quizes.length ? quizes.map(data => (
               <Quiz
                 key={data.id}
                 data={data}
                 onEdit={this.onEdit}
                 onRemove={this.onRemove}
               />
-            ))}
+            )) : <NoResults />}
             <ModalSave
               open={modalSaveOpened}
               title="Examen"

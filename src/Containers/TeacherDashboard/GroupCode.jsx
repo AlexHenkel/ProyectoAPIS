@@ -11,9 +11,9 @@ import Loading from '../../Components/Common/Loading'
 
 const GroupCode = ({ loading, groupCode }) => (
   <div>
-    <Typography type="display1" gutterBottom>Código de grupo</Typography>
+    {groupCode && <Typography type="display1" gutterBottom>Código de grupo</Typography>}
     {loading && <Loading />}
-    {!loading && (
+    {!loading && groupCode && (
       <Card>
         <CardContent>
           <AlignCenter>

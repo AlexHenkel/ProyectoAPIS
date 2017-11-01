@@ -16,6 +16,7 @@ import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
 import { Answer } from '../../Components/Teacher/Quiz'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 
 const CheckIcon = styled(OriginalCheckIcon)`
   position: absolute;
@@ -87,7 +88,7 @@ class Questions extends Component {
                 Agregar pregunta
               </Button>
             </AlignCenter>
-            {questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
+            {questions.length ? questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
               <Card key={id}>
                 <CardContent>
                   <ContextContainer>
@@ -116,7 +117,7 @@ class Questions extends Component {
                   </TagContainer>
                 </CardContent>
               </Card>
-            ))}
+            )) : <NoResults />}
             <ModalSave
               open={modalSaveOpened}
               title="Pregunta"

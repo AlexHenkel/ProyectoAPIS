@@ -11,6 +11,7 @@ import {
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
 import Loading from './Common/Loading'
+import NoResults from './Common/NoResults'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
@@ -30,7 +31,7 @@ const Top10 = ({ theme, loading, students, userId }) => (
   <div>
     <Title type="display1" gutterBottom>Top 10</Title>
     {loading && <Loading />}
-    {!loading && (
+    {!loading && (students.length ?
       <Card theme={theme}>
         <List>
           {students.map(({ id, name }) => (
@@ -40,7 +41,7 @@ const Top10 = ({ theme, loading, students, userId }) => (
           ))}
         </List>
       </Card>
-    )}
+    : <NoResults />)}
   </div>
 )
 

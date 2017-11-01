@@ -8,6 +8,7 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import OriginalPaper from 'material-ui/Paper'
 import OriginalDialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 import { TabContainer } from './Exams'
 import GroupResultsActions from '../../Data/Redux/GroupResultsRedux'
 
@@ -26,28 +27,30 @@ export const DialogResults = styled(OriginalDialogResults)`
 
 export const GroupResultTable = ({ exams, grades }) => (
   <Paper>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Alumno</TableCell>
-          {exams.map(({ id: examId, name }) => (
-            <TableCell key={examId} numeric>{name}</TableCell>
-          ))}
-          <TableCell><b>Cal.</b></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {grades.map(studentGrades => (
-          <TableRow key={studentGrades.id}>
-            <TableCell>{studentGrades.student}</TableCell>
-            {studentGrades.grades.map((grade, index) => (
-              <TableCell key={index} numeric>{grade}</TableCell>
+    {grades.length ?
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Alumno</TableCell>
+            {exams.map(({ id: examId, name }) => (
+              <TableCell key={examId} numeric>{name}</TableCell>
             ))}
-            <TableCell><b>{studentGrades.average}</b></TableCell>
+            <TableCell><b>Cal.</b></TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {grades.map(studentGrades => (
+            <TableRow key={studentGrades.id}>
+              <TableCell>{studentGrades.student}</TableCell>
+              {studentGrades.grades.map((grade, index) => (
+                <TableCell key={index} numeric>{grade}</TableCell>
+              ))}
+              <TableCell><b>{studentGrades.average}</b></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table> : <NoResults />
+    }
   </Paper>
 )
 GroupResultTable.propTypes = {

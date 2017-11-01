@@ -7,6 +7,7 @@ import { AlignCenter } from '../../Components/Common/Utils'
 import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 import Group from '../../Components/Group'
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 
@@ -70,7 +71,7 @@ class Groups extends Component {
                 Agregar grupo
               </Button>
             </AlignCenter>
-            {groups.map((group, index) => (
+            {groups.length ? groups.map((group, index) => (
               <Group
                 key={index}
                 onEdit={this.onEdit}
@@ -78,7 +79,7 @@ class Groups extends Component {
                 allowEdit
                 {...group}
               />
-            ))}
+            )) : <NoResults />}
           </div>
         )}
         <ModalSave

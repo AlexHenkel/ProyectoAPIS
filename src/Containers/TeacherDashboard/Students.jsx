@@ -10,6 +10,7 @@ import {
   ListItemText,
 } from 'material-ui'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 
 const Title = styled(Typography)`
   margin-top: 25px !important;
@@ -19,7 +20,7 @@ const Students = ({ loading, students }) => (
   <div>
     <Title type="display1" gutterBottom>Mis alumnos</Title>
     {loading && <Loading />}
-    {!loading && (
+    {!loading && (students.length ?
       <Card>
         <List>
           {students.map(({ id, name }) => (
@@ -29,7 +30,7 @@ const Students = ({ loading, students }) => (
           ))}
         </List>
       </Card>
-    )}
+    : <NoResults />)}
   </div>
 )
 

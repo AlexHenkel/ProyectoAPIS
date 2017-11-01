@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Typography } from 'material-ui'
 import Loading from '../../Components/Common/Loading'
 import Group from '../../Components/Group'
+import NoResults from '../../Components/Common/NoResults'
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 
 class Groups extends Component {
@@ -22,13 +23,13 @@ class Groups extends Component {
       <div>
         <Typography type="display1" gutterBottom>Mis grupos</Typography>
         {loading && <Loading />}
-        {!loading && groups.map((group, index) => (
+        {!loading && (groups.length ? groups.map((group, index) => (
           <Group
             key={index}
             allowEdit={false}
             {...group}
           />
-        ))}
+        )) : <NoResults />)}
       </div>
     )
   }

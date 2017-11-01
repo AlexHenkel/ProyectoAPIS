@@ -9,6 +9,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { withTheme } from 'material-ui/styles'
 import Exam from '../../Components/Student/Exam'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 
 import StudentStateActions from '../../Data/Redux/StudentStateRedux'
 
@@ -87,7 +88,7 @@ class Exams extends Component {
               onChangeIndex={this.handleChangeIndex}
             >
               <TabContainer>
-                {currentExams.map(data => (
+                {currentExams.length ? currentExams.map(data => (
                   <Exam
                     key={data.id}
                     data={data}
@@ -96,10 +97,10 @@ class Exams extends Component {
                     onClickButton={this.handleClickExam(data.id)}
                     noActions={studentState !== 'free'}
                   />
-                ))}
+                )) : <NoResults />}
               </TabContainer>
               <TabContainer>
-                {pastExams.map(data => (
+                {pastExams.length ? pastExams.map(data => (
                   <Exam
                     key={data.id}
                     data={data}
@@ -107,7 +108,7 @@ class Exams extends Component {
                     noEdit
                     noActions
                   />
-                ))}
+                )) : <NoResults />}
               </TabContainer>
             </SwipeableViews>
           </div>

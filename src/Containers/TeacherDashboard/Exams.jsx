@@ -15,6 +15,7 @@ import ModalSave from '../../Components/Common/ModalSave'
 import ModalRemove from '../../Components/Common/ModalRemove'
 import Exam from '../../Components/Teacher/Exam'
 import Loading from '../../Components/Common/Loading'
+import NoResults from '../../Components/Common/NoResults'
 
 export const TabContainer = ({ children }) => <div style={{ padding: 8 * 3 }}>{children}</div>
 TabContainer.propTypes = { children: PropTypes.node.isRequired }
@@ -97,7 +98,7 @@ class Exams extends Component {
                     Agregar examen
                   </Button>
                 </AlignCenter>
-                {currentExams.map(data => (
+                {currentExams.length ? currentExams.map(data => (
                   <Exam
                     key={data.id}
                     onEdit={this.onEdit}
@@ -107,10 +108,10 @@ class Exams extends Component {
                     theme={theme}
                     groupId={activeGroup}
                   />
-                ))}
+                )) : <NoResults />}
               </TabContainer>
               <TabContainer>
-                {pastExams.map(data => (
+                {pastExams.length ? pastExams.map(data => (
                   <Exam
                     key={data.id}
                     onEdit={this.onEdit}
@@ -121,7 +122,7 @@ class Exams extends Component {
                     noEdit
                     groupId={activeGroup}
                   />
-                ))}
+                )) : <NoResults />}
               </TabContainer>
             </SwipeableViews>
           </div>
