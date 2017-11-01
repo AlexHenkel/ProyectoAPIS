@@ -17,8 +17,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
-        + id: 1 (number, required)
-
         + (object)
 
             + id: 1 (number, required)
@@ -278,8 +276,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (array)
-
-        + id: 1 (number, required)
 
         + (object)
 
@@ -575,8 +571,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
-        + id: 1 (number, required)
-
         + (object)
 
             + id: 1 (number, required)
@@ -798,8 +792,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 + Response 200 (application/json)
 
     + Attributes (array)
-
-        + id: 1 (number, required)
 
         + (object)
 
@@ -1149,8 +1141,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (array)
 
-        + id: 1 (number, required)
-
         + (object)
 
             + id: 1 (number, required)
@@ -1282,4 +1272,105 @@ TecLearn is a tool for teacher and students to create and grade exams associated
         
         + examId: 1 (number)
 
+
+## Exam resources [/resources/{id}]
+
+This endpoint will be used to display resource to student before answering questions
+
+### Get exam resource [GET]
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+        + resourceType: video (string, required)
+
+        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+
+## Exam questions [/exam/]
+
+These endpoints will be used to display and save the test questions from the student
+
+### Get exam questions [GET /exam/{id}]
+
+`id` refers to `teacher_group_exam` instance id
+
+**NOTE: Answers include both `incorrectAnswers` and `correctAnswers` in the same array**
+
++ Parameters
+
+    + id: 1 (number, required)
+
++ Response 201 (application/json)
+
+    + Attributes (array)
+
+        + (object)
+
+            + id: 1 (number, required)
+
+            + question: ¿Cuál es la magnitud de la gravedad? (string, required)
+
+            + answers: 4.56, 9.14, 4.56, 4.56 (array[string], required)
         
+        + (object)
+
+            + id: 2 (number, required)
+
+            + question: ¿Cuál es la magnitud de la velocidad? (string, required)
+
+            + answers: 4.56, 98.14, 4.56, 9.14 (array[string], required)
+
+        + (object)
+
+            + id: 3 (number, required)
+
+            + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+
+            + answers: 4.56, 98.14, 4.56, 15.32 (array[string], required)
+
+### Create exam intent [POST]
+
+Answers is an array of objects that includes the question `id` and it's answer
+
++ Request (application/json)
+
+    + Attributes
+
+        + id: 1 (number, required)
+
+        + student_id: 1 (number, required)
+
+        + answers (array, required)
+            
+            + (object)
+
+                + id: 1 (number, required)
+
+                + answer: 9.14 (string, required)
+            
+            + (object)
+
+                + id: 2 (number, required)
+
+                + answer: 9.14 (string, required)
+            
+            + (object)
+
+                + id: 3 (number, required)
+
+                + answer: 15.32 (string, required)
+        
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
