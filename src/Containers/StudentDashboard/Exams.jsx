@@ -134,7 +134,7 @@ const mapStateToProps = state => ({
   studentState: state.studentState.getOne.result.state,
   activeExamId: state.studentState.getOne.result.examId,
   activeGroup: state.groups.activeGroup,
-  loading: state.overview.getOne.fetching,
+  loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   currentExams: state.overview.getOne.result.currentExams,
   pastExams: state.overview.getOne.result.pastExams,
 })

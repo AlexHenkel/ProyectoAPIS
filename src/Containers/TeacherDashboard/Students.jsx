@@ -40,7 +40,7 @@ Students.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  loading: state.overview.getOne.fetching,
+  loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   students: state.overview.getOne.result.students,
 })
 

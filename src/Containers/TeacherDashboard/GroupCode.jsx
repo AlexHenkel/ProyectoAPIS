@@ -34,7 +34,7 @@ GroupCode.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  loading: state.overview.getOne.fetching,
+  loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   groupCode: state.overview.getOne.result.groupCode,
 })
 
