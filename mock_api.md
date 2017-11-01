@@ -1232,7 +1232,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 **To prevent student from opening resource and exam in different tabs, we should have a singleton instance for each student to controll it's status on the app. The possible states are:**
 - `free`: Default state. It will be set after test is completed
 - `onResource`: Will be set when student access to one of the resources of the test
-- `onTest`: Will be set when student access to the questions of one test
+- `onExam`: Will be set when student access to the questions of one test
 
 ### Get student state [GET /student_state/{id}]
 
@@ -1289,9 +1289,11 @@ This endpoint will be used to display resource to student before answering quest
 
         + id: 1 (number, required)
 
-        + resourceType: video (string, required)
+        + name: Leyes de Newton (string, required)
 
-        + resource: https://www.youtube.com/watch?v=S3QlbbUmszE (string, required)
+        + resourceType: pdf (string, required)
+
+        + resource: https://webhome.phy.duke.edu/~rgb/Class/intro_physics_1/intro_physics_1.pdf (string, required)
 
 ## Exam questions [/exam/]
 
@@ -1309,31 +1311,37 @@ These endpoints will be used to display and save the test questions from the stu
 
 + Response 201 (application/json)
 
-    + Attributes (array)
+    + Attributes (object)
 
-        + (object)
+        + id: 1 (number, required)
 
-            + id: 1 (number, required)
+        + name: Leyes de Newton (string, required)
 
-            + question: ¿Cuál es la magnitud de la gravedad? (string, required)
+        + questions (array)
 
-            + answers: 4.56, 9.14, 4.56, 4.56 (array[string], required)
-        
-        + (object)
+            + (object)
 
-            + id: 2 (number, required)
+                + id: 1 (number, required)
 
-            + question: ¿Cuál es la magnitud de la velocidad? (string, required)
+                + question: ¿Cuál es la magnitud de la gravedad? (string, required)
 
-            + answers: 4.56, 98.14, 4.56, 9.14 (array[string], required)
+                + answers: 4.56, 9.14, 4.56, 4.56 (array[string], required)
+            
+            + (object)
 
-        + (object)
+                + id: 2 (number, required)
 
-            + id: 3 (number, required)
+                + question: ¿Cuál es la magnitud de la velocidad? (string, required)
 
-            + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+                + answers: 4.56, 98.14, 4.56, 9.14 (array[string], required)
 
-            + answers: 4.56, 98.14, 4.56, 15.32 (array[string], required)
+            + (object)
+
+                + id: 3 (number, required)
+
+                + question: ¿Cuál es la magnitud de la aceleración? (string, required)
+
+                + answers: 4.56, 98.14, 4.56, 15.32 (array[string], required)
 
 ### Create exam intent [POST]
 

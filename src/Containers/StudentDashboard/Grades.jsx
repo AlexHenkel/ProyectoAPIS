@@ -29,10 +29,11 @@ const Grades = ({ loading, exams }) => (
                 <ListItemText
                   primary={name}
                   secondary={(
-                    <div>
-                      <div>Más alta: <b>{highestGrade}</b></div>
-                      <div>Más reciente: <b>{recentGrade}</b></div>
-                    </div>
+                    <span>
+                      <span>Más alta: <b>{highestGrade}</b></span>
+                      <br />
+                      <span>Más reciente: <b>{recentGrade}</b></span>
+                    </span>
                   )}
                 />
               </ListItem>

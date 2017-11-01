@@ -33,8 +33,8 @@ class Resource extends Component {
 
   render() {
     const { loading, studentState: { state, examId },
-      resource: { resource, resourceType }, match: { params: { id } } } = this.props
-    const isInvalid = (state === 'onResource' && examId === id) || state === 'inExam'
+      resource: { resource, resourceType, name }, match: { params: { id } } } = this.props
+    const isInvalid = (state === 'onResource' && examId !== Number(id)) || state === 'onExam'
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} sm={2} />
@@ -42,12 +42,12 @@ class Resource extends Component {
           {loading && <Loading />}
           {!loading && (
             <div>
-              {isInvalid === 'onTest' && (
+              {isInvalid && (
                 <Typography type="display2">Lo sentimos. Tienes abierto otro examen. Es necesario que termines el examen actual para poder responder otro.</Typography>
               )}
               {!isInvalid && (
                 <div>
-                  <Typography type="display2" gutterBottom>Ver {resourceType}</Typography>
+                  <Typography type="display2" gutterBottom>Ver {resourceType} - {name}</Typography>
                   <Subtitle type="title" color="primary" gutterBottom>Recuerda que al continuar con las preguntas, ya no podrás volver a ver este recurso</Subtitle>
                   <AlignCenter>
                     <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>

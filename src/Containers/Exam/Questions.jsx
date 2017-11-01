@@ -1,11 +1,92 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { Typography, Grid, Button } from 'material-ui'
+import { AlignCenter } from '../../Components/Common/Utils'
+import Loading from '../../Components/Common/Loading'
 
-export default class Questions extends Component {
+import StudentStateActions from '../../Data/Redux/StudentStateRedux'
+import ExamQuestionsActions from '../../Data/Redux/ExamQuestionsRedux'
+
+class Questions extends Component {
+  componentDidMount() {
+    const { match: { params: { id } } } = this.props
+    this.props.getQuestions(id)
+    this.props.getState()
+  }
+
+  handleMoveForward = () => {
+    const { goHome, setFreeOnState, match: { params: { id } } } = this.props
+    setFreeOnState(id)
+    goHome(id)
+  }
+
   render() {
+    const { loading, studentState: { state, examId },
+      questions, match: { params: { id } } } = this.props
+    const isInvalid = (state === 'onExam' && examId !== Number(id)) || state === 'onResource'
     return (
-      <div>
-        <h1>Hola</h1>
-      </div>
+      <Grid container spacing={24}>
+        <Grid item xs={12} sm={2} />
+        <Grid item xs={12} sm={8}>
+          {loading && <Loading />}
+          {!loading && (
+            <div>
+              {isInvalid && (
+                <div>
+                  <Typography type="display2" align="center">Lo sentimos.</Typography>
+                  <Typography type="display2" align="center" color="accent">Tienes abierto otro examen.</Typography>
+                  <Typography type="display2" align="center" color="primary">Es necesario que termines el examen actual para poder responder otro.</Typography>
+                </div>
+              )}
+              {!isInvalid && (
+                <div>
+                  <Typography type="display2" gutterBottom>Examen - {questions.name}</Typography>
+                  <AlignCenter>
+                    <Button raised color="accent" onClick={this.handleMoveForward}>Finalizar examen</Button>
+                  </AlignCenter>
+                  <h1>Preguntas</h1>
+                  <AlignCenter>
+                    <Button raised color="accent" onClick={this.handleMoveForward}>Finalizar examen</Button>
+                  </AlignCenter>
+                </div>
+              )}
+            </div>
+          )}
+        </Grid>
+      </Grid>
     )
   }
 }
+
+Questions.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  studentState: PropTypes.object.isRequired,
+  getQuestions: PropTypes.func.isRequired,
+  getState: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  questions: PropTypes.object.isRequired,
+  goHome: PropTypes.func.isRequired,
+  setFreeOnState: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state => ({
+  loading: state.studentState.getOne.fetching || state.examQuestions.getOne.fetching,
+  studentState: state.studentState.getOne.result,
+  questions: state.examQuestions.getOne.result,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getQuestions: id => dispatch(ExamQuestionsActions.getOneRequest(id)),
+  getState: () => dispatch(StudentStateActions.getOneRequest(1)),
+  goHome: () => dispatch(push('/')),
+  setFreeOnState: id => dispatch(StudentStateActions.updateRequest(1, {
+    state: 'free',
+    examId: id,
+  })),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Questions)
+
