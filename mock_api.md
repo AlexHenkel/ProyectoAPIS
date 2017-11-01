@@ -1268,7 +1268,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + id: 1 (number, required)
 
-        + state: onResource (string, required)
+        + state: onExam (string, required)
         
         + examId: 1 (number)
 
@@ -1325,7 +1325,7 @@ These endpoints will be used to display and save the test questions from the stu
 
                 + question: ¿Cuál es la magnitud de la gravedad? (string, required)
 
-                + answers: 4.56, 9.14, 4.56, 4.56 (array[string], required)
+                + answers: 4.56, 9.14, 1.56, 3.56 (array[string], required)
             
             + (object)
 
@@ -1333,7 +1333,7 @@ These endpoints will be used to display and save the test questions from the stu
 
                 + question: ¿Cuál es la magnitud de la velocidad? (string, required)
 
-                + answers: 4.56, 98.14, 4.56, 9.14 (array[string], required)
+                + answers: 4.56, 98.14, 7.56, 9.14 (array[string], required)
 
             + (object)
 
@@ -1341,7 +1341,7 @@ These endpoints will be used to display and save the test questions from the stu
 
                 + question: ¿Cuál es la magnitud de la aceleración? (string, required)
 
-                + answers: 4.56, 98.14, 4.56, 15.32 (array[string], required)
+                + answers: 4.56, 98.14, 10.56, 15.32 (array[string], required)
 
 ### Create exam intent [POST]
 

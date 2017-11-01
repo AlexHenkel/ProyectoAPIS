@@ -20,6 +20,10 @@ export default Creators
 export const INITIAL_STATE = createState({}, {
   get: true,
   getOne: true,
+  getOneInitial: {
+    questions: [],
+  },
+  create: true,
 })
 
 /* ------------- Reducers ------------- */
@@ -30,6 +34,7 @@ export const reducer = createReducer(INITIAL_STATE, {}, {
   defaultActions: {
     get: true,
     getOne: true,
+    create: true,
   },
   Types,
 })
