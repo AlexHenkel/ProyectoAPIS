@@ -7,6 +7,8 @@ import { examsEpic } from './ExamsObservable'
 import { teacherGroupExamsEpic } from './TeacherGroupExamsObservable'
 import { questionsEpic } from './QuestionsObservable'
 import { tagsEpic } from './TagsObservable'
+import { resourceEpic } from './ResourceObservable'
+import { examQuestionsEpic } from './ExamQuestionsObservable'
 import { groupExamResultsEpic } from './GroupExamResultsObservable'
 import { groupResultsEpic } from './GroupResultsObservable'
 
@@ -20,6 +22,8 @@ const rootEpic = combineEpics(
   tagsEpic,
   groupExamResultsEpic,
   groupResultsEpic,
+  resourceEpic,
+  examQuestionsEpic,
 )
 
 export default createEpicMiddleware(rootEpic, {

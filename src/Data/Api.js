@@ -45,6 +45,12 @@ const getOneGroupResult = id => api.get(`group_results/${id}`)
 const getOneStudentState = id => api.get(`student_state/${id}`)
 const updateStudentState = (id, data) => api.post('student_state/', { id, ...data })
 
+const getOneResource = id => api.get(`resources/${id}`)
+
+const getOneExamQuestions = id => api.get(`exam/${id}`)
+const createExamQuestions = data => api.post('exam/', data)
+
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -87,5 +93,12 @@ export default {
   studentState: {
     getOne: getOneStudentState,
     update: updateStudentState,
+  },
+  resource: {
+    getOne: getOneResource,
+  },
+  examQuestions: {
+    getOne: getOneExamQuestions,
+    create: createExamQuestions,
   },
 }
