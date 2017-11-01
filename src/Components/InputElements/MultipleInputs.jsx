@@ -20,13 +20,17 @@ const Button = styled(OriginalButton)`
 `
 
 class MultipleInputs extends Mixin {
-  state = {
-    value: this.getValue() || [''],
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: this.getValue().length ? this.getValue() : [''],
+    }
   }
 
-  componentDidMount() {
-    if (!this.getValue()) {
-      this.setValue([''])
+  componentWillReceiveProps({ value }) {
+    if (value.length) {
+      this.setState({ value })
     }
   }
 

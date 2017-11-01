@@ -153,6 +153,7 @@ class Exams extends Component {
               inputType: 'datetime-local',
               label: 'Fecha límite',
               required: true,
+              help: 'Fecha límite para que los alumnos presenten el examen',
             },
             {
               type: 'fuzzySearch',
@@ -165,6 +166,7 @@ class Exams extends Component {
               optionsLabel: 'name',
               required: true,
               specificFor: 'create',
+              help: 'Selecciona alguno de tus examenes creados.',
             },
             {
               type: 'multiSelect',
@@ -178,6 +180,7 @@ class Exams extends Component {
               optionsLabel: 'name',
               required: true,
               specificFor: 'create',
+              help: 'Asigna este examen a todos los grupos que sea necesario en una sola vez!',
             },
             {
               type: 'textField',

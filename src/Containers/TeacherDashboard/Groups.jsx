@@ -108,6 +108,7 @@ class Groups extends Component {
               inputType: 'datetime-local',
               label: 'Fecha de inicio',
               required: true,
+              help: 'A partir de esta fecha, el quiz estará disponible para tí y tus alumnos',
             },
             {
               type: 'textField',
@@ -117,6 +118,7 @@ class Groups extends Component {
               inputType: 'datetime-local',
               label: 'Fecha de fin',
               required: true,
+              help: 'Después de esta fecha, el grupo se cerrará automáticamente',
             },
             {
               type: 'textField',

@@ -160,6 +160,7 @@ class Questions extends Component {
                   options: tags,
                   optionsValue: 'id',
                   optionsLabel: 'name',
+                  help: 'Estas te ayudan a identificar tus preguntas cuando creas un examen',
                 },
                 {
                   type: 'textField',

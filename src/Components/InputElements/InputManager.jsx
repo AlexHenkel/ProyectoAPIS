@@ -23,7 +23,7 @@ const InputManager = ({ noValue, result, value, path, type, inputType, ...inputP
   if (type === 'tags' || type === 'multiSelect' || type === 'multipleInputs' || type === 'multiSelectSearch') {
     if (!value && (noValue || currVal == null)) {
       fixedVal = []
-    } else {
+    } else if (type !== 'multipleInputs') {
       fixedVal = currVal.map(item => item[inputProps.optionsValue])
     }
   } else if (!value && (noValue || currVal == null)) {
