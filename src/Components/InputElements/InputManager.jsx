@@ -8,6 +8,7 @@ import TagSelect from './TagSelect'
 import MultipleInputs from './MultipleInputs'
 import Radio from './Radio'
 import MultipleSelectSearch from './MultipleSelectSearch'
+import Datepicker from './Datepicker'
 
 const InputManager = ({ noValue, result, value, path, type, inputType, ...inputProps }) => {
   /**
@@ -33,14 +34,16 @@ const InputManager = ({ noValue, result, value, path, type, inputType, ...inputP
   switch (type) {
     case 'textField':
       return <Input value={fixedVal} type={inputType} {...inputProps} />
+    case 'datepicker':
+      return <Datepicker value={fixedVal} {...inputProps} />
     case 'select':
       return <Select value={fixedVal} {...inputProps} />
     case 'fuzzySearch':
       return <FuzzySearch value={fixedVal} {...inputProps} />
-    case 'multiSelect':
-      return <MultipleSelect value={fixedVal} {...inputProps} />
     case 'radio':
       return <Radio value={fixedVal} {...inputProps} />
+    case 'multiSelect':
+      return <MultipleSelect value={fixedVal} {...inputProps} />
     case 'tags':
       return <TagSelect value={fixedVal} {...inputProps} />
     case 'multipleInputs':

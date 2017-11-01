@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Mixin } from 'formsy-react-2'
 import { TextField as OriginalTextField } from 'material-ui'
-import moment from 'moment'
 
 const TextField = styled(OriginalTextField)`
   ${({ hidden }) => !hidden ? '' : 'display: none !important;'}
@@ -15,18 +14,11 @@ const TextField = styled(OriginalTextField)`
 class Input extends Mixin {
   updateValue = (event) => {
     const { value } = event.target
-    if (value && this.props.type === 'datetime-local') {
-      this.setValue(moment(value).valueOf())
-    } else {
-      this.setValue(value)
-    }
+    this.setValue(value)
   }
 
   parseInput = () => {
     const value = this.getValue()
-    if (value && this.props.type === 'datetime-local') {
-      return moment(value).format('YYYY-MM-DDThh:mm')
-    }
     return value
   }
 
@@ -46,9 +38,6 @@ class Input extends Mixin {
           onChange={this.updateValue}
           helperText={errorMessages.length ? errorMessages : help}
           margin="normal"
-          InputLabelProps={type === 'datetime-local' ? {
-            shrink: true,
-          } : {}}
           fullWidth
         />
       </div>

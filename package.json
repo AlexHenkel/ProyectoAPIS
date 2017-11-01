@@ -12,6 +12,7 @@
     "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.17",
     "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-pickers": "^1.0.0-alpha.10",
     "moment": "^2.19.1",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",

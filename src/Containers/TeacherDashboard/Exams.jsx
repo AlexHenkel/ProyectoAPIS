@@ -146,11 +146,10 @@ class Exams extends Component {
               required: true,
             },
             {
-              type: 'textField',
+              type: 'datepicker',
               id: 2,
               name: 'expiresAt',
               path: 'expiresAt',
-              inputType: 'datetime-local',
               label: 'Fecha límite',
               required: true,
               help: 'Fecha límite para que los alumnos presenten el examen',
