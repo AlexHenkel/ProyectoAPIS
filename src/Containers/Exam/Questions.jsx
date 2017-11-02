@@ -11,16 +11,21 @@ import ExamQuestionsActions from '../../Data/Redux/ExamQuestionsRedux'
 
 class Questions extends Component {
   componentDidMount() {
-    const { match: { params: { id } } } = this.props
-    this.props.getQuestions(id)
-    this.props.getState()
+    const { match: { params: { id } }, user: { userId, isTeacher },
+      goLogin, getQuestions, getState } = this.props
+
+    if (!userId || isTeacher) {
+      goLogin()
+    }
+    getQuestions(id)
+    getState(userId)
   }
 
   componentWillReceiveProps(nextProps) {
     const { successIntent, goHome, setFreeOnState, resetIntent,
-      match: { params: { id } } } = this.props
+      match: { params: { id } }, user: { userId } } = this.props
     if (nextProps.successIntent && !successIntent) {
-      setFreeOnState(id)
+      setFreeOnState(id, userId)
       resetIntent()
     } else if (!nextProps.successIntent && successIntent) {
       goHome(id)
@@ -28,10 +33,10 @@ class Questions extends Component {
   }
 
   handleMoveForward = (answers) => {
-    const { match: { params: { id } } } = this.props
+    const { match: { params: { id } }, user: { userId } } = this.props
     this.props.createExamIntent({
       id,
-      student_id: 1,
+      student_id: userId,
       answers,
     })
   }
@@ -80,6 +85,8 @@ Questions.propTypes = {
   createExamIntent: PropTypes.func.isRequired,
   successIntent: PropTypes.bool.isRequired,
   resetIntent: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  goLogin: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -88,18 +95,20 @@ const mapStateToProps = state => ({
   studentState: state.studentState.getOne.result,
   questions: state.examQuestions.getOne.result,
   successIntent: state.examQuestions.create.success,
+  user: state.user,
 })
 
 const mapDispatchToProps = dispatch => ({
   getQuestions: id => dispatch(ExamQuestionsActions.getOneRequest(id)),
-  getState: () => dispatch(StudentStateActions.getOneRequest(1)),
+  getState: userId => dispatch(StudentStateActions.getOneRequest(userId)),
   goHome: () => dispatch(push('/')),
-  setFreeOnState: id => dispatch(StudentStateActions.updateRequest(1, {
+  setFreeOnState: (id, userId) => dispatch(StudentStateActions.updateRequest(userId, {
     state: 'free',
     examId: id,
   })),
   createExamIntent: data => dispatch(ExamQuestionsActions.createRequest(data)),
   resetIntent: () => dispatch(ExamQuestionsActions.createReset()),
+  goLogin: () => dispatch(push('/login')),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions)

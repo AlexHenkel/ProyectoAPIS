@@ -20,14 +20,19 @@ const Subtitle = styled(Typography)`
 
 class Resource extends Component {
   componentDidMount() {
-    const { match: { params: { id } } } = this.props
-    this.props.getResource(id)
-    this.props.getState()
+    const { match: { params: { id } }, user: { userId, isTeacher },
+      goLogin, getResource, getState } = this.props
+
+    if (!userId || isTeacher) {
+      goLogin()
+    }
+    getResource(id)
+    getState(userId)
   }
 
   handleMoveForward = () => {
-    const { goToExam, setResourceOnState, match: { params: { id } } } = this.props
-    setResourceOnState(id)
+    const { goToExam, setResourceOnState, match: { params: { id } }, user: { userId } } = this.props
+    setResourceOnState(id, userId)
     goToExam(id)
   }
 
@@ -75,22 +80,26 @@ Resource.propTypes = {
   resource: PropTypes.object.isRequired,
   goToExam: PropTypes.func.isRequired,
   setResourceOnState: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  goLogin: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.studentState.getOne.fetching || state.resource.getOne.fetching,
   studentState: state.studentState.getOne.result,
   resource: state.resource.getOne.result,
+  user: state.user,
 })
 
 const mapDispatchToProps = dispatch => ({
   getResource: id => dispatch(ResourceActions.getOneRequest(id)),
-  getState: () => dispatch(StudentStateActions.getOneRequest(1)),
+  getState: userId => dispatch(StudentStateActions.getOneRequest(userId)),
   goToExam: id => dispatch(push(`/examen/${id}`)),
-  setResourceOnState: id => dispatch(StudentStateActions.updateRequest(1, {
+  setResourceOnState: (id, userId) => dispatch(StudentStateActions.updateRequest(userId, {
     state: 'onExam',
     examId: id,
   })),
+  goLogin: () => dispatch(push('/login')),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Resource)

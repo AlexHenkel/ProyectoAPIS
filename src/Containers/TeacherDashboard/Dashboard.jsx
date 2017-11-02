@@ -17,8 +17,9 @@ import ExamsActions from '../../Data/Redux/ExamsRedux'
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getGroups()
-    this.props.getExams()
+    const { userId, getGroups, getExams } = this.props
+    getGroups(userId)
+    getExams(userId)
   }
 
   componentWillReceiveProps({ activeGroup }) {
@@ -50,23 +51,24 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  activeGroup: PropTypes.number.isRequired,  
+  activeGroup: PropTypes.number.isRequired,
   getGroups: PropTypes.func.isRequired,
   getOverview: PropTypes.func.isRequired,
   getExams: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
-  activeGroup: state.groups.activeGroup,  
+  activeGroup: state.groups.activeGroup,
 })
 
 const mapDispatchToProps = dispatch => ({
-  getGroups: () => dispatch(GroupsActions.getRequest({
+  getGroups: userId => dispatch(GroupsActions.getRequest({
     isTeacher: true,
-    id: 1,
+    id: userId,
   })),
   getOverview: id => dispatch(OverviewActions.getOneRequest(id, { isTeacher: true })),
-  getExams: () => dispatch(ExamsActions.getRequest(1)),
+  getExams: userId => dispatch(ExamsActions.getRequest(userId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

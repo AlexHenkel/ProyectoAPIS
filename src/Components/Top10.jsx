@@ -49,16 +49,13 @@ Top10.propTypes = {
   theme: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   students: PropTypes.array.isRequired,
-  userId: PropTypes.number,
-}
-
-Top10.defaultProps = {
-  userId: -1,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   students: state.overview.getOne.result.top10,
+  userId: state.user.userId,
 })
 
 export default connect(mapStateToProps)(withTheme()(Top10))

@@ -15,7 +15,8 @@ export default (middlewares) => {
     groupExamResults: require('./GroupExamResultsRedux').reducer,
     groupResults: require('./GroupResultsRedux').reducer,
     resource: require('./ResourceRedux').reducer,
-    examQuestions: require('./ExamQuestionsRedux').reducer,    
+    examQuestions: require('./ExamQuestionsRedux').reducer,
+    user: require('./UserRedux').reducer,
   })
 
   return configureStore(rootReducer, [epicMiddleware, ...middlewares])

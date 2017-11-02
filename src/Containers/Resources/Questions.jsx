@@ -74,7 +74,7 @@ class Questions extends Component {
   }
 
   render() {
-    const { loading, questions, tags, theme } = this.props
+    const { loading, questions, tags, theme, userId } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -167,7 +167,7 @@ class Questions extends Component {
                   id: 5,
                   name: 'teacher_id',
                   inputType: 'hidden',
-                  value: 1, // TODO: Change this for user id
+                  value: userId,
                   specificFor: 'create',
                 },
               ]}
@@ -191,12 +191,14 @@ Questions.propTypes = {
   questions: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.questions.get.fetching,
   questions: state.questions.get.results,
   tags: state.tags.get.results,
+  userId: state.user.userId,
 })
 
 export default connect(mapStateToProps)(withTheme()(Questions))

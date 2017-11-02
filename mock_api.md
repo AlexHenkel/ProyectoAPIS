@@ -5,6 +5,42 @@ HOST: http://teclearnapi.herokuapp.com/
 
 TecLearn is a tool for teacher and students to create and grade exams associated with videos
 
+## Teacher login [/teacher_login/]
+
+### Login [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email: teacher@mail.com (string, required)
+
+        + password: 123123 (string, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+## Student login [/student_login/]
+
+### Login [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email: teacher@mail.com (string, required)
+
+        + password: 123123 (string, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
 ## Teacher Groups Collection [/teacher_groups/]
 
 ### List all teacher's groups [GET /teacher_groups/{id}]
@@ -1381,4 +1417,3 @@ Answers is an array of objects that includes the question `id` and it's answer
     + Attributes (object)
 
         + id: 1 (number, required)
-

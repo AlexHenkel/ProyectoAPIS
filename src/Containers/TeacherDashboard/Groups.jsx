@@ -57,7 +57,7 @@ class Groups extends Component {
   }
 
   render() {
-    const { loading, groups } = this.props
+    const { loading, groups, userId } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -124,7 +124,7 @@ class Groups extends Component {
               id: 4,
               name: 'teacher_id',
               inputType: 'hidden',
-              value: 1, // TODO: Change this for user id
+              value: userId,
               specificFor: 'create',
             },
           ]}
@@ -145,11 +145,13 @@ Groups.propTypes = {
   loading: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.groups.get.fetching,
   groups: state.groups.get.results,
+  userId: state.user.userId,
 })
 
 const mapDispatchToProps = dispatch => ({

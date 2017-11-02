@@ -68,7 +68,7 @@ class Exams extends Component {
 
   render() {
     const { theme, activeGroup, loading, currentExams,
-      pastExams, students, groups, exams } = this.props
+      pastExams, students, groups, exams, userId } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened, tabIndex } = this.state
 
     return (
@@ -186,7 +186,7 @@ class Exams extends Component {
               id: 5,
               name: 'teacher_id',
               inputType: 'hidden',
-              value: 1, // TODO: Change this for user id
+              value: userId,
               specificFor: 'create',
             },
           ]}
@@ -212,6 +212,7 @@ Exams.propTypes = {
   students: PropTypes.array.isRequired,
   exams: PropTypes.array.isRequired,
   groups: PropTypes.array.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -222,6 +223,7 @@ const mapStateToProps = state => ({
   students: state.overview.getOne.result.students,
   groups: state.groups.get.results,
   exams: state.exams.get.results,
+  userId: state.user.userId,
 })
 
 export default connect(mapStateToProps)(withTheme()(Exams))

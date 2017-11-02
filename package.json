@@ -30,6 +30,7 @@
     "redux-observable": "^0.16.0",
     "redux-observable-crud": "https://github.com/alexhenkel/redux-observable-crud.git",
     "reduxsauce-crud": "https://github.com/AlexHenkel/reduxsauce-crud.git",
+    "rxjs": "^5.5.2",
     "styled-components": "^2.2.1"
   },
   "scripts": {

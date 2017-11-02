@@ -43,6 +43,7 @@ class Layout extends Component {
 
   render() {
     const { drawerOpened } = this.state
+    const { user: { userId, isTeacher } } = this.props
     return (
       <AppBar position="static">
         <Toolbar>
@@ -55,10 +56,18 @@ class Layout extends Component {
             TecLearn
           </Typography>
           <Hidden xsDown>
-            <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Cursos</Button>
-            <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Quizes</Button>
-            <Button raised color="accent" onClick={() => this.props.navigateTo('/estudiante')}>Estudiante</Button>
-            <Button color="contrast">Login</Button>
+            {userId && isTeacher && (
+              <div>
+                <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Home</Button>
+                <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Crear quiz</Button>
+              </div>
+            )}
+            {!userId && (
+              <Button color="contrast" onClick={() => this.props.navigateTo('/login')}>Login</Button>
+            )}
+            {userId && (
+              <Button color="contrast" onClick={() => null}>Logout</Button>
+            )}
           </Hidden>
         </Toolbar>
         <Drawer open={drawerOpened} onRequestClose={this.handleToggleDrawer(false)}>
@@ -69,24 +78,35 @@ class Layout extends Component {
             onKeyDown={this.handleToggleDrawer(false)}
           >
             <List>
-              <ListItem button>
-                <ListItemText primary="Cursos" onClick={() => this.props.navigateTo('/')} />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="Quizes" onClick={() => this.props.navigateTo('/recursos')} />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="Estudiante" onClick={() => this.props.navigateTo('/estudiante')} />
-              </ListItem>
+              {userId && isTeacher && (
+                <div>
+                  <ListItem button>
+                    <ListItemText primary="Cursos" onClick={() => this.props.navigateTo('/')} />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="Quizes" onClick={() => this.props.navigateTo('/recursos')} />
+                  </ListItem>
+                </div>
+              )}
             </List>
             <Divider />
             <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <PowerIcon />
-                </ListItemIcon>
-                <ListItemText primary="Login" />
-              </ListItem>
+              {!userId && (
+                <ListItem button>
+                  <ListItemIcon>
+                    <PowerIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Login" />
+                </ListItem>
+              )}
+              {userId && (
+                <ListItem button>
+                  <ListItemIcon>
+                    <PowerIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Logout" />
+                </ListItem>
+              )}
             </List>
           </div>
         </Drawer>
@@ -97,10 +117,11 @@ class Layout extends Component {
 
 Layout.propTypes = {
   navigateTo: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = () => ({
-  // TODO: Get isTeacher from state to show/hide nav buttons
+const mapStateToProps = state => ({
+  user: state.user,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { Grid } from 'material-ui'
 import Quizes from './Quizes'
 import Questions from './Questions'
@@ -11,9 +12,13 @@ import TagsActions from '../../Data/Redux/TagsRedux'
 
 class Resources extends Component {
   componentDidMount() {
-    this.props.getExams()
-    this.props.getQuestions()
-    this.props.getTags()
+    const { user: { userId, isTeacher }, goLogin, getExams, getQuestions, getTags } = this.props
+    if (!userId || !isTeacher) {
+      goLogin()
+    }
+    getExams(userId)
+    getQuestions(userId)
+    getTags(userId)
   }
 
   render() {
@@ -34,14 +39,19 @@ Resources.propTypes = {
   getExams: PropTypes.func.isRequired,
   getQuestions: PropTypes.func.isRequired,
   getTags: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  goLogin: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = state => ({
+  user: state.user,
+})
 
 const mapDispatchToProps = dispatch => ({
-  getExams: () => dispatch(ExamsActions.getRequest(1)),
-  getQuestions: () => dispatch(QuestionsActions.getRequest(1)),
-  getTags: () => dispatch(TagsActions.getRequest(1)),
+  getExams: userId => dispatch(ExamsActions.getRequest(userId)),
+  getQuestions: userId => dispatch(QuestionsActions.getRequest(userId)),
+  getTags: userId => dispatch(TagsActions.getRequest(userId)),
+  goLogin: () => dispatch(push('/login')),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Resources)

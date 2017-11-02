@@ -9,11 +9,11 @@ import createStore from './Data/Redux'
 import { styles, theme } from './Theme'
 
 import Layout from './Containers/Layout'
-import TeacherDashboard from './Containers/TeacherDashboard/Dashboard'
-import StudentDashboard from './Containers/StudentDashboard/Dashboard'
+import Dashboard from './Containers/DashboardManager'
 import Resources from './Containers/Resources/Resources'
 import Resource from './Containers/Exam/Resource'
 import Questions from './Containers/Exam/Questions'
+import Login from './Containers/Login/Login'
 
 const Container = styled.div`
   padding: 15px;
@@ -33,8 +33,8 @@ const App = () => (
         <Layout />
         <ConnectedRouter history={history}>
           <Container>
-            <Route exact path="/" component={TeacherDashboard} />
-            <Route exact path="/estudiante" component={StudentDashboard} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Dashboard} />
             <Route exact path="/recursos" component={Resources} />
             <Route exact path="/recurso/:id" component={Resource} />
             <Route exact path="/examen/:id" component={Questions} />

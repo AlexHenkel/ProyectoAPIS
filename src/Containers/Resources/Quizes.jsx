@@ -50,7 +50,7 @@ class Quizes extends Component {
   }
 
   render() {
-    const { loading, quizes, questions } = this.props
+    const { loading, quizes, questions, userId } = this.props
     const { modalSaveOpened, modalType, toModifyId, modalRemoveOpened } = this.state
     return (
       <div>
@@ -139,7 +139,7 @@ class Quizes extends Component {
                   id: 5,
                   name: 'teacher_id',
                   inputType: 'hidden',
-                  value: 1, // TODO: Change this for user id
+                  value: userId,
                   specificFor: 'create',
                 },
               ]}
@@ -162,12 +162,14 @@ Quizes.propTypes = {
   loading: PropTypes.bool.isRequired,
   quizes: PropTypes.array.isRequired,
   questions: PropTypes.array.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
   loading: state.exams.get.fetching,
   quizes: state.exams.get.results,
   questions: state.questions.get.results,
+  userId: state.user.userId,
 })
 
 

@@ -51,8 +51,8 @@ class Exams extends Component {
   handleClickAlert = id => this.props.studentState === 'onResource' ? `/recurso/${id}` : `/examen/${id}`
 
   handleClickExam = id => () => {
-    const { goToResource, activeGroup, setResourceOnState } = this.props
-    setResourceOnState(id)
+    const { goToResource, activeGroup, setResourceOnState, userId } = this.props
+    setResourceOnState(id, userId)
     goToResource(activeGroup)
   }
 
@@ -128,6 +128,7 @@ Exams.propTypes = {
   studentState: PropTypes.string.isRequired,
   activeExamId: PropTypes.number.isRequired,
   setResourceOnState: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -137,11 +138,12 @@ const mapStateToProps = state => ({
   loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   currentExams: state.overview.getOne.result.currentExams,
   pastExams: state.overview.getOne.result.pastExams,
+  userId: state.user.userId,
 })
 
 const mapDispatchToProps = dispatch => ({
   goToResource: id => dispatch(push(`/recurso/${id}`)),
-  setResourceOnState: id => dispatch(StudentStateActions.updateRequest(1, {
+  setResourceOnState: (id, userId) => dispatch(StudentStateActions.updateRequest(userId, {
     state: 'onResource',
     examId: id,
   })),
