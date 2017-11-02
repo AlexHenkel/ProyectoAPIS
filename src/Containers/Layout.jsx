@@ -20,6 +20,8 @@ import {
 import MenuIcon from 'material-ui-icons/Menu'
 import PowerIcon from 'material-ui-icons/PowerSettingsNew'
 
+import UserActions from '../Data/Redux/UserRedux'
+
 const Typography = styled(OriginalTypography)`
   flex: 1;
 `
@@ -41,9 +43,15 @@ class Layout extends Component {
 
   handleToggleDrawer = state => () => this.toggleDrawer(state)
 
+  logout = () => {
+    const { navigateTo, logout } = this.props
+    logout()
+    navigateTo('/login')
+  }
+
   render() {
     const { drawerOpened } = this.state
-    const { user: { userId, isTeacher } } = this.props
+    const { user: { userId, isTeacher }, navigateTo } = this.props
     return (
       <AppBar position="static">
         <Toolbar>
@@ -52,21 +60,18 @@ class Layout extends Component {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Typography type="title" color="inherit" onClick={() => this.props.navigateTo('/')}>
+          <Typography type="title" color="inherit" onClick={() => navigateTo('/')}>
             TecLearn
           </Typography>
           <Hidden xsDown>
             {userId && isTeacher && (
               <div>
-                <Button raised color="accent" onClick={() => this.props.navigateTo('/')}>Home</Button>
-                <Button raised color="accent" onClick={() => this.props.navigateTo('/recursos')}>Crear quiz</Button>
+                <Button raised color="accent" onClick={() => navigateTo('/')}>Home</Button>
+                <Button raised color="accent" onClick={() => navigateTo('/recursos')}>Crear quiz</Button>
               </div>
             )}
-            {!userId && (
-              <Button color="contrast" onClick={() => this.props.navigateTo('/login')}>Login</Button>
-            )}
             {userId && (
-              <Button color="contrast" onClick={() => null}>Logout</Button>
+              <Button color="contrast" onClick={this.logout}>Logout</Button>
             )}
           </Hidden>
         </Toolbar>
@@ -77,30 +82,22 @@ class Layout extends Component {
             onClick={this.handleToggleDrawer(false)}
             onKeyDown={this.handleToggleDrawer(false)}
           >
-            <List>
-              {userId && isTeacher && (
-                <div>
-                  <ListItem button>
-                    <ListItemText primary="Cursos" onClick={() => this.props.navigateTo('/')} />
+            {userId && isTeacher && (
+              <div>
+                <List>
+                  <ListItem button onClick={() => navigateTo('/')}>
+                    <ListItemText primary="Cursos" />
                   </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="Quizes" onClick={() => this.props.navigateTo('/recursos')} />
+                  <ListItem button onClick={() => navigateTo('/recursos')}>
+                    <ListItemText primary="Quizes" />
                   </ListItem>
-                </div>
-              )}
-            </List>
-            <Divider />
+                </List>
+                <Divider />
+              </div>
+            )}
             <List>
-              {!userId && (
-                <ListItem button>
-                  <ListItemIcon>
-                    <PowerIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Login" />
-                </ListItem>
-              )}
               {userId && (
-                <ListItem button>
+                <ListItem button onClick={this.logout}>
                   <ListItemIcon>
                     <PowerIcon />
                   </ListItemIcon>
@@ -118,6 +115,7 @@ class Layout extends Component {
 Layout.propTypes = {
   navigateTo: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -126,6 +124,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   navigateTo: route => dispatch(push(route)),
+  logout: () => dispatch(UserActions.logout()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)
