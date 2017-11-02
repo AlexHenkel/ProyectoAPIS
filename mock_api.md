@@ -1233,6 +1233,26 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
             + activeExams: 2 (number, required)
  
+### Add student to group  [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + student_id: 1 (string, required)
+
+        + groupCode: 1E4RF (string, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 3 (number, required)
+            
+        + name: New group (string, required)
+
+        + activeExams: 0 (number, required)
+
 ## Student Overview [/student_overview/{id}]
 
 ### List a student's group overview [GET]
