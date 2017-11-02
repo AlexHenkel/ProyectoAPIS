@@ -50,6 +50,8 @@ const getOneResource = id => api.get(`resources/${id}`)
 const getOneExamQuestions = id => api.get(`exam/${id}`)
 const createExamQuestions = data => api.post('exam/', data)
 
+const login = (data, isTeacher) => isTeacher ? api.post('teacher_login/', data) : api.post('student_login/', data)
+const register = (data, isTeacher) => isTeacher ? api.post('teacher_register/', data) : api.post('student_register/', data)
 
 /**
  * Create a collection of the previous functions to be exposed
@@ -100,5 +102,9 @@ export default {
   examQuestions: {
     getOne: getOneExamQuestions,
     create: createExamQuestions,
+  },
+  user: {
+    login,
+    register,
   },
 }

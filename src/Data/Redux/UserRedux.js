@@ -5,7 +5,10 @@ import { createActions, createState, createReducer } from 'reduxsauce-crud'
 export const UserRedux = createActions({
   loginRequest: ['data', 'isTeacher'],
   loginSuccess: ['result', 'isTeacher'],
-  loginError: ['error'],
+  loginFailure: ['error'],
+  registerRequest: ['data', 'isTeacher'],
+  registerSuccess: ['result', 'isTeacher'],
+  registerFailure: ['error'],
   logout: null,
 }, {
   prefix: 'STUDENT_STATE_',
@@ -19,7 +22,7 @@ export default Creators
 
 export const INITIAL_STATE = createState({
   fetching: false,
-  userId: 1,
+  userId: null,
   isTeacher: false,
   error: null,
 })
@@ -29,7 +32,11 @@ export const INITIAL_STATE = createState({
 const loginRequest = state => state.merge({ fetching: true })
 const loginSuccess = (state, { result: { id }, isTeacher }) =>
   state.merge({ fetching: false, userId: id, isTeacher })
-const loginError = (state, { error }) => state.merge({ fetching: false, error })
+const loginFailure = (state, { error }) => state.merge({ fetching: false, error })
+const registerRequest = state => state.merge({ fetching: true })
+const registerSuccess = (state, { result: { id }, isTeacher }) =>
+  state.merge({ fetching: false, userId: id, isTeacher })
+const registerFailure = (state, { error }) => state.merge({ fetching: false, error })
 const logout = state => state.merge({ userId: null, error: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -37,6 +44,9 @@ const logout = state => state.merge({ userId: null, error: null })
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.loginRequest]: loginRequest,
   [Types.loginSuccess]: loginSuccess,
-  [Types.loginError]: loginError,
+  [Types.loginFailure]: loginFailure,
+  [Types.registerRequest]: registerRequest,
+  [Types.registerSuccess]: registerSuccess,
+  [Types.registerFailure]: registerFailure,
   [Types.logout]: logout,
 })

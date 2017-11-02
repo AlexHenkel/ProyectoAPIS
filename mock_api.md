@@ -41,6 +41,46 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + id: 1 (number, required)
 
+## Teacher register [/teacher_register/]
+
+### Register [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + name: John Smith (string, required)
+
+        + email: teacher@mail.com (string, required)
+
+        + password: 123123 (string, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
+## Student register [/student_register/]
+
+### Register [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + name: John Smith (string, required)
+
+        + email: student@mail.com (string, required)
+
+        + password: 123123 (string, required)
+
++ Response 201 (application/json)
+
+    + Attributes (object)
+
+        + id: 1 (number, required)
+
 ## Teacher Groups Collection [/teacher_groups/]
 
 ### List all teacher's groups [GET /teacher_groups/{id}]
