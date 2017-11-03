@@ -277,6 +277,8 @@ TecLearn is a tool for teacher and students to create and grade exams associated
  
 ### Create teacher's group exam  [POST]
 
+In the response, name refers to the `teacher_exam` name
+
 + Request (application/json)
 
     + Attributes
@@ -286,8 +288,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
         + groups_id: 1, 3 (array[number], required)
 
         + exam_id: 1 (number, required)
-
-        + name: Cool exam (string, required)
 
         + expiresAt: 1485932460000 (number, required)
 
@@ -311,8 +311,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
         + teacher_group_exam_id: 4 (number, required)
 
-        + name: not cool test (string, required)
-
         + expiresAt: 1485932460000 (number, required)
 
 + Response 201 (application/json)
@@ -320,8 +318,6 @@ TecLearn is a tool for teacher and students to create and grade exams associated
     + Attributes (object)
 
         + id: 4 (number, required)
-
-        + name: not cool test (string, required)
 
         + expiresAt: 1485932460000 (number, required)
 

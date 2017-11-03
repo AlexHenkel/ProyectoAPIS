@@ -133,7 +133,7 @@ class Questions extends Component {
                   id: 1,
                   name: 'question',
                   path: 'question',
-                  label: 'Título de la pregunta',
+                  label: 'Pregunta',
                   required: true,
                 },
                 {

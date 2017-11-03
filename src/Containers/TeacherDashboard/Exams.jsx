@@ -138,23 +138,6 @@ class Exams extends Component {
           getOnePath="overview.getOne.result.currentExams"
           fields={[
             {
-              type: 'textField',
-              id: 1,
-              name: 'name',
-              path: 'name',
-              label: 'Nombre del examen',
-              required: true,
-            },
-            {
-              type: 'datepicker',
-              id: 2,
-              name: 'expiresAt',
-              path: 'expiresAt',
-              label: 'Fecha límite',
-              required: true,
-              help: 'Fecha límite para que los alumnos presenten el examen',
-            },
-            {
               type: 'fuzzySearch',
               id: 3,
               name: 'exam_id',
@@ -166,6 +149,15 @@ class Exams extends Component {
               required: true,
               specificFor: 'create',
               help: 'Selecciona alguno de tus examenes creados.',
+            },
+            {
+              type: 'datepicker',
+              id: 2,
+              name: 'expiresAt',
+              path: 'expiresAt',
+              label: 'Fecha límite',
+              required: true,
+              help: 'Fecha límite para que los alumnos presenten el examen',
             },
             {
               type: 'multiSelect',
