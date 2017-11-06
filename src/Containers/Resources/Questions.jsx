@@ -165,7 +165,7 @@ class Questions extends Component {
                 {
                   type: 'textField',
                   id: 5,
-                  name: 'teacher_id',
+                  name: 'teacherId',
                   inputType: 'hidden',
                   value: userId,
                   specificFor: 'create',

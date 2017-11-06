@@ -36,7 +36,7 @@ class Questions extends Component {
     const { match: { params: { id } }, user: { userId } } = this.props
     this.props.createExamIntent({
       id,
-      student_id: userId,
+      studentId: userId,
       answers,
     })
   }

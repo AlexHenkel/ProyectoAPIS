@@ -69,7 +69,7 @@ class Groups extends Component {
             {
               type: 'textField',
               id: 1,
-              name: 'student_id',
+              name: 'studentId',
               inputType: 'hidden',
               value: userId,
             },

@@ -123,7 +123,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes
 
-        + teacher_id: 1 (string, required)
+        + teacherId: 1 (string, required)
 
         + name: cool name (string, required)
 
@@ -151,7 +151,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes
 
-        + group_id: 3 (string, required)
+        + id: 3 (string, required)
 
         + name: not cool name (string, required)
 
@@ -173,7 +173,7 @@ TecLearn is a tool for teacher and students to create and grade exams associated
 
     + Attributes (object)
 
-        + group_id: 3 (number, required)
+        + id: 3 (number, required)
 
 + Response 201 (application/json)
     
@@ -283,11 +283,11 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes
 
-        + teacher_id: 1 (number, required)
+        + teacherId: 1 (number, required)
 
-        + groups_id: 1, 3 (array[number], required)
+        + groupsId: 1, 3 (array[number], required)
 
-        + exam_id: 1 (number, required)
+        + examId: 1 (number, required)
 
         + expiresAt: 1485932460000 (number, required)
 
@@ -309,7 +309,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes
 
-        + teacher_group_exam_id: 4 (number, required)
+        + id: 4 (number, required)
 
         + expiresAt: 1485932460000 (number, required)
 
@@ -327,7 +327,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes (object)
 
-        + teacher_group_exam_id: 1 (number, required)
+        + id: 1 (number, required)
 
 + Response 201 (application/json)
     
@@ -493,7 +493,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes
 
-        + teacher_id: 1 (number, required)
+        + teacherId: 1 (number, required)
 
         + name: New exam (string, required)
 
@@ -557,7 +557,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes
 
-        + exam_id: 4 (number, required)
+        + id: 4 (number, required)
 
         + name: New title for exam (string, required)
 
@@ -621,7 +621,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes (object)
 
-        + exam_id: 4 (number, required)
+        + id: 4 (number, required)
 
 + Response 201 (application/json)
     
@@ -735,7 +735,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes (object)
 
-        + teacher_id: 1 (number, required)
+        + teacherId: 1 (number, required)
 
         + question: Cool question title (string, required)
 
@@ -791,7 +791,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes (object)
 
-        + question_id: 1 (number, required)
+        + id: 1 (number, required)
 
         + question: Not cool question title (string, required)
 
@@ -845,7 +845,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes (object)
 
-        + question_id: 1 (number, required)
+        + id: 1 (number, required)
 
 + Response 201 (application/json)
     
@@ -893,13 +893,13 @@ In the response, name refers to the `teacher_exam` name
 
 **NOTE: Questions should be sorted in the same way as students questions**
 
-### List teacher's group exam results [GET /group_exam_results/{group_id}/{exam_id}]
+### List teacher's group exam results [GET /group_exam_results/{groupId}/{examId}]
 
 + Parameters
 
-    + group_id: 1 (number, required)
+    + groupId: 1 (number, required)
 
-    + exam_id: 1 (number, required)
+    + examId: 1 (number, required)
 
 + Response 200 (application/json)
 
@@ -1104,11 +1104,11 @@ In the response, name refers to the `teacher_exam` name
 
 **NOTE: Exams should be sorted in the same way as students questions**
 
-### List teacher's group results [GET /group_results/{group_id}]
+### List teacher's group results [GET /group_results/{groupId}]
 
 + Parameters
 
-    + group_id: 1 (number, required)
+    + groupId: 1 (number, required)
 
 + Response 200 (application/json)
 
@@ -1235,7 +1235,7 @@ In the response, name refers to the `teacher_exam` name
 
     + Attributes
 
-        + student_id: 1 (string, required)
+        + studentId: 1 (string, required)
 
         + groupCode: 1E4RF (string, required)
 
@@ -1445,7 +1445,7 @@ Answers is an array of objects that includes the question `id` and it's answer
 
         + id: 1 (number, required)
 
-        + student_id: 1 (number, required)
+        + studentId: 1 (number, required)
 
         + answers (array, required)
             

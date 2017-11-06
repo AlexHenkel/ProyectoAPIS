@@ -140,8 +140,7 @@ class Exams extends Component {
             {
               type: 'fuzzySearch',
               id: 3,
-              name: 'exam_id',
-              path: 'exam_id',
+              name: 'examId',
               label: 'Examen a asignar',
               options: exams,
               optionsValue: 'id',
@@ -162,8 +161,7 @@ class Exams extends Component {
             {
               type: 'multiSelect',
               id: 4,
-              name: 'groups_id',
-              path: 'groups_id',
+              name: 'groupsId',
               label: 'Grupos a asignar examen',
               value: [activeGroup],
               options: groups,
@@ -176,7 +174,7 @@ class Exams extends Component {
             {
               type: 'textField',
               id: 5,
-              name: 'teacher_id',
+              name: 'teacherId',
               inputType: 'hidden',
               value: userId,
               specificFor: 'create',

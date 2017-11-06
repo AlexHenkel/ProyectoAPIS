@@ -122,7 +122,7 @@ class Groups extends Component {
             {
               type: 'textField',
               id: 4,
-              name: 'teacher_id',
+              name: 'teacherId',
               inputType: 'hidden',
               value: userId,
               specificFor: 'create',

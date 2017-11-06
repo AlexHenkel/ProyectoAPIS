@@ -17,24 +17,24 @@ const api = create({
 
 const getGroups = ({ isTeacher, id }) => isTeacher ? api.get(`teacher_groups/${id}`) : api.get(`student_groups/${id}`)
 const createGroup = ({ isTeacher, ...data }) => isTeacher ? api.post('teacher_groups/', data) : api.post('student_groups/', data)
-const updateGroup = (id, data) => api.patch('teacher_groups/', data)
-const removeGroup = id => api.delete('teacher_groups/', { group_id: id })
+const updateGroup = (id, data) => api.patch('teacher_groups/', { id, ...data })
+const removeGroup = id => api.delete('teacher_groups/', { id })
 
 const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : api.get(`student_overview/${id}`)
 
 const getExams = id => api.get(`teacher_exams/${id}`)
 const createExam = data => api.post('teacher_exams/', data)
-const updateExam = (id, data) => api.patch('teacher_exams/', { exam_id: id, ...data })
-const removeExam = id => api.delete('teacher_exams/', { exam_id: id })
+const updateExam = (id, data) => api.patch('teacher_exams/', { id, ...data })
+const removeExam = id => api.delete('teacher_exams/', { id })
 
 const createTeacherGroupExam = data => api.post('teacher_groups_exams/', data)
-const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', { teacher_group_exam_id: id, ...data })
-const removeTeacherGroupExam = id => api.delete('teacher_exams/', { teacher_group_exam_id: id })
+const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', { id, ...data })
+const removeTeacherGroupExam = id => api.delete('teacher_exams/', { id })
 
 const getQuestions = id => api.get(`teacher_questions/${id}`)
 const createQuestion = data => api.post('teacher_questions/', data)
-const updateQuestion = (id, data) => api.patch('teacher_questions/', { question_id: id, ...data })
-const removeQuestion = id => api.delete('teacher_questions/', { question_id: id })
+const updateQuestion = (id, data) => api.patch('teacher_questions/', { id, ...data })
+const removeQuestion = id => api.delete('teacher_questions/', { id })
 
 const getTags = id => api.get(`teacher_tags/${id}`)
 
