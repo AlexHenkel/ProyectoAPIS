@@ -45,6 +45,12 @@ class TagSelect extends Mixin {
     this.setValue(this.state.formsyValue)
   }
 
+  findInOptions = (value) => {
+    const { options, optionsLabel, optionsValue } = this.props
+    const foundOption = options.filter(item => item[optionsLabel] === value)
+    return foundOption.length ? foundOption[0][optionsValue] : value
+  }
+
   getFilteredSuggestions = () => {
     const value = this.getValue() || []
     const { options, optionsValue } = this.props
@@ -72,8 +78,9 @@ class TagSelect extends Mixin {
 
   handleKeyPress = (e) => {
     if (!this.props.noNewValues && e.which === 13 && this.state.value) {
+      e.preventDefault()
       const currValue = this.getValue() || []
-      this.setValue([...currValue, this.state.value])
+      this.setValue([...currValue, this.findInOptions(this.state.value)])
       this.setState({ value: '' })
     }
   }
@@ -152,7 +159,7 @@ class TagSelect extends Mixin {
             isRequired: this.isRequired(),
             value: this.state.value,
             onChange: this.handleChange,
-            onKeyUp: this.handleKeyPress,
+            onKeyDown: this.handleKeyPress,
           }}
         />
         {value && (

@@ -1,4 +1,5 @@
 import { create } from 'axios'
+import tagManipulator from './Utils'
 
 const baseURL = 'http://private-anon-fdb02c9693-teclearn.apiary-mock.com/'
 
@@ -20,6 +21,7 @@ const createGroup = ({ isTeacher, ...data }) => isTeacher ? api.post('teacher_gr
 const updateGroup = (id, data) => api.patch('teacher_groups/', { id, ...data })
 const removeGroup = id => api.delete('teacher_groups/', { id })
 
+// TODO: Add student_id to `student_overview/${student_id}/${group_id}`
 const getOneOverview = (id, { isTeacher }) => isTeacher ? api.get(`teacher_overview/${id}`) : api.get(`student_overview/${id}`)
 
 const getExams = id => api.get(`teacher_exams/${id}`)
@@ -32,8 +34,8 @@ const updateTeacherGroupExam = (id, data) => api.patch('teacher_groups_exams/', 
 const removeTeacherGroupExam = id => api.delete('teacher_exams/', { id })
 
 const getQuestions = id => api.get(`teacher_questions/${id}`)
-const createQuestion = data => api.post('teacher_questions/', data)
-const updateQuestion = (id, data) => api.patch('teacher_questions/', { id, ...data })
+const createQuestion = data => api.post('teacher_questions/', tagManipulator(data))
+const updateQuestion = (id, data) => api.patch('teacher_questions/', { id, ...tagManipulator(data) })
 const removeQuestion = id => api.delete('teacher_questions/', { id })
 
 const getTags = id => api.get(`teacher_tags/${id}`)

@@ -88,35 +88,36 @@ class Questions extends Component {
                 Agregar pregunta
               </Button>
             </AlignCenter>
-            {questions.length ? questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
-              <Card key={id}>
-                <CardContent>
-                  <ContextContainer>
-                    <ContextMenu
-                      value={id}
-                      handleEdit={this.onEdit}
-                      handleRemove={this.onRemove}
-                    />
-                  </ContextContainer>
-                  <CardText type="title" gutterBottom>
-                    {question}
-                  </CardText>
-                  <CardText component="div">
-                    <Answer gutterBottom type="title" color="accent">
-                      <CheckIcon /> {correctAnswer}
-                    </Answer>
-                    {incorrectAnswers.map((incorrectAnswer, index) => (
-                      <Answer key={index} gutterBottom type="title">
-                        {incorrectAnswer}
+            {questions.length ?
+              questions.map(({ id, question, correctAnswer, incorrectAnswers, tags: currTags }) => (
+                <Card key={id}>
+                  <CardContent>
+                    <ContextContainer>
+                      <ContextMenu
+                        value={id}
+                        handleEdit={this.onEdit}
+                        handleRemove={this.onRemove}
+                      />
+                    </ContextContainer>
+                    <CardText type="title" gutterBottom>
+                      {question}
+                    </CardText>
+                    <CardText component="div">
+                      <Answer gutterBottom type="title" color="accent">
+                        <CheckIcon /> {correctAnswer}
                       </Answer>
-                    ))}
-                  </CardText>
-                  <TagContainer>
-                    {currTags.map(({ id: tagId, name }) =>
-                      <Tag key={tagId} theme={theme}>{name}</Tag>)}
-                  </TagContainer>
-                </CardContent>
-              </Card>
+                      {incorrectAnswers.map((incorrectAnswer, index) => (
+                        <Answer key={index} gutterBottom type="title">
+                          {incorrectAnswer}
+                        </Answer>
+                      ))}
+                    </CardText>
+                    <TagContainer>
+                      {currTags.map(({ id: tagId, name }) =>
+                        <Tag key={tagId} theme={theme}>{name}</Tag>)}
+                    </TagContainer>
+                  </CardContent>
+                </Card>
             )) : <NoResults />}
             <ModalSave
               open={modalSaveOpened}
