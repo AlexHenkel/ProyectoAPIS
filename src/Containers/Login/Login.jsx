@@ -97,7 +97,8 @@ class Login extends Component {
 
   toggleLogin = () => this.setState({ login: !this.state.login })
 
-  toggleTeacher = () => this.setState({ isTeacher: !this.state.isTeacher })
+  toggleTeacher = isTeacher => () => isTeacher ^ this.state.isTeacher && // eslint-disable-line
+    this.setState({ isTeacher: !this.state.isTeacher })
 
   render() {
     const { login, isTeacher } = this.state
@@ -113,10 +114,10 @@ class Login extends Component {
             <ToggleContainer>
               <Typography type="headline">Soy:&nbsp;&nbsp;</Typography>
               <OptionsContainer>
-                <ToggleItem active={!isTeacher} onClick={this.toggleTeacher} left>
+                <ToggleItem active={!isTeacher} onClick={this.toggleTeacher(false)} left>
                   Alumno
                 </ToggleItem>
-                <ToggleItem active={isTeacher} onClick={this.toggleTeacher} right>
+                <ToggleItem active={isTeacher} onClick={this.toggleTeacher(true)} right>
                   Profesor
                 </ToggleItem>
               </OptionsContainer>
@@ -133,7 +134,7 @@ class Login extends Component {
                   {loginFields.map(({ ...inputProps }, index) => (
                     <InputManager noValue key={index} {...inputProps} />
                   ))}
-                  <Button type="submit" raised color="accent" disabled={loading}>Ingresar</Button>
+                  <Button type="submit" raised color="primary" disabled={loading}>Ingresar</Button>
                   <Link onClick={this.toggleLogin}>
                     ¿No tienes cuenta? Registrate ahora
                   </Link>
@@ -145,7 +146,7 @@ class Login extends Component {
                   {registerFields.map(({ ...inputProps }, index) => (
                     <InputManager noValue key={index} {...inputProps} />
                   ))}
-                  <Button type="submit" raised color="accent" disabled={loading}>Registrarte</Button>
+                  <Button type="submit" raised color="primary" disabled={loading}>Registrarte</Button>
                   <Link onClick={this.toggleLogin}>¿Ya tienes cuenta? Ingresa ahora</Link>
                 </div>
               )}

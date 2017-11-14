@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import bgImage from '../Assets/bg1.jpg'
+import bgImage from '../Assets/bg3.jpg'
 
 export const Background = styled.div`
   height: 100vh;
@@ -25,7 +25,7 @@ export const Container = styled.div`
 `
 
 export const Header = styled.div`
-  background-color: #FF7043;;
+  background-color: #512DA8;
   padding: 30px 0;
   
   h1 {
@@ -60,12 +60,13 @@ export const OptionsContainer = styled.div`
 `
 
 export const ToggleItem = styled.div`
-  cursor: pointer;
-  background-color: ${({ active }) => active ? '#4DB6AC' : '#B2DFDB'};
-  background-color: ${({ active }) => active ? '#FF8A65' : '#FFCCBC'};
+  cursor: ${({ active }) => active ? 'inherit' : 'pointer'};
+  background-color: ${({ active }) => active ? '#512DA8' : '#D1C4E9'};
   padding: 20px;
   border-top-left-radius: ${({ left }) => left ? '11px' : '0'};
   border-bottom-left-radius: ${({ left }) => left ? '11px' : '0'};
   border-top-right-radius: ${({ right }) => right ? '11px' : '0'};
   border-bottom-right-radius: ${({ right }) => right ? '11px' : '0'};
+  color: ${({ active }) => active ? 'white' : 'black'};
+  font-weight: ${({ active }) => active ? '700' : '300'};
 `
