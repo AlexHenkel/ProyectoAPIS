@@ -24,7 +24,7 @@ class MultipleInputs extends Mixin {
     super(props)
 
     this.state = {
-      value: this.getValue().length ? this.getValue() : [''],
+      value: this.getValue().length ? this.getValue() : ['', ''],
     }
   }
 
@@ -52,6 +52,11 @@ class MultipleInputs extends Mixin {
     this.setState({ value: value.slice(0, value.length - 1) })
   }
 
+  verifyDisableAdd = () => {
+    const value = this.getValue()
+    return !value || !value[0] || !value[1]
+  }
+
   render() {
     const { value } = this.state
     const { label } = this.props
@@ -68,11 +73,13 @@ class MultipleInputs extends Mixin {
             error={currVal === ''}
           />
         ))}
-        <Button raised color="accent" onClick={this.onAddInput}>
-          <AddIcon />
-          Agregar respuesta
-        </Button>
-        {(value.length > 1) && (
+        {(value.length < 5) && (
+          <Button raised color="accent" onClick={this.onAddInput} disabled={this.verifyDisableAdd()}>
+            <AddIcon />
+            Agregar respuesta
+          </Button>
+        )}
+        {(value.length > 2) && (
           <Button color="accent" onClick={this.onRemoveInput}>
             <RemoveIcon />
             Borrar respuesta
