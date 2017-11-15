@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoResults component renders correctly 1`] = `
+<h3
+  className="MuiTypography-root-1 MuiTypography-subheading-8 MuiTypography-colorPrimary-21 MuiTypography-gutterBottom-18 MuiTypography-alignCenter-14 sc-bdVaJa dEnwzp"
+>
+  No se encontraron resultados 
+  <span>
+    :(
+  </span>
+</h3>
+`;
