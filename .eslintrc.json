@@ -11,6 +11,18 @@
     "react/forbid-prop-types": ["error", { "forbid": [""] }],
     "react/no-array-index-key": ["off"],
     "object-curly-newline": ["off"],
-    "jsx-a11y/anchor-is-valid": ["off"]
+    "jsx-a11y/anchor-is-valid": ["off"],
+    "react/jsx-filename-extension": ["off"]
+  },
+  "globals": {
+    // Define test variables as global to avoid errors
+    "jest": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "renderer": true,
+    "beforeEach": true,
+    "mount": true,
+    "shallow": true
   }
 }

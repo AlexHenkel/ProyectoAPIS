@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context menu component renders correctly 1`] = `
+<div>
+  <button
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns={null}
+    className="MuiButtonBase-root-10 MuiIconButton-root-1"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex={0}
+    type="button"
+  >
+    <span
+      className="MuiIconButton-label-7"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-12 MuiIconButton-icon-8"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+        />
+      </svg>
+    </span>
+    <span
+      className="MuiTouchRipple-root-13"
+    />
+  </button>
+</div>
+`;
+
+exports[`Context menu component should open on click and closed on requestClose 1`] = `
+<div>
+  <withStyles(IconButton)
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns={null}
+    onClick={[Function]}
+  >
+    <pure(MoreVert) />
+  </withStyles(IconButton)>
+  <withStyles(Menu)
+    anchorEl={null}
+    onRequestClose={[Function]}
+    open={false}
+  >
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Edit) />
+      </withStyles(ListItemIcon)>
+      Editar
+    </withStyles(MenuItem)>
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Delete) />
+      </withStyles(ListItemIcon)>
+      Eliminar
+    </withStyles(MenuItem)>
+  </withStyles(Menu)>
+</div>
+`;
+
+exports[`Context menu component should pass value to handleEdit on click in first context menu item 1`] = `
+<div>
+  <withStyles(IconButton)
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns={null}
+    onClick={[Function]}
+  >
+    <pure(MoreVert) />
+  </withStyles(IconButton)>
+  <withStyles(Menu)
+    anchorEl={null}
+    onRequestClose={[Function]}
+    open={false}
+  >
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Edit) />
+      </withStyles(ListItemIcon)>
+      Editar
+    </withStyles(MenuItem)>
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Delete) />
+      </withStyles(ListItemIcon)>
+      Eliminar
+    </withStyles(MenuItem)>
+  </withStyles(Menu)>
+</div>
+`;
+
+exports[`Context menu component should pass value to handleEdit on click in first context menu item 2`] = `
+<div>
+  <withStyles(IconButton)
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns="long-menu"
+    onClick={[Function]}
+  >
+    <pure(MoreVert) />
+  </withStyles(IconButton)>
+  <withStyles(Menu)
+    anchorEl={<div />}
+    onRequestClose={[Function]}
+    open={true}
+  >
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Edit) />
+      </withStyles(ListItemIcon)>
+      Editar
+    </withStyles(MenuItem)>
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Delete) />
+      </withStyles(ListItemIcon)>
+      Eliminar
+    </withStyles(MenuItem)>
+  </withStyles(Menu)>
+</div>
+`;
+
+exports[`Context menu component should pass value to handleRemove on click in last context menu item 1`] = `
+<div>
+  <withStyles(IconButton)
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns={null}
+    onClick={[Function]}
+  >
+    <pure(MoreVert) />
+  </withStyles(IconButton)>
+  <withStyles(Menu)
+    anchorEl={null}
+    onRequestClose={[Function]}
+    open={false}
+  >
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Edit) />
+      </withStyles(ListItemIcon)>
+      Editar
+    </withStyles(MenuItem)>
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Delete) />
+      </withStyles(ListItemIcon)>
+      Eliminar
+    </withStyles(MenuItem)>
+  </withStyles(Menu)>
+</div>
+`;
+
+exports[`Context menu component should pass value to handleRemove on click in last context menu item 2`] = `
+<div>
+  <withStyles(IconButton)
+    aria-haspopup="true"
+    aria-label="More"
+    aria-owns="long-menu"
+    onClick={[Function]}
+  >
+    <pure(MoreVert) />
+  </withStyles(IconButton)>
+  <withStyles(Menu)
+    anchorEl={<div />}
+    onRequestClose={[Function]}
+    open={true}
+  >
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Edit) />
+      </withStyles(ListItemIcon)>
+      Editar
+    </withStyles(MenuItem)>
+    <withStyles(MenuItem)
+      onClick={[Function]}
+    >
+      <withStyles(ListItemIcon)>
+        <pure(Delete) />
+      </withStyles(ListItemIcon)>
+      Eliminar
+    </withStyles(MenuItem)>
+  </withStyles(Menu)>
+</div>
+`;
