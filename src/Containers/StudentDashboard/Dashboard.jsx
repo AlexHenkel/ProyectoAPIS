@@ -21,9 +21,9 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps({ activeGroup }) {
-    const { activeGroup: prevGroup, getOverview } = this.props
+    const { userId, activeGroup: prevGroup, getOverview } = this.props
     if (activeGroup >= 0 && activeGroup !== prevGroup) {
-      getOverview(activeGroup)
+      getOverview(userId, activeGroup)
     }
   }
 
@@ -63,7 +63,10 @@ const mapDispatchToProps = dispatch => ({
     isTeacher: false,
     id: userId,
   })),
-  getOverview: id => dispatch(OverviewActions.getOneRequest(id, { isTeacher: false })),
+  getOverview: (id, groupId) => dispatch(OverviewActions.getOneRequest(id, {
+    isTeacher: false,
+    groupId,
+  })),
   getState: userId => dispatch(StudentStateActions.getOneRequest(userId)),
 })
 
