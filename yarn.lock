@@ -6188,7 +6188,7 @@ redux@^3.7.1, redux@^3.7.2:
 
 "reduxsauce-crud@https://github.com/AlexHenkel/reduxsauce-crud.git":
   version "1.0.0"
-  resolved "https://github.com/AlexHenkel/reduxsauce-crud.git#d5d57916685de049051f6c4f1d89391ada87b5aa"
+  resolved "https://github.com/AlexHenkel/reduxsauce-crud.git#118f8c3d9acefee3888d55661d0efa50f2b52e7c"
   dependencies:
     ramda "^0.24.1"
     ramdasauce "^2.0.0"

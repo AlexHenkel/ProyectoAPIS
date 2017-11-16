@@ -133,7 +133,7 @@ Exams.propTypes = {
 
 const mapStateToProps = state => ({
   studentState: state.studentState.getOne.result.state,
-  activeExamId: state.studentState.getOne.result.examId,
+  activeExamId: state.studentState.getOne.result.examId || -1,
   activeGroup: state.groups.activeGroup,
   loading: state.overview.getOne.fetching || state.groups.getOne.fetching,
   currentExams: state.overview.getOne.result.currentExams,

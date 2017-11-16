@@ -11,7 +11,7 @@ const teacherGroupExamsCrudObservable = createCRUDObservable({
     onSuccessActions: [
       {
         redux: OverviewRedux,
-        pathToUpdate: 'currentExams',
+        pathToUpdate: null,
       },
     ],
   },
@@ -19,7 +19,7 @@ const teacherGroupExamsCrudObservable = createCRUDObservable({
     onSuccessActions: [
       {
         redux: OverviewRedux,
-        pathToUpdate: 'currentExams',
+        pathToUpdate: null,
       },
     ],
   },

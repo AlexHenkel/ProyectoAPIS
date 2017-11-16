@@ -8,7 +8,7 @@ import ContextMenu, { ContextContainer } from './Common/ContextMenu'
 import GroupsActions from '../Data/Redux/GroupsRedux'
 
 const Group = ({ id, allowEdit, onEdit, onRemove, activeGroup, theme,
-  name, activeExams, selectActiveGroup }) => (
+  name, activeQuizzes, selectActiveGroup }) => (
     <Card key={id} active={activeGroup === id ? 'yes' : ''} theme={theme}>
       <CardContent>
         {allowEdit && (
@@ -24,7 +24,7 @@ const Group = ({ id, allowEdit, onEdit, onRemove, activeGroup, theme,
           {name}
         </CardText>
         <CardText type="body1" gutterBottom active={activeGroup === id ? 'yes' : ''}>
-          Quizes activos: <b>{activeExams}</b>
+          Quizes activos: <b>{activeQuizzes}</b>
         </CardText>
       </CardContent>
       <CardActions>
@@ -45,7 +45,7 @@ Group.propTypes = {
   activeGroup: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
-  activeExams: PropTypes.number.isRequired,
+  activeQuizzes: PropTypes.number.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,
   allowEdit: PropTypes.bool.isRequired,
 }
