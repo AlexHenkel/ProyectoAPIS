@@ -11,7 +11,7 @@ import NoResults from '../../Components/Common/NoResults'
 import Group from '../../Components/Group'
 import GroupsActions from '../../Data/Redux/GroupsRedux'
 
-class Groups extends Component {
+export class Groups extends Component {
   constructor(props) {
     super(props)
     this.state = {

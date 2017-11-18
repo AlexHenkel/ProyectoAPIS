@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Groups component renders correctly 1`] = `
+<div>
+  <withStyles(Typography)
+    gutterBottom={true}
+    type="display1"
+  >
+    Mis grupos
+  </withStyles(Typography)>
+  <div>
+    <styled.div>
+      <withStyles(Button)
+        color="accent"
+        onClick={[Function]}
+      >
+        <pure(Add) />
+        Agregar grupo
+      </withStyles(Button)>
+    </styled.div>
+    <Component />
+  </div>
+  <Connect(ModalSave)
+    fields={
+      Array [
+        Object {
+          "id": 1,
+          "label": "Nombre del grupo",
+          "name": "name",
+          "path": "name",
+          "required": true,
+          "type": "textField",
+        },
+        Object {
+          "help": "A partir de esta fecha, el quiz estará disponible para tí y tus alumnos",
+          "id": 2,
+          "label": "Fecha de inicio",
+          "name": "startDate",
+          "path": "startDate",
+          "required": true,
+          "type": "datepicker",
+        },
+        Object {
+          "help": "Después de esta fecha, el grupo se cerrará automáticamente",
+          "id": 3,
+          "inputType": "datetime-local",
+          "label": "Fecha de fin",
+          "name": "endDate",
+          "path": "endDate",
+          "required": true,
+          "type": "datepicker",
+        },
+        Object {
+          "id": 4,
+          "inputType": "hidden",
+          "name": "teacherId",
+          "specificFor": "create",
+          "type": "textField",
+          "value": 1,
+        },
+      ]
+    }
+    getOnePath="groups.get.results"
+    modalType="create"
+    onRequestClose={[Function]}
+    open={false}
+    statePath="groups"
+    title="Grupo"
+    toUpdateId={-1}
+    typePrefix="GROUPS"
+  />
+  <Connect(ModalRemove)
+    onRequestClose={[Function]}
+    open={false}
+    statePath="groups"
+    toRemoveId={-1}
+    typePrefix="GROUPS"
+  />
+</div>
+`;
