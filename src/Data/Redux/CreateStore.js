@@ -7,16 +7,18 @@ const toLoadState = persistedState ? {
   user: createState(persistedState),
 } : {}
 
+const toComponse = (middlewares) => {
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
+    return compose(
+      applyMiddleware(...middlewares),
+      window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line
+    )
+  }
+  return compose(applyMiddleware(...middlewares))
+}
+
 // creates the store
 export default (rootReducer, middlewares) => {
-  const store = createStore(
-    rootReducer,
-    toLoadState,
-    compose(
-      applyMiddleware(...middlewares),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line
-    ),
-  )
-
+  const store = createStore(rootReducer, toLoadState, toComponse(middlewares))
   return store
 }
