@@ -1,4 +1,5 @@
 import { createActions, createState, createReducer } from 'reduxsauce-crud'
+import { saveState, removeState } from '../../localStorage'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -30,14 +31,20 @@ export const INITIAL_STATE = createState({
 /* ------------- Reducers ------------- */
 
 const loginRequest = state => state.merge({ fetching: true })
-const loginSuccess = (state, { result: { id }, isTeacher }) =>
-  state.merge({ fetching: false, userId: id, isTeacher })
+const loginSuccess = (state, { result: { id }, isTeacher }) => {
+  const newState = state.merge({ fetching: false, userId: id, isTeacher })
+  saveState(newState)
+  return newState
+}
 const loginFailure = (state, { error }) => state.merge({ fetching: false, error })
 const registerRequest = state => state.merge({ fetching: true })
-const registerSuccess = (state, { result: { id }, isTeacher }) =>
-  state.merge({ fetching: false, userId: id, isTeacher })
+const registerSuccess = (state, { result: { id }, isTeacher }) => {
+  const newState = state.merge({ fetching: false, userId: id, isTeacher })
+  saveState(newState)
+  return newState
+}
 const registerFailure = (state, { error }) => state.merge({ fetching: false, error })
-const logout = state => state.merge({ userId: null, error: null })
+const logout = state => removeState() || state.merge({ userId: null, error: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
