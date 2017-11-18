@@ -27,10 +27,18 @@ export const Container = styled.div`
 export const Header = styled.div`
   background-color: #512DA8;
   padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   h1 {
     color: #fff !important;
   }
+`
+
+export const Logo = styled.img`
+  height: 60px;
+  margin-left: 20px;
 `
 
 export const Body = styled.div`

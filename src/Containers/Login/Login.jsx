@@ -5,8 +5,9 @@ import { push } from 'react-router-redux'
 import { Typography, Button } from 'material-ui'
 import { Form } from 'formsy-react-2'
 
+import logo from '../../Assets/logo.png'
 import InputManager from '../../Components/InputElements/InputManager'
-import { Container, Background, Header, Body, Link, ToggleItem, ToggleContainer, OptionsContainer } from '../../Components/LoginElements'
+import { Container, Background, Header, Body, Link, ToggleItem, ToggleContainer, OptionsContainer, Logo } from '../../Components/LoginElements'
 import UserActions from '../../Data/Redux/UserRedux'
 
 const loginFields = [
@@ -109,6 +110,7 @@ class Login extends Component {
         <Container>
           <Header>
             <Typography type="display1">TecLearn</Typography>
+            <Logo src={logo} alt="logo" />
           </Header>
           <Body>
             <ToggleContainer>

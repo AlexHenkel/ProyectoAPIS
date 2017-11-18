@@ -20,6 +20,7 @@ import {
 import MenuIcon from 'material-ui-icons/Menu'
 import PowerIcon from 'material-ui-icons/PowerSettingsNew'
 
+import logo from '../Assets/logo.png'
 import UserActions from '../Data/Redux/UserRedux'
 
 const Typography = styled(OriginalTypography)`
@@ -29,6 +30,11 @@ const Typography = styled(OriginalTypography)`
 const Button = styled(OriginalButton)`
   margin-left: 5px;
   margin-right: 5px;
+`
+
+const Logo = styled.img`
+  height: 30px;
+  margin-right: 10px;
 `
 
 class Layout extends Component {
@@ -59,6 +65,9 @@ class Layout extends Component {
             <IconButton onClick={this.handleToggleDrawer(true)} color="contrast" aria-label="Menu">
               <MenuIcon />
             </IconButton>
+          </Hidden>
+          <Hidden xsDown>
+            <Logo src={logo} />
           </Hidden>
           <Typography type="title" color="inherit" onClick={() => navigateTo('/')}>
             TecLearn
