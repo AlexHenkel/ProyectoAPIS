@@ -99,16 +99,29 @@ class Quizes extends Component {
                   required: true,
                   options: [
                     {
-                      value: 'video',
-                      label: 'Video',
+                      value: 'youtube',
+                      label: 'Youtube (Video)',
+                    },
+                    {
+                      value: 'drive-video',
+                      label: 'Google Drive (Video)',
+                    },
+                    {
+                      value: 'drive-pdf',
+                      label: 'Google Drive (PDF)',
                     },
                     {
                       value: 'pdf',
-                      label: 'PDF',
+                      label: 'PDF regular',
+                    },
+                    {
+                      value: 'embed',
+                      label: 'Código Embebido',
                     },
                   ],
                   optionsLabel: 'label',
                   optionsValue: 'value',
+                  help: 'Si es un link de Youtube o Google Drive asegurate que sea público. Si tienes algun otro proveedor de video, el link será el que te genere esa página. ¡Puedes probar el link y editarlo posteriormente!',
                 },
                 {
                   type: 'textField',
@@ -117,10 +130,6 @@ class Quizes extends Component {
                   path: 'resource',
                   label: 'Link del recurso',
                   required: true,
-                  validations: 'isUrl',
-                  validationErrors: {
-                    isUrl: 'Introduce un link válido',
-                  },
                 },
                 {
                   type: 'multiSelectSearch',

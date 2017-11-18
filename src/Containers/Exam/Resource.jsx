@@ -10,7 +10,7 @@ import Loading from '../../Components/Common/Loading'
 import StudentStateActions from '../../Data/Redux/StudentStateRedux'
 import ResourceActions from '../../Data/Redux/ResourceRedux'
 
-const CObject = styled.object`
+const CIframe = styled.iframe`
   margin: 30px 0;
 `
 
@@ -28,6 +28,76 @@ class Resource extends Component {
     }
     getResource(id)
     getState(userId)
+  }
+
+  getEmbedHeight = (url) => {
+    const regExp = /height\s*=\s*"([^"]+)"/
+    const match = url.match(regExp)
+
+    if (match && match[1]) {
+      return match[1]
+    }
+    return 'error'
+  }
+
+  getEmbedSrc = (url) => {
+    const regExp = /src\s*=\s*"([^"]+)"/
+    const match = url.match(regExp)
+
+    if (match && match[1]) {
+      return match[1]
+    }
+    return 'error'
+  }
+
+  getYouTubeId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+    const match = url.match(regExp)
+
+    if (match && match[2].length === 11) {
+      return match[2]
+    }
+    return 'error'
+  }
+
+  getDriveLink = (url) => {
+    const regExp = /^.*(drive.google.com\/file\/d\/)([^#&?/]*).*/
+    const match = url.match(regExp)
+    if (match && match[2].length === 28) {
+      return match[2]
+    }
+    return 'error'
+  }
+
+  getHeight = (resourceType, resource) => {
+    switch (resourceType) {
+      case 'youtube':
+      case 'drive-video':
+        return '450'
+      case 'drive-pdf':
+      case 'pdf':
+        return '700'
+      case 'embed':
+        return this.getEmbedHeight(resource)
+      default:
+        return null
+    }
+  }
+
+  getLink = (resource, resourceType) => {
+    switch (resourceType) {
+      case 'youtube':
+        return `http://www.youtube.com/embed/${this.getYouTubeId(resource)}`
+      case 'drive-video':
+      case 'drive-pdf':
+        return `http://drive.google.com/file/d/${this.getDriveLink(resource)}/preview`
+      case 'pdf':
+        return resource
+      case 'embed':
+        return this.getEmbedSrc(resource)
+      default:
+        return null
+    }
   }
 
   handleMoveForward = () => {
@@ -52,12 +122,19 @@ class Resource extends Component {
               )}
               {!isInvalid && (
                 <div>
-                  <Typography type="display2" gutterBottom>Ver {resourceType} - {name}</Typography>
+                  <Typography type="display2" gutterBottom>Ver recurso - {name}</Typography>
                   <Subtitle type="title" color="primary" gutterBottom>Recuerda que al continuar con las preguntas, ya no podrás volver a ver este recurso</Subtitle>
                   <AlignCenter>
                     <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
                   </AlignCenter>
-                  <CObject data={resource} width="100%" height={resourceType === 'video' ? '450' : '700'} title="Resource" />
+                  <CIframe
+                    src={this.getLink(resource, resourceType)}
+                    width="100%"
+                    height={this.getHeight(resourceType, resource)}
+                    title="Resource"
+                    frameborder="0"
+                    allowfullscreen
+                  />
                   <AlignCenter>
                     <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
                   </AlignCenter>
