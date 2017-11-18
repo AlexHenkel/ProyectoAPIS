@@ -16,6 +16,8 @@ const Title = styled(Typography)`
   margin-top: 25px !important;
 `
 
+const isCorrectGrade = (highestGrade, recentGrade) => typeof highestGrade === 'number' && typeof recentGrade === 'number'
+
 const Grades = ({ loading, exams }) => (
   <div>
     <Title type="display1" gutterBottom>Mis calificaciones</Title>
@@ -24,7 +26,7 @@ const Grades = ({ loading, exams }) => (
       <Card>
         <List>
           {exams.map(({ id, name, highestGrade, recentGrade }) =>
-            (highestGrade && recentGrade) && (
+            isCorrectGrade(highestGrade, recentGrade) && (
               <ListItem key={id}>
                 <ListItemText
                   primary={name}
