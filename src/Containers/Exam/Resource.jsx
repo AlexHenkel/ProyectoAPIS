@@ -41,6 +41,12 @@ class Resource extends Component {
     goToExam(id)
   }
 
+  handleReturnHome = () => {
+    const { goHome, setFreeOnState, match: { params: { id } }, user: { userId } } = this.props
+    setFreeOnState(id, userId)
+    goHome()
+  }
+
   render() {
     const { loading, studentState: { state, examId },
       resource: { resource, resourceType, name }, match: { params: { id } }, goHome } = this.props
@@ -82,7 +88,7 @@ class Resource extends Component {
                       <Typography type="display3" color="primary" align="center" gutterBottom>Lo sentimos, el recurso de este video está dañado.</Typography>
                       <Typography type="display1" align="center" gutterBottom>Por favor, reporta este error con tu profesor</Typography>
                       <RedirectContainer>
-                        <Button raised onClick={goHome()} color="accent">
+                        <Button raised onClick={this.handleReturnHome} color="accent">
                           Regresar al inicio
                         </Button>
                       </RedirectContainer>
@@ -106,6 +112,7 @@ Resource.propTypes = {
   match: PropTypes.object.isRequired,
   resource: PropTypes.object.isRequired,
   goToExam: PropTypes.func.isRequired,
+  setFreeOnState: PropTypes.func.isRequired,
   setResourceOnState: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   goLogin: PropTypes.func.isRequired,
@@ -125,6 +132,10 @@ const mapDispatchToProps = dispatch => ({
   goToExam: id => dispatch(push(`/examen/${id}`)),
   setResourceOnState: (id, userId) => dispatch(StudentStateActions.updateRequest(userId, {
     state: 'onExam',
+    examId: id,
+  })),
+  setFreeOnState: (id, userId) => dispatch(StudentStateActions.updateRequest(userId, {
+    state: 'free',
     examId: id,
   })),
   goLogin: () => dispatch(push('/login')),

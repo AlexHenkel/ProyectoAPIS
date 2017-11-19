@@ -83,7 +83,7 @@ class Questions extends Component {
             <div>
               <Typography type="display3" color="primary" gutterBottom>!Éxito! Tu examen ha sido registrado</Typography>
               <RedirectContainer>
-                <Button raised onClick={goHome()} color="accent">
+                <Button raised onClick={goHome} color="accent">
                   Regresar al inicio
                 </Button>
               </RedirectContainer>
