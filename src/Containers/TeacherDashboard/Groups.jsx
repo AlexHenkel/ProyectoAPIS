@@ -91,6 +91,9 @@ export class Groups extends Component {
           statePath="groups"
           typePrefix="GROUPS"
           getOnePath="groups.get.results"
+          extraParamsSave={{
+            isTeacher: true,
+          }}
           fields={[
             {
               type: 'textField',
