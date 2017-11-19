@@ -9,8 +9,11 @@ import {
 } from 'material-ui'
 import OriginalCheckIcon from 'material-ui-icons/Check'
 import moment from 'moment'
+import Slide from 'material-ui/transitions/Slide'
+import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog'
 import ContextMenu, { ContextContainer } from '../Common/ContextMenu'
 import { Card, AlignCenter } from '../Common/Utils'
+import { getLink, getHeight } from '../Common/VideoUtils'
 
 const Question = styled(Typography)`
   margin-top: 20px !important;
@@ -49,64 +52,111 @@ class Quiz extends Component {
     super(props)
     this.state = {
       open: false,
+      modalOpen: false,
     }
   }
+
+  getResourceType = (resourceType) => {
+    switch (resourceType) {
+      case 'youtube':
+        return 'Video de YouTube'
+      case 'drive-video':
+        return 'Google Drive - Video'
+      case 'drive-pdf':
+        return 'Google Drive - PDF'
+      case 'pdf':
+        return 'PDF'
+      case 'embed':
+        return 'Código embebido'
+      default:
+        return null
+    }
+  }
+
+  setModalState = modalOpen => () => this.setState({ modalOpen })
 
   toggleOpen = () => this.setState({ open: !this.state.open })
 
   render() {
-    const { data: { id, name, resourceType, resource, assigned, createdAt, questions },
+    const { data: { id, name, resourceType, resource, createdAt, questions },
       onEdit, onRemove } = this.props
-    const { open } = this.state
+    const { open, modalOpen } = this.state
+    const iFrameLink = getLink(resource, resourceType)
+
     return (
-      <Card key={id}>
-        <CardContent>
-          <ContextContainer>
-            <ContextMenu
-              value={id}
-              handleEdit={onEdit}
-              handleRemove={onRemove}
-            />
-          </ContextContainer>
-          <Typography type="display2" gutterBottom align="center" color="primary">{name}</Typography>
-          {open && (
-            <div>
-              <AlignCenter>
-                <Button dense color="accent" onClick={this.toggleOpen}>Ocultar Preguntas</Button>
-              </AlignCenter>
-              <Typography type="body1" gutterBottom>
-                Tipo de recurso: <b>{resourceType === 'video' ? 'Video' : 'PDF'}</b>
-              </Typography>
-              <Typography type="body1" gutterBottom>
-                Link: <a href={resource} target="_blank">{resource}</a>
-              </Typography>
-              <Typography type="body1" gutterBottom>
-                Creado: <b>{moment(createdAt).format('ll')}</b>
-              </Typography>
-              <Typography type="body1" gutterBottom>
-                Número de veces asignado: <b>{assigned}</b>
-              </Typography>
-              {questions.map(({ id: answerId, question, correctAnswer, incorrectAnswers }, i) => (
-                <div key={answerId}>
-                  <Question type="display1">{i + 1}. {question}</Question>
-                  <AnswerTitle type="body2">Respuestas</AnswerTitle>
-                  <Answer gutterBottom type="headline" color="accent">
-                    <CheckIcon /> {correctAnswer}
-                  </Answer>
-                  {incorrectAnswers.map((option, incorrectIndex) => (
-                    <Answer key={incorrectIndex} gutterBottom type="headline">
-                      {option}
+      <div>
+        <Card key={id}>
+          <CardContent>
+            <ContextContainer>
+              <ContextMenu
+                value={id}
+                handleEdit={onEdit}
+                handleRemove={onRemove}
+              />
+            </ContextContainer>
+            <Typography type="display2" gutterBottom align="center" color="primary">{name}</Typography>
+            {open && (
+              <div>
+                <AlignCenter>
+                  <Button dense color="accent" onClick={this.toggleOpen}>Ocultar Preguntas</Button>
+                </AlignCenter>
+                <Typography type="body1" gutterBottom>
+                  Tipo de recurso: <b>{this.getResourceType(resourceType)}</b>
+                </Typography>
+                <Typography type="body1" gutterBottom>
+                  Creado: <b>{moment(createdAt).format('ll')}</b>
+                </Typography>
+                <br />
+                <Typography type="body1" gutterBottom>
+                  Al hacer click a este botón, puedes verificar que tu recurso se esté
+                  mostrando correctamente a tus alumnos
+                </Typography>
+                <Button raised onClick={this.setModalState(true)} color="primary">Verificar link</Button>
+                {questions.map(({ id: answerId, question, correctAnswer, incorrectAnswers }, i) => (
+                  <div key={answerId}>
+                    <Question type="display1">{i + 1}. {question}</Question>
+                    <AnswerTitle type="body2">Respuestas</AnswerTitle>
+                    <Answer gutterBottom type="headline" color="accent">
+                      <CheckIcon /> {correctAnswer}
                     </Answer>
-                  ))}
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-        <CardActions>
-          <Button dense color="accent" onClick={this.toggleOpen}>{open ? 'Ocultar' : 'Ver'} Preguntas</Button>
-        </CardActions>
-      </Card>
+                    {incorrectAnswers.map((option, incorrectIndex) => (
+                      <Answer key={incorrectIndex} gutterBottom type="headline">
+                        {option}
+                      </Answer>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+          <CardActions>
+            <Button dense color="accent" onClick={this.toggleOpen}>{open ? 'Ocultar' : 'Ver'} Preguntas</Button>
+          </CardActions>
+        </Card>
+        <Dialog
+          open={modalOpen}
+          transition={<Slide direction="up" />}
+          onRequestClose={this.setModalState(false)}
+        >
+          <DialogTitle>Recurso</DialogTitle>
+          <DialogContent>
+            {iFrameLink !== 'error' ? (
+              <iframe
+                src={iFrameLink}
+                width="100%"
+                height={getHeight(resourceType, resource)}
+                title="Resource"
+                frameBorder="0"
+                allowFullScreen
+              />
+            ) : (
+              <Typography>
+                Lo sentimos, hay un error en tu link. Por favor verificalo y vuelve a intentar
+              </Typography>
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
     )
   }
 }

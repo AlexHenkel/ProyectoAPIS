@@ -44,8 +44,6 @@ class Questions extends Component {
     }
   }
 
-  redirectHome = () => this.props.goHome()
-
   handleMoveForward = (answers) => {
     const { match: { params: { id } }, user: { userId } } = this.props
     this.props.createExamIntent({
@@ -57,7 +55,7 @@ class Questions extends Component {
 
   render() {
     const { loading, studentState: { state, examId },
-      questions: { name, questions }, match: { params: { id } } } = this.props
+      questions: { name, questions }, match: { params: { id } }, goHome } = this.props
     const { isSuccess } = this.state
     const isInvalid = (state === 'onExam' && examId !== Number(id)) || state === 'onResource'
     return (
@@ -85,7 +83,7 @@ class Questions extends Component {
             <div>
               <Typography type="display3" color="primary" gutterBottom>!Éxito! Tu examen ha sido registrado</Typography>
               <RedirectContainer>
-                <Button raised onClick={this.redirectHome} color="accent">
+                <Button raised onClick={goHome()} color="accent">
                   Regresar al inicio
                 </Button>
               </RedirectContainer>

@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 import { Typography, Grid, Button } from 'material-ui'
 import { AlignCenter } from '../../Components/Common/Utils'
 import Loading from '../../Components/Common/Loading'
+import { getLink, getHeight } from '../../Components/Common/VideoUtils'
 
 import StudentStateActions from '../../Data/Redux/StudentStateRedux'
 import ResourceActions from '../../Data/Redux/ResourceRedux'
@@ -16,6 +17,10 @@ const CIframe = styled.iframe`
 
 const Subtitle = styled(Typography)`
   margin-bottom: 30px !important;
+`
+
+const RedirectContainer = styled(AlignCenter)`
+  margin-top: 30px;
 `
 
 class Resource extends Component {
@@ -30,76 +35,6 @@ class Resource extends Component {
     getState(userId)
   }
 
-  getEmbedHeight = (url) => {
-    const regExp = /height\s*=\s*"([^"]+)"/
-    const match = url.match(regExp)
-
-    if (match && match[1]) {
-      return match[1]
-    }
-    return 'error'
-  }
-
-  getEmbedSrc = (url) => {
-    const regExp = /src\s*=\s*"([^"]+)"/
-    const match = url.match(regExp)
-
-    if (match && match[1]) {
-      return match[1]
-    }
-    return 'error'
-  }
-
-  getYouTubeId = (url) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
-    const match = url.match(regExp)
-
-    if (match && match[2].length === 11) {
-      return match[2]
-    }
-    return 'error'
-  }
-
-  getDriveLink = (url) => {
-    const regExp = /^.*(drive.google.com\/file\/d\/)([^#&?/]*).*/
-    const match = url.match(regExp)
-    if (match && match[2].length === 28) {
-      return match[2]
-    }
-    return 'error'
-  }
-
-  getHeight = (resourceType, resource) => {
-    switch (resourceType) {
-      case 'youtube':
-      case 'drive-video':
-        return '450'
-      case 'drive-pdf':
-      case 'pdf':
-        return '700'
-      case 'embed':
-        return this.getEmbedHeight(resource)
-      default:
-        return null
-    }
-  }
-
-  getLink = (resource, resourceType) => {
-    switch (resourceType) {
-      case 'youtube':
-        return `http://www.youtube.com/embed/${this.getYouTubeId(resource)}`
-      case 'drive-video':
-      case 'drive-pdf':
-        return `http://drive.google.com/file/d/${this.getDriveLink(resource)}/preview`
-      case 'pdf':
-        return resource
-      case 'embed':
-        return this.getEmbedSrc(resource)
-      default:
-        return null
-    }
-  }
-
   handleMoveForward = () => {
     const { goToExam, setResourceOnState, match: { params: { id } }, user: { userId } } = this.props
     setResourceOnState(id, userId)
@@ -108,8 +43,9 @@ class Resource extends Component {
 
   render() {
     const { loading, studentState: { state, examId },
-      resource: { resource, resourceType, name }, match: { params: { id } } } = this.props
+      resource: { resource, resourceType, name }, match: { params: { id } }, goHome } = this.props
     const isInvalid = (state === 'onResource' && examId !== Number(id)) || state === 'onExam'
+    const iFrameLink = getLink(resource, resourceType)
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} sm={2} />
@@ -122,22 +58,36 @@ class Resource extends Component {
               )}
               {!isInvalid && (
                 <div>
-                  <Typography type="display2" gutterBottom>Ver recurso - {name}</Typography>
-                  <Subtitle type="title" color="primary" gutterBottom>Recuerda que al continuar con las preguntas, ya no podrás volver a ver este recurso</Subtitle>
-                  <AlignCenter>
-                    <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
-                  </AlignCenter>
-                  <CIframe
-                    src={this.getLink(resource, resourceType)}
-                    width="100%"
-                    height={this.getHeight(resourceType, resource)}
-                    title="Resource"
-                    frameborder="0"
-                    allowfullscreen
-                  />
-                  <AlignCenter>
-                    <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
-                  </AlignCenter>
+                  {iFrameLink !== 'error' ? (
+                    <div>
+                      <Typography type="display2" gutterBottom>Ver recurso - {name}</Typography>
+                      <Subtitle type="title" color="primary" gutterBottom>Recuerda que al continuar con las preguntas, ya no podrás volver a ver este recurso</Subtitle>
+                      <AlignCenter>
+                        <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
+                      </AlignCenter>
+                      <CIframe
+                        src={iFrameLink}
+                        width="100%"
+                        height={getHeight(resourceType, resource)}
+                        title="Resource"
+                        frameBorder="0"
+                        allowFullScreen
+                      />
+                      <AlignCenter>
+                        <Button raised color="accent" onClick={this.handleMoveForward}>Continuar a las preguntas</Button>
+                      </AlignCenter>
+                    </div>
+                  ) : (
+                    <div>
+                      <Typography type="display3" color="primary" align="center" gutterBottom>Lo sentimos, el recurso de este video está dañado.</Typography>
+                      <Typography type="display1" align="center" gutterBottom>Por favor, reporta este error con tu profesor</Typography>
+                      <RedirectContainer>
+                        <Button raised onClick={goHome()} color="accent">
+                          Regresar al inicio
+                        </Button>
+                      </RedirectContainer>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -159,6 +109,7 @@ Resource.propTypes = {
   setResourceOnState: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   goLogin: PropTypes.func.isRequired,
+  goHome: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -177,6 +128,7 @@ const mapDispatchToProps = dispatch => ({
     examId: id,
   })),
   goLogin: () => dispatch(push('/login')),
+  goHome: () => dispatch(push('/')),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Resource)
