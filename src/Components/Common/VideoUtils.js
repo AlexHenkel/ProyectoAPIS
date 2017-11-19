@@ -55,10 +55,10 @@ export const getHeight = (resourceType, resource) => {
 export const getLink = (resource, resourceType) => {
   switch (resourceType) {
     case 'youtube':
-      return `http://www.youtube.com/embed/${getYouTubeId(resource)}`
+      return `https://www.youtube.com/embed/${getYouTubeId(resource)}`
     case 'drive-video':
     case 'drive-pdf':
-      return `http://drive.google.com/file/d/${getDriveLink(resource)}/preview`
+      return `https://drive.google.com/file/d/${getDriveLink(resource)}/preview`
     case 'pdf':
       return resource
     case 'embed':
