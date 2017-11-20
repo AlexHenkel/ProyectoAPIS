@@ -5,6 +5,7 @@ Plataforma Web para Enseñanza a Distancia
 
 ```
 yarn install                 # install all node dependencies
+create .env file from .env.example
 yarn start                   # start server
-yarn run build               # production build (remember to build with NODE_ENV=production)
+yarn run test                # run test suite
 ```
