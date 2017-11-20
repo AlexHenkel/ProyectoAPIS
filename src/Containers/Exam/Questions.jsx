@@ -10,6 +10,8 @@ import { AlignCenter } from '../../Components/Common/Utils'
 
 import StudentStateActions from '../../Data/Redux/StudentStateRedux'
 import ExamQuestionsActions from '../../Data/Redux/ExamQuestionsRedux'
+import OverviewActions from '../../Data/Redux/OverviewRedux'
+import GroupsActions from '../../Data/Redux/GroupsRedux'
 
 const RedirectContainer = styled(AlignCenter)`
   margin-top: 30px;
@@ -44,6 +46,13 @@ class Questions extends Component {
     }
   }
 
+  goHome = () => {
+    const { goHome, resetOverview, resetActiveGroup } = this.props
+    resetActiveGroup()
+    resetOverview()
+    goHome()
+  }
+
   handleMoveForward = (answers) => {
     const { match: { params: { id } }, user: { userId } } = this.props
     this.props.createExamIntent({
@@ -55,7 +64,7 @@ class Questions extends Component {
 
   render() {
     const { loading, studentState: { state, examId },
-      questions: { name, questions }, match: { params: { id } }, goHome } = this.props
+      questions: { name, questions }, match: { params: { id } } } = this.props
     const { isSuccess } = this.state
     const isInvalid = (state === 'onExam' && examId !== Number(id)) || state === 'onResource'
     return (
@@ -83,7 +92,7 @@ class Questions extends Component {
             <div>
               <Typography type="display3" color="primary" gutterBottom>!Éxito! Tu examen ha sido registrado</Typography>
               <RedirectContainer>
-                <Button raised onClick={goHome} color="accent">
+                <Button raised onClick={this.goHome} color="accent">
                   Regresar al inicio
                 </Button>
               </RedirectContainer>
@@ -109,6 +118,8 @@ Questions.propTypes = {
   resetIntent: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   goLogin: PropTypes.func.isRequired,
+  resetOverview: PropTypes.func.isRequired,
+  resetActiveGroup: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -131,6 +142,8 @@ const mapDispatchToProps = dispatch => ({
   createExamIntent: data => dispatch(ExamQuestionsActions.createRequest(data)),
   resetIntent: () => dispatch(ExamQuestionsActions.createReset()),
   goLogin: () => dispatch(push('/login')),
+  resetOverview: () => dispatch(OverviewActions.getOneReset()),
+  resetActiveGroup: () => dispatch(GroupsActions.resetActiveGroup()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions)

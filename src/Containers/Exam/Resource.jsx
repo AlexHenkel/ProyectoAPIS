@@ -49,7 +49,7 @@ class Resource extends Component {
 
   render() {
     const { loading, studentState: { state, examId },
-      resource: { resource, resourceType, name }, match: { params: { id } }, goHome } = this.props
+      resource: { resource, resourceType, name }, match: { params: { id } } } = this.props
     const isInvalid = (state === 'onResource' && examId !== Number(id)) || state === 'onExam'
     const iFrameLink = getLink(resource, resourceType)
     return (
