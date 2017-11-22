@@ -104,7 +104,7 @@ class Quiz extends Component {
                   Tipo de recurso: <b>{this.getResourceType(resourceType)}</b>
                 </Typography>
                 <Typography type="body1" gutterBottom>
-                  Creado: <b>{moment(createdAt).format('ll')}</b>
+                  Creado: <b>{moment.unix(createdAt).format('ll')}</b>
                 </Typography>
                 <br />
                 <Typography type="body1" gutterBottom>
