@@ -169,7 +169,6 @@ class Questions extends Component {
                   name: 'teacherId',
                   inputType: 'hidden',
                   value: userId,
-                  specificFor: 'create',
                 },
               ]}
             />
