@@ -10,7 +10,7 @@ import OriginalDialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
 import NoResults from '../../Components/Common/NoResults'
 import { TabContainer } from './Exams'
-import { ExcelButton, downloadCSV, getGroupCSV } from '../../Components/Common/CsvUtils'
+import { ExcelButton, downloadGroupCSV } from '../../Components/Common/CsvUtils'
 import GroupResultsActions from '../../Data/Redux/GroupResultsRedux'
 
 export const Paper = styled(OriginalPaper)`
@@ -78,12 +78,10 @@ class GroupResult extends Component {
   }
 
   handleDownload = type => () => {
-    const { exams, highestGrades, recentGrades } = this.props
-    const csv = type === 'higher'
-      ? getGroupCSV(exams, highestGrades)
-      : getGroupCSV(exams, recentGrades)
-
-    downloadCSV(csv)
+    const { exams, highestGrades, recentGrades, name } = this.props
+    return type === 'higher'
+      ? downloadGroupCSV(exams, highestGrades, type, name)
+      : downloadGroupCSV(exams, recentGrades, type, name)
   }
 
   render() {

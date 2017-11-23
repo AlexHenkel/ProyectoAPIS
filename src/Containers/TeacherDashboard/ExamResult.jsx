@@ -9,7 +9,7 @@ import OriginalPaper from 'material-ui/Paper'
 import DialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
 import NoResults from '../../Components/Common/NoResults'
-import { ExcelButton, downloadCSV, getExamCSV } from '../../Components/Common/CsvUtils'
+import { ExcelButton, downloadExamCSV } from '../../Components/Common/CsvUtils'
 import { TabContainer } from './Exams'
 import GroupExamResultsActions from '../../Data/Redux/GroupExamResultsRedux'
 
@@ -72,12 +72,10 @@ class ExamResult extends Component {
   }
 
   handleDownload = type => () => {
-    const { questions, highestGrades, recentGrades } = this.props
-    const csv = type === 'higher'
-      ? getExamCSV(questions, highestGrades)
-      : getExamCSV(questions, recentGrades)
-
-    downloadCSV(csv)
+    const { questions, highestGrades, recentGrades, title } = this.props
+    return type === 'higher'
+      ? downloadExamCSV(questions, highestGrades, type, title)
+      : downloadExamCSV(questions, recentGrades, type, title)
   }
 
   render() {
