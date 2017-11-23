@@ -10,6 +10,7 @@ import OriginalDialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
 import NoResults from '../../Components/Common/NoResults'
 import { TabContainer } from './Exams'
+import { ExcelButton, downloadCSV, getGroupCSV } from '../../Components/Common/CsvUtils'
 import GroupResultsActions from '../../Data/Redux/GroupResultsRedux'
 
 export const Paper = styled(OriginalPaper)`
@@ -76,6 +77,15 @@ class GroupResult extends Component {
     this.setState({ tabIndex })
   }
 
+  handleDownload = type => () => {
+    const { exams, highestGrades, recentGrades } = this.props
+    const csv = type === 'higher'
+      ? getGroupCSV(exams, highestGrades)
+      : getGroupCSV(exams, recentGrades)
+
+    downloadCSV(csv)
+  }
+
   render() {
     const { loading, name, exams, highestGrades, recentGrades } = this.props
     const { tabIndex } = this.state
@@ -107,9 +117,11 @@ class GroupResult extends Component {
                   onChangeIndex={this.handleChangeIndex}
                 >
                   <TabContainer>
+                    <ExcelButton onClick={this.handleDownload('higher')} />
                     <GroupResultTable exams={exams} grades={highestGrades} />
                   </TabContainer>
                   <TabContainer>
+                    <ExcelButton onClick={this.handleDownload('recent')} />
                     <GroupResultTable exams={exams} grades={recentGrades} />
                   </TabContainer>
                 </SwipeableViews>

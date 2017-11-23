@@ -9,6 +9,7 @@ import OriginalPaper from 'material-ui/Paper'
 import DialogResults from '../../Components/Teacher/DialogResults'
 import Loading from '../../Components/Common/Loading'
 import NoResults from '../../Components/Common/NoResults'
+import { ExcelButton, downloadCSV, getExamCSV } from '../../Components/Common/CsvUtils'
 import { TabContainer } from './Exams'
 import GroupExamResultsActions from '../../Data/Redux/GroupExamResultsRedux'
 
@@ -70,6 +71,15 @@ class ExamResult extends Component {
     this.setState({ tabIndex })
   }
 
+  handleDownload = type => () => {
+    const { questions, highestGrades, recentGrades } = this.props
+    const csv = type === 'higher'
+      ? getExamCSV(questions, highestGrades)
+      : getExamCSV(questions, recentGrades)
+
+    downloadCSV(csv)
+  }
+
   render() {
     const { loading, title, questions, highestGrades, recentGrades, getResults } = this.props
     const { tabIndex } = this.state
@@ -100,9 +110,11 @@ class ExamResult extends Component {
                   onChangeIndex={this.handleChangeIndex}
                 >
                   <TabContainer>
+                    <ExcelButton onClick={this.handleDownload('higher')} />
                     <ExamResultTable questions={questions} grades={highestGrades} />
                   </TabContainer>
                   <TabContainer>
+                    <ExcelButton onClick={this.handleDownload('recent')} />
                     <ExamResultTable questions={questions} grades={recentGrades} />
                   </TabContainer>
                 </SwipeableViews>
