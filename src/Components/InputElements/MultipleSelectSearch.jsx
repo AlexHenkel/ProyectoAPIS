@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Mixin } from 'formsy-react-2'
-import { contains, remove, indexOf } from 'ramda'
+import { remove } from 'ramda'
 import {
   FormControl as OriginalFormControl,
   FormControlLabel,
@@ -14,6 +14,18 @@ import {
   TextField,
 } from 'material-ui'
 import { withTheme } from 'material-ui/styles'
+
+const accentMap = {
+  á: 'a',
+  é: 'e',
+  í: 'i',
+  ó: 'o',
+  ú: 'u',
+}
+
+const replaceAccent = char => accentMap[char] ? accentMap[char] : char
+
+const formatWord = word => word.split('').map(i => replaceAccent(i.toLowerCase())).join('')
 
 const FormControl = styled(OriginalFormControl)`
   width: 100%;
@@ -51,21 +63,31 @@ class MultipleSelectSearch extends Mixin {
     const selectedValues = this.getValue() || []
     this.setState({
       filter: value,
-      filteredOptions: options.filter(item => contains(item[optionsValue], selectedValues) ||
-        item[optionsLabel].toLowerCase().indexOf(value.toLowerCase()) >= 0 ||
-        item[tagsPath].filter(tag =>
-          tag.name.toLowerCase().indexOf(value.toLowerCase()) >= 0).length),
+      filteredOptions:
+        options
+          // Filter selected options
+          .filter(item =>
+            selectedValues.find(i => i === item[optionsValue]) ||
+            // // Filter by question name
+            formatWord(item[optionsLabel]).search(formatWord(value)) >= 0 ||
+            // Filter by tag
+            item[tagsPath].find(({ name }) =>
+              formatWord(name).search(formatWord(value)) >= 0)),
     })
   }
 
   handleChange = id => (event, checked) => {
     const currVal = this.getValue() || []
     if (checked) {
+      // Add value to array
       this.setValue([...currVal, id])
     } else if (currVal.length === 1) {
+      // Remove array to set required errors
       this.setValue(undefined)
     } else {
-      this.setValue(remove(indexOf(id, currVal), 1, currVal))
+      // Remove item from array
+      const indexToRemove = currVal.findIndex(i => i === id)
+      this.setValue(remove(indexToRemove, 1, currVal))
     }
   }
 
@@ -91,8 +113,9 @@ class MultipleSelectSearch extends Mixin {
             <FormControlLabel
               control={
                 <Checkbox
-                  // TODO: Check if this will be an array of id's or objects
-                  checked={contains(item[optionsValue], this.getValue() || [])}
+                  checked={this.getValue()
+                    ? !!this.getValue().find(i => i === item[optionsValue])
+                    : false}
                   onChange={this.handleChange(item[optionsValue])}
                 />
               }
